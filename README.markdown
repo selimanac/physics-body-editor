@@ -1,3 +1,6 @@
+Original website: http://www.aurelienribon.com/
+
+
 Physics Body Editor
 ==========
 <p align="center"><img src="readmeImgs/slide-physics-body-editor.jpg" alt="Physics Body Editor"/></p>
