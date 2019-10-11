@@ -1,0 +1,50 @@
+apply plugin: "java"
+
+sourceCompatibility = 1.8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+dependencies {
+    compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
+    compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+
+    compile files('./libs/tween-engine-api.jar')
+
+    compile project(':loader-libgdx')
+
+}
+
+sourceSets {
+    main {
+        java.srcDirs = ["src/main/java"]
+        resources.srcDirs = ["src/main/resources"]
+    }
+}
+
+jar {
+    archiveName = "loader-libgdx-demo.jar"
+}
+
+eclipse.project {
+    name = appName + "-loader-libgdx-demo"
+}
+
+// Mark the resources dir in IntelliJ as an actual resource dir, not another java source dir
+// Derived from https://discuss.gradle.org/t/13391/2 but needs a TODO for Gradle import style vs XML hacking
+idea {
+    module.iml.withXml {
+        def node = it.asNode()
+        def content = node.component.find { it.'@name' == 'NewModuleRootManager' }.content[0]
+        content.sourceFolder.each { sourceFolder ->
+            if (sourceFolder.@url?.endsWith('/resources')) {
+                sourceFolder.attributes().with {
+                    boolean isTestSource = (remove('isTestSource') == 'true')
+                    put('type', isTestSource ? 'java-test-resource' : 'java-resource')
+                }
+            }
+        }
+    }
+}
