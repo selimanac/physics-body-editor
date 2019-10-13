@@ -13,7 +13,7 @@ public class Settings {
     public static boolean isSnapToGridEnabled = false;
     public static boolean isAxisShown = true;
     public static boolean isGridShown = false;
-    public static float gridGap = 0.03f;
+    public static float gridGap = 100.0f;
     public static Polygonizer polygonizer = Polygonizer.BAYAZIT;
     public static float autoTraceHullTolerance = 2.5f;
     public static int autoTraceAlphaTolerance = 128;

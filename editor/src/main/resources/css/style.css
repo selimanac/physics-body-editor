@@ -21,7 +21,6 @@ javax-swing-JToolBar javax-swing-JButton {
 }
 
 javax-swing-JToolBar,
-javax-swing-JButton,
 javax-swing-JCheckBox,
 javax-swing-JSlider{
 	-swing-opaque: false;
@@ -38,17 +37,24 @@ javax-swing-JSlider{
 	-ar-border-thickness: 0;
 	-ar-border-header-stroke: null;
 	-ar-border-header-thickness: 0;
-	-ar-border-header-fill: lineargradient(0, 0, 0, 1, 0, #4D6082, 1, #3D5277);
-	-ar-border-margin: 3 6;
+	-ar-border-header-fill: lineargradient(0, 0, 0, 1, 0, #3e3e3e, 1, #3e3e3e);
+	-ar-border-margin: 13 10;
 	-ar-border-foreground: #FFF;
+	-swing-foreground: #d1d1d1;
 }
 
 #projectPanel {
-	-ar-border-title: "Project configuration";
+	-ar-border-title: "Project";
+	-swing-background: #494949;
+	-swing-foreground: #d1d1d1;
+	-swing-font-size: 14;
 }
 
 #optionsPanel {
 	-ar-border-title: "Options";
+	-swing-font-size: 14;
+	-swing-background: #494949;
+	-swing-foreground: #d1d1d1;
 }
 
 /*******************************************************************************
@@ -56,7 +62,7 @@ javax-swing-JSlider{
  ******************************************************************************/
 
 .headerPanel {
-	-swing-background: #BBC8D8;
+	-swing-background: #494949;
 }
 
 .headerPanel javax-swing-JLabel {
@@ -67,12 +73,16 @@ javax-swing-JSlider{
 }
 
 .headerPanel javax-swing-JButton {
-	-swing-font-size: 10;
-	-swing-foreground: #3D5277;
+	-swing-font-size: 12;
+	-swing-foreground: #d1d1d1;
+	-swing-background:  #313131;
+	
+
 }
 
 .headerPanel javax-swing-JButton:disabled {
 	-swing-foreground: #888;
+	-swing-background:  #494949;
 }
 
 /*******************************************************************************
@@ -81,7 +91,7 @@ javax-swing-JSlider{
 
 .configPanel aurelienribon-ui-components-PaintedPanel {
 	-swing-opaque: false;
-	-ar-fill: #3FFF;
+	
 }
 
 .configPanel aurelienribon-ui-components-PaintedPanel > javax-swing-JLabel,
@@ -99,11 +109,11 @@ javax-swing-JSlider{
  ******************************************************************************/
 
 aurelienribon-ui-components-TabPanel {
-	-swing-background: #BBC8D8;
+	-swing-background: #313131;
 }
 
 aurelienribon-ui-components-TabPanel .-ar-tabcontent {
-	-swing-background: #FFF;
+	-swing-background: #313131;
 }
 
 aurelienribon-ui-components-TabPanel .-ar-header {
@@ -111,19 +121,24 @@ aurelienribon-ui-components-TabPanel .-ar-header {
 }
 
 aurelienribon-ui-components-TabPanel .-ar-tab {
-	-swing-foreground: #FFF;
+
 	-ar-stroke: null;
 	-ar-fill: null;
+	-ar-fill: lineargradient(0, 0, 0, 1, 0, #3a3a3a, 1, #3a3a3a);
+	-swing-foreground: #a6a6a6;
+	-swing-font-size: 12;
 }
 
 aurelienribon-ui-components-TabPanel .-ar-tab:hover {
 	-ar-stroke: #9BA7B7;
-	-ar-fill: lineargradient(0, 0, 0, 1, 0, #6F7776, 1, #4F5F74);
+	-ar-fill: lineargradient(0, 0, 0, 1, 0, #494949, 1, #494949);
+	-swing-foreground: #ececec;
 }
 
 aurelienribon-ui-components-TabPanel .-ar-tab:selected {
 	-ar-stroke: null;
-	-ar-fill: lineargradient(0, 0, 0, 1, 0, #4D6082, 1, #3D5277);
+	-ar-fill: lineargradient(0, 0, 0, 1, 0, #494949, 1, #494949);
+	-swing-foreground: #ececec;
 }
 
 /*******************************************************************************
@@ -135,11 +150,12 @@ aurelienribon-ui-components-TabPanel .-ar-tab:selected {
 }
 
 .brightlink {
-	-swing-foreground: #FFF;
+	-swing-foreground: #888;
+	-swing-font-size: 10;
 }
 
 .brightlink:hover {
-	-swing-foreground: #AAF;
+	-swing-foreground: rgb(187, 187, 187);
 }
 
 .darklink {
@@ -152,6 +168,7 @@ aurelienribon-ui-components-TabPanel .-ar-tab:selected {
 
 .bold {
 	-swing-font-style: bold;
+	-swing-font-size: 12;
 }
 
 .brightcomment {
@@ -159,12 +176,13 @@ aurelienribon-ui-components-TabPanel .-ar-tab:selected {
 }
 
 .versionLabel {
-	-swing-foreground: #000;
+	-swing-foreground: #d1d1d1;
 	-swing-border: emptyborder(2, 10, 2, 10);
 	-swing-font-size: 10;
 }
 
 .versionPanel {
-	-swing-background: #FFF;
-	-swing-border: matteborder(1, 0, 0, 0, #2A3B57);
+
+	-swing-background: #3a3a3a;
+	-swing-border: matteborder(1, 0, 0, 0, #313131);
 }

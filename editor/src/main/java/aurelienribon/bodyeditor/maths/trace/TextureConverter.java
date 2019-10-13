@@ -15,9 +15,9 @@ public class TextureConverter {
     // / 1.) Das Array welches ich bekomme am besten in einen boolean array
     // verwandeln. Wurde die Geschwindigkeit verbessern
     // / </summary>
-    private static int[][] ClosePixels = new int[][]{{-1, -1}, {0, -1},
-            {1, -1}, {1, 0}, {1, 1}, {0, 1}, {-1, 1}, {-1, 0}};
-	private static Array list;
+    private static int[][] ClosePixels = new int[][] { { -1, -1 }, { 0, -1 }, { 1, -1 }, { 1, 0 }, { 1, 1 }, { 0, 1 },
+            { -1, 1 }, { -1, 0 } };
+    private static Array list;
     private static Array list2;
 
     public static Array<Vector2> createPolygon(int[] data, int width, int height) throws Exception {
@@ -35,7 +35,8 @@ public class TextureConverter {
     }
 
     public static Array<Array<Vector2>> createPolygon(int[] data, int width, int height, float hullTolerance,
-            int alphaTolerance, boolean multiPartDetection, boolean holeDetection) throws Exception {
+            int alphaTolerance, boolean multiPartDetection, boolean holeDetection) throws Exception 
+            {
         PolygonCreationAssistance pca = new PolygonCreationAssistance(data, width, height);
         pca.setHullTolerance(hullTolerance);
         pca.setAlphaTolerance(alphaTolerance);
@@ -269,7 +270,7 @@ public class TextureConverter {
     public static int vectorListIndexOf(Array list, Vector2 v) {
         list2 = list;
         TextureConverter.list = list;
-		for (int i = 0; i < list.size; i++) {
+        for (int i = 0; i < list.size; i++) {
             Object obj = list.get(i);
             if (obj == v)
                 return i;
@@ -311,9 +312,8 @@ public class TextureConverter {
         return new Vector2(v1.x * scalar, v1.y * scalar);
     }
 
-    private static Array<CrossingEdgeInfo> GetCrossingEdges(
-            Array<Vector2> polygon, EdgeAlignment edgeAlign, int checkLine)
-            throws Exception {
+    private static Array<CrossingEdgeInfo> GetCrossingEdges(Array<Vector2> polygon, EdgeAlignment edgeAlign,
+            int checkLine) throws Exception {
         Array<CrossingEdgeInfo> edges = new Array<CrossingEdgeInfo>();
         Vector2 slope = new Vector2();
         Vector2 edgeVertex1 = new Vector2();
@@ -325,41 +325,35 @@ public class TextureConverter {
         if (polygon.size > 1) {
             edgeVertex2.set(polygon.get(polygon.size - 1));
             switch (edgeAlign) {
-                case Vertical:
-                    for (int i = 0; i < polygon.size; i++) {
-                        edgeVertex1.set(polygon.get(i));
-                        if ((edgeVertex1.y >= checkLine && edgeVertex2.y <= checkLine)
-                                || (edgeVertex1.y <= checkLine && edgeVertex2.y >= checkLine)) {
-                            if (edgeVertex1.y != edgeVertex2.y) {
-                                addCrossingPoint = true;
-                                slope.set(vectorSub(edgeVertex2, edgeVertex1));
-                                if (edgeVertex1.y == checkLine) {
-                                    edgeVertexPreview.set(polygon.get((i + 1)
-                                            % polygon.size));
-                                    slopePreview.set(vectorSub(edgeVertex1,
-                                            edgeVertexPreview));
-                                    if (slope.y > 0) {
-                                        addCrossingPoint = (slopePreview.y <= 0);
-                                    } else {
-                                        addCrossingPoint = (slopePreview.y >= 0);
-                                    }
-                                }
-                                if (addCrossingPoint) {
-                                    crossingPoint = new Vector2(
-                                            (checkLine - edgeVertex1.y) / slope.y
-                                                    * slope.x + edgeVertex1.x,
-                                            checkLine);
-                                    edges.add(new CrossingEdgeInfo(edgeVertex1,
-                                            edgeVertex2, crossingPoint, edgeAlign));
+            case Vertical:
+                for (int i = 0; i < polygon.size; i++) {
+                    edgeVertex1.set(polygon.get(i));
+                    if ((edgeVertex1.y >= checkLine && edgeVertex2.y <= checkLine)
+                            || (edgeVertex1.y <= checkLine && edgeVertex2.y >= checkLine)) {
+                        if (edgeVertex1.y != edgeVertex2.y) {
+                            addCrossingPoint = true;
+                            slope.set(vectorSub(edgeVertex2, edgeVertex1));
+                            if (edgeVertex1.y == checkLine) {
+                                edgeVertexPreview.set(polygon.get((i + 1) % polygon.size));
+                                slopePreview.set(vectorSub(edgeVertex1, edgeVertexPreview));
+                                if (slope.y > 0) {
+                                    addCrossingPoint = (slopePreview.y <= 0);
+                                } else {
+                                    addCrossingPoint = (slopePreview.y >= 0);
                                 }
                             }
+                            if (addCrossingPoint) {
+                                crossingPoint = new Vector2(
+                                        (checkLine - edgeVertex1.y) / slope.y * slope.x + edgeVertex1.x, checkLine);
+                                edges.add(new CrossingEdgeInfo(edgeVertex1, edgeVertex2, crossingPoint, edgeAlign));
+                            }
                         }
-                        edgeVertex2.set(edgeVertex1);
                     }
-                    break;
-                case Horizontal:
-                    throw new Exception(
-                            "EdgeAlignment.Horizontal isn't implemented yet. Sorry.");
+                    edgeVertex2.set(edgeVertex1);
+                }
+                break;
+            case Horizontal:
+                throw new Exception("EdgeAlignment.Horizontal isn't implemented yet. Sorry.");
             }
         }
         edges.sort();
@@ -367,10 +361,9 @@ public class TextureConverter {
         return edges;
     }
 
-    private static boolean SplitPolygonEdge(Array<Vector2> polygon,
-                                            EdgeAlignment edgeAlign, Vector2 coordInsideThePolygon,
-                                            Reference<Integer> vertex1IndexRef,
-                                            Reference<Integer> vertex2IndexRef) throws Exception {
+    private static boolean SplitPolygonEdge(Array<Vector2> polygon, EdgeAlignment edgeAlign,
+            Vector2 coordInsideThePolygon, Reference<Integer> vertex1IndexRef, Reference<Integer> vertex2IndexRef)
+            throws Exception {
         Array<CrossingEdgeInfo> edges;
         Vector2 slope = new Vector2();
         int nearestEdgeVertex1Index = 0;
@@ -382,78 +375,63 @@ public class TextureConverter {
         vertex1IndexRef.v = 0;
         vertex2IndexRef.v = 0;
         switch (edgeAlign) {
-            case Vertical:
-                edges = GetCrossingEdges(polygon, EdgeAlignment.Vertical,
-                        (int) coordInsideThePolygon.y);
-                foundEdgeCoord.y = coordInsideThePolygon.y;
-                if (edges != null && edges.size > 1 && edges.size % 2 == 0) {
-                    float distance;
-                    for (int i = 0; i < edges.size; i++) {
-                        if (edges.get(i).CrossingPoint.x < coordInsideThePolygon.x) {
-                            distance = coordInsideThePolygon.x
-                                    - edges.get(i).CrossingPoint.x;
-                            if (distance < shortestDistance) {
-                                shortestDistance = distance;
-                                foundEdgeCoord.x = edges.get(i).CrossingPoint.x;
-                                edgeCoordFound = true;
-                            }
-                        }
-                    }
-                    if (edgeCoordFound) {
-                        shortestDistance = Float.MAX_VALUE;
-                        int edgeVertex2Index = polygon.size - 1;
-                        int edgeVertex1Index;
-                        for (edgeVertex1Index = 0; edgeVertex1Index < polygon.size; edgeVertex1Index++) {
-                            Vector2 tempVector1 = polygon.get(edgeVertex1Index)
-                                    .cpy();
-                            Vector2 tempVector2 = polygon.get(edgeVertex2Index)
-                                    .cpy();
-                            distance = LineTools
-                                    .DistanceBetweenPointAndLineSegment(
-                                            foundEdgeCoord, tempVector1,
-                                            tempVector2);
-                            if (distance < shortestDistance) {
-                                shortestDistance = distance;
-                                nearestEdgeVertex1Index = edgeVertex1Index;
-                                nearestEdgeVertex2Index = edgeVertex2Index;
-                                edgeFound = true;
-                            }
-                            edgeVertex2Index = edgeVertex1Index;
-                        }
-                        if (edgeFound) {
-                            slope.set(vectorSub(
-                                    polygon.get(nearestEdgeVertex2Index),
-                                    polygon.get(nearestEdgeVertex1Index)));
-                            slope.nor();
-                            Vector2 tempVector = polygon.get(
-                                    nearestEdgeVertex1Index).cpy();
-                            distance = LineTools.DistanceBetweenPointAndPoint(
-                                    tempVector, foundEdgeCoord);
-                            vertex1IndexRef.v = nearestEdgeVertex1Index;
-                            vertex2IndexRef.v = nearestEdgeVertex1Index + 1;
-                            // distance * slope + polygon[vertex1Index]
-                            polygon.insert(
-                                    nearestEdgeVertex1Index,
-                                    vectorAdd(vectorMul(slope, distance),
-                                            polygon.get(vertex1IndexRef.v)));
-                            polygon.insert(
-                                    nearestEdgeVertex1Index,
-                                    vectorAdd(vectorMul(slope, distance),
-                                            polygon.get(vertex2IndexRef.v)));
-                            return true;
+        case Vertical:
+            edges = GetCrossingEdges(polygon, EdgeAlignment.Vertical, (int) coordInsideThePolygon.y);
+            foundEdgeCoord.y = coordInsideThePolygon.y;
+            if (edges != null && edges.size > 1 && edges.size % 2 == 0) {
+                float distance;
+                for (int i = 0; i < edges.size; i++) {
+                    if (edges.get(i).CrossingPoint.x < coordInsideThePolygon.x) {
+                        distance = coordInsideThePolygon.x - edges.get(i).CrossingPoint.x;
+                        if (distance < shortestDistance) {
+                            shortestDistance = distance;
+                            foundEdgeCoord.x = edges.get(i).CrossingPoint.x;
+                            edgeCoordFound = true;
                         }
                     }
                 }
-                break;
-            case Horizontal:
-                throw new Exception(
-                        "EdgeAlignment.Horizontal isn't implemented yet. Sorry.");
+                if (edgeCoordFound) {
+                    shortestDistance = Float.MAX_VALUE;
+                    int edgeVertex2Index = polygon.size - 1;
+                    int edgeVertex1Index;
+                    for (edgeVertex1Index = 0; edgeVertex1Index < polygon.size; edgeVertex1Index++) {
+                        Vector2 tempVector1 = polygon.get(edgeVertex1Index).cpy();
+                        Vector2 tempVector2 = polygon.get(edgeVertex2Index).cpy();
+                        distance = LineTools.DistanceBetweenPointAndLineSegment(foundEdgeCoord, tempVector1,
+                                tempVector2);
+                        if (distance < shortestDistance) {
+                            shortestDistance = distance;
+                            nearestEdgeVertex1Index = edgeVertex1Index;
+                            nearestEdgeVertex2Index = edgeVertex2Index;
+                            edgeFound = true;
+                        }
+                        edgeVertex2Index = edgeVertex1Index;
+                    }
+                    if (edgeFound) {
+                        slope.set(
+                                vectorSub(polygon.get(nearestEdgeVertex2Index), polygon.get(nearestEdgeVertex1Index)));
+                        slope.nor();
+                        Vector2 tempVector = polygon.get(nearestEdgeVertex1Index).cpy();
+                        distance = LineTools.DistanceBetweenPointAndPoint(tempVector, foundEdgeCoord);
+                        vertex1IndexRef.v = nearestEdgeVertex1Index;
+                        vertex2IndexRef.v = nearestEdgeVertex1Index + 1;
+                        // distance * slope + polygon[vertex1Index]
+                        polygon.insert(nearestEdgeVertex1Index,
+                                vectorAdd(vectorMul(slope, distance), polygon.get(vertex1IndexRef.v)));
+                        polygon.insert(nearestEdgeVertex1Index,
+                                vectorAdd(vectorMul(slope, distance), polygon.get(vertex2IndexRef.v)));
+                        return true;
+                    }
+                }
+            }
+            break;
+        case Horizontal:
+            throw new Exception("EdgeAlignment.Horizontal isn't implemented yet. Sorry.");
         }
         return false;
     }
 
-    private static Array<Vector2> CreateSimplePolygon(
-            PolygonCreationAssistance pca, Vector2 entrance, Vector2 last) {
+    private static Array<Vector2> CreateSimplePolygon(PolygonCreationAssistance pca, Vector2 entrance, Vector2 last) {
         boolean entranceFound = false;
         boolean endOfHull = false;
         Array<Vector2> polygon = new Array<Vector2>();
@@ -490,8 +468,7 @@ public class TextureConverter {
             do {
                 // Search in the pre vision list for an outstanding point.
                 Vector2 outstanding = new Vector2();
-                if (SearchForOutstandingVertex(hullArea,
-                        pca.getHullTolerance(), outstanding)) {
+                if (SearchForOutstandingVertex(hullArea, pca.getHullTolerance(), outstanding)) {
                     if (endOfHull) {
                         // We have found the next pixel, but is it on the last
                         // bit of the
@@ -557,8 +534,8 @@ public class TextureConverter {
         return polygon;
     }
 
-    private static boolean SearchNearPixels(PolygonCreationAssistance pca,
-                                            boolean searchingForSolidPixel, Vector2 current, Vector2 foundPixel) {
+    private static boolean SearchNearPixels(PolygonCreationAssistance pca, boolean searchingForSolidPixel,
+            Vector2 current, Vector2 foundPixel) {
         int x;
         int y;
         for (int i = 0; i < 8; i++) {
@@ -574,8 +551,7 @@ public class TextureConverter {
         return false;
     }
 
-    private static boolean IsNearPixel(PolygonCreationAssistance pca,
-                                       Vector2 current, Vector2 near) {
+    private static boolean IsNearPixel(PolygonCreationAssistance pca, Vector2 current, Vector2 near) {
         for (int i = 0; i < 8; i++) {
             int x = (int) current.x + ClosePixels[i][0];
             int y = (int) current.y + ClosePixels[i][1];
@@ -588,8 +564,7 @@ public class TextureConverter {
         return false;
     }
 
-    private static boolean GetHullEntrance(PolygonCreationAssistance pca,
-                                           Vector2 entrance) {
+    private static boolean GetHullEntrance(PolygonCreationAssistance pca, Vector2 entrance) {
         // Search for first solid pixel.
         for (int y = 0; y < pca.Height; y++) {
             for (int x = 0; x < pca.Width; x++) {
@@ -604,8 +579,7 @@ public class TextureConverter {
         return false;
     }
 
-    private static boolean GetNextHullEntrance(PolygonCreationAssistance pca,
-                                               Vector2 start, Vector2 entrance) {
+    private static boolean GetNextHullEntrance(PolygonCreationAssistance pca, Vector2 start, Vector2 entrance) {
         // Search for first solid pixel.
         int size = pca.Height * pca.Width;
         int x;
@@ -626,17 +600,15 @@ public class TextureConverter {
         return false;
     }
 
-    private static boolean GetNextHullPoint(PolygonCreationAssistance pca,
-                                            Vector2 last, Vector2 current, Vector2 next) {
+    private static boolean GetNextHullPoint(PolygonCreationAssistance pca, Vector2 last, Vector2 current,
+            Vector2 next) {
         int x;
         int y;
-        int indexOfFirstPixelToCheck = GetIndexOfFirstPixelToCheck(last,
-                current);
+        int indexOfFirstPixelToCheck = GetIndexOfFirstPixelToCheck(last, current);
         int indexOfPixelToCheck;
         int pixelsToCheck = 8; // _closePixels.Length;
         for (int i = 0; i < pixelsToCheck; i++) {
-            indexOfPixelToCheck = (indexOfFirstPixelToCheck + i)
-                    % pixelsToCheck;
+            indexOfPixelToCheck = (indexOfFirstPixelToCheck + i) % pixelsToCheck;
             x = (int) current.x + ClosePixels[indexOfPixelToCheck][0];
             y = (int) current.y + ClosePixels[indexOfPixelToCheck][1];
             if (x >= 0 && x < pca.Width && y >= 0 && y <= pca.Height) {
@@ -651,8 +623,8 @@ public class TextureConverter {
         return false;
     }
 
-    private static boolean SearchForOutstandingVertex(Array<Vector2> hullArea,
-                                                      float hullTolerance, Vector2 outstanding) {
+    private static boolean SearchForOutstandingVertex(Array<Vector2> hullArea, float hullTolerance,
+            Vector2 outstanding) {
         Vector2 outstandingResult = new Vector2();
         boolean found = false;
         if (hullArea.size > 2) {
@@ -664,8 +636,8 @@ public class TextureConverter {
             for (int i = 1; i < hullAreaLastPoint; i++) {
                 tempVector1 = hullArea.get(i);
                 // Check if the distance is over the one that's tolerable.
-                if (LineTools.DistanceBetweenPointAndLineSegment(tempVector1,
-                        tempVector2, tempVector3) >= hullTolerance) {
+                if (LineTools.DistanceBetweenPointAndLineSegment(tempVector1, tempVector2,
+                        tempVector3) >= hullTolerance) {
                     outstandingResult.set(hullArea.get(i));
                     found = true;
                     break;
@@ -688,34 +660,34 @@ public class TextureConverter {
         // next
         // first pixel.
         switch ((int) (current.x - last.x)) {
+        case 1:
+            switch ((int) (current.y - last.y)) {
             case 1:
-                switch ((int) (current.y - last.y)) {
-                    case 1:
-                        return 1;
-                    case 0:
-                        return 0;
-                    case -1:
-                        return 7;
-                }
-                break;
+                return 1;
             case 0:
-                switch ((int) (current.y - last.y)) {
-                    case 1:
-                        return 2;
-                    case -1:
-                        return 6;
-                }
-                break;
+                return 0;
             case -1:
-                switch ((int) (current.y - last.y)) {
-                    case 1:
-                        return 3;
-                    case 0:
-                        return 4;
-                    case -1:
-                        return 5;
-                }
-                break;
+                return 7;
+            }
+            break;
+        case 0:
+            switch ((int) (current.y - last.y)) {
+            case 1:
+                return 2;
+            case -1:
+                return 6;
+            }
+            break;
+        case -1:
+            switch ((int) (current.y - last.y)) {
+            case 1:
+                return 3;
+            case 0:
+                return 4;
+            case -1:
+                return 5;
+            }
+            break;
         }
         return 0;
     }
@@ -737,8 +709,8 @@ class CrossingEdgeInfo implements Comparable<CrossingEdgeInfo> {
     public EdgeAlignment CheckLineAlignment;
     public Vector2 CrossingPoint;
 
-    public CrossingEdgeInfo(Vector2 edgeVertex1, Vector2 edgeVertex2,
-                            Vector2 crossingPoint, EdgeAlignment checkLineAlignment) {
+    public CrossingEdgeInfo(Vector2 edgeVertex1, Vector2 edgeVertex2, Vector2 crossingPoint,
+            EdgeAlignment checkLineAlignment) {
         _egdeVertex1 = edgeVertex1.cpy();
         _edgeVertex2 = edgeVertex2.cpy();
         _alignment = checkLineAlignment;
@@ -749,20 +721,20 @@ class CrossingEdgeInfo implements Comparable<CrossingEdgeInfo> {
         CrossingEdgeInfo cei = obj;
         int result = 0;
         switch (_alignment) {
-            case Vertical:
-                if (_crossingPoint.x < cei.CrossingPoint.y) {
-                    result = -1;
-                } else if (_crossingPoint.x > cei.CrossingPoint.y) {
-                    result = 1;
-                }
-                break;
-            case Horizontal:
-                if (_crossingPoint.y < cei.CrossingPoint.y) {
-                    result = -1;
-                } else if (_crossingPoint.y > cei.CrossingPoint.y) {
-                    result = 1;
-                }
-                break;
+        case Vertical:
+            if (_crossingPoint.x < cei.CrossingPoint.y) {
+                result = -1;
+            } else if (_crossingPoint.x > cei.CrossingPoint.y) {
+                result = 1;
+            }
+            break;
+        case Horizontal:
+            if (_crossingPoint.y < cei.CrossingPoint.y) {
+                result = -1;
+            } else if (_crossingPoint.y > cei.CrossingPoint.y) {
+                result = 1;
+            }
+            break;
         }
         return result;
     }
@@ -899,14 +871,13 @@ class Reference<K> {
 }
 
 class LineTools {
-    public static float DistanceBetweenPointAndPoint(Vector2 point1,
-                                                     Vector2 point2) {
+    public static float DistanceBetweenPointAndPoint(Vector2 point1, Vector2 point2) {
         Vector2 v = TextureConverter.vectorSub(point1, point2);
         return v.len();
     }
 
-    public static float DistanceBetweenPointAndLineSegment(Vector2 point,
-                                                           Vector2 lineEndPoint1, Vector2 lineEndPoint2) {
+    public static float DistanceBetweenPointAndLineSegment(Vector2 point, Vector2 lineEndPoint1,
+            Vector2 lineEndPoint2) {
         Vector2 v = TextureConverter.vectorSub(lineEndPoint2, lineEndPoint1);
         Vector2 w = TextureConverter.vectorSub(point, lineEndPoint1);
         float c1 = TextureConverter.vectorDot(w, v);
@@ -916,8 +887,7 @@ class LineTools {
         if (c2 <= c1)
             return DistanceBetweenPointAndPoint(point, lineEndPoint2);
         float b = c1 / c2;
-        Vector2 pointOnLine = TextureConverter.vectorAdd(lineEndPoint1,
-                TextureConverter.vectorMul(v, b));
+        Vector2 pointOnLine = TextureConverter.vectorAdd(lineEndPoint1, TextureConverter.vectorMul(v, b));
         return DistanceBetweenPointAndPoint(point, pointOnLine);
     }
 }

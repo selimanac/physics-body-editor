@@ -220,9 +220,9 @@ public class RigidBodiesCreationDialog extends javax.swing.JDialog {
 
         b2NameField.setText("Name");
 
-        b2CreateBtn.setText("Create body from image");
+        b2CreateBtn.setText("FROM IMAGE");
 
-        jLabel3.setText("<html> Creates a new body associated to an image.<br/>You are still able to change the image later.</html>");
+        jLabel3.setText("Creates a new body associated to an image.");
         jLabel3.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout paintedPanel3Layout = new javax.swing.GroupLayout(paintedPanel3);
@@ -255,9 +255,9 @@ public class RigidBodiesCreationDialog extends javax.swing.JDialog {
 
         b1NameField.setText("Name");
 
-        b1CreateBtn.setText("Create new empty body");
+        b1CreateBtn.setText("EMPTY");
 
-        jLabel1.setText("<html> Creates a new empty body with no associated image.<br/>You are still able to associate an image with it later.</html>");
+        jLabel1.setText("Creates a new empty body with no associated image.");
         jLabel1.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout paintedPanel1Layout = new javax.swing.GroupLayout(paintedPanel1);
@@ -290,9 +290,9 @@ public class RigidBodiesCreationDialog extends javax.swing.JDialog {
 
         orLbl2.setText("- OR -");
 
-        b3CreateBtn.setText("Create bodies from images");
+        b3CreateBtn.setText("FROM IMAGES");
 
-        jLabel2.setText("<html> Creates multiple bodies associated to selected images.<br/>You are still able to change the images later.</html>");
+        jLabel2.setText("Creates multiple bodies associated to selected images.");
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout paintedPanel2Layout = new javax.swing.GroupLayout(paintedPanel2);

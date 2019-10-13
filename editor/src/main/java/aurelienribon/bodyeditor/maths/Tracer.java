@@ -20,7 +20,8 @@ public class Tracer {
 
         int w = pixmap.getWidth();
         int h = pixmap.getHeight();
-
+        System.out.println("Tracer w: " + w); 
+        System.out.println("Tracer h: " + h); 
         int size = w * h;
         int[] array = new int[size];
 
@@ -52,9 +53,9 @@ public class Tracer {
             polygons[i] = new Vector2[outline.size];
             for (int ii = 0; ii < outline.size; ii++) {
                 polygons[i][ii] = outline.get(ii);
-                polygons[i][ii].x /= tw;
-                polygons[i][ii].y /= tw;
-                polygons[i][ii].y = 1 * th / tw - polygons[i][ii].y;
+               // polygons[i][ii].x /= tw;
+               // polygons[i][ii].y /= tw;
+                polygons[i][ii].y = 1 * th  - polygons[i][ii].y;
             }
         }
 

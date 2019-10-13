@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-
+import javax.swing.border.LineBorder;;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
@@ -42,16 +42,30 @@ public class ProjectPanel extends javax.swing.JPanel {
             }
         });
 
-        prjPathField.setForeground(Color.GRAY);
+        exportDefoldBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               exportDefoldProject();
+            }
+        });
+
+        prjPathField.setForeground(new Color(211,211,211));
+        prjPathField.setBackground(new Color(49,49,49));
+        prjPathField.setOpaque(true);
+        prjPathField.setBorder(new LineBorder( new Color(87, 87, 87), 2, true ));
+
+
         saveBtn.setEnabled(false);
+        exportDefoldBtn.setEnabled(false);
 
         Ctx.io.addChangeListener(new ChangeListener() {
             @Override
             public void propertyChanged(Object source, String propertyName) {
                 if (propertyName.equals(IoManager.PROP_PROJECTFILE)) {
                     saveBtn.setEnabled(true);
+                    exportDefoldBtn.setEnabled(true);
                     prjPathField.setText(Ctx.io.getProjectFile().getPath());
-                    prjPathField.setForeground(Color.BLACK);
+        
                     Ctx.bodies.getModels().clear();
                 }
             }
@@ -99,6 +113,19 @@ public class ProjectPanel extends javax.swing.JPanel {
         }
     }
 
+    private void exportDefoldProject(){
+        try {
+            Ctx.io.exportToDefoldFile();
+            JOptionPane.showMessageDialog(Ctx.window, "Save successfully done.");
+
+        } catch (IOException ex) {
+            String msg = "Something went wrong while saving.\n\n" + ex.getClass().getSimpleName() + " - " + ex.getMessage();
+            JOptionPane.showMessageDialog(Ctx.window, msg);
+        } catch (JSONException ex) {
+            String msg = "Something went wrong while saving.\n\n" + ex.getClass().getSimpleName() + " - " + ex.getMessage();
+            JOptionPane.showMessageDialog(Ctx.window, msg);
+        }
+    }
     private void saveProject() {
         File file = Ctx.io.getProjectFile();
 
@@ -135,6 +162,7 @@ public class ProjectPanel extends javax.swing.JPanel {
         loadBtn = new javax.swing.JButton();
         jToolBar2 = new javax.swing.JToolBar();
         saveBtn = new javax.swing.JButton();
+        exportDefoldBtn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         prjPathField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -144,15 +172,27 @@ public class ProjectPanel extends javax.swing.JPanel {
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
-        newBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gfx/ic_open.png"))); // NOI18N
-        newBtn.setText("New project");
-        newBtn.setFocusable(false);
+        newBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gfx/ic_new.png"))); // NOI18N
+
+        //newBtn.setBackground(new Color(49, 49, 49));
+        newBtn.setContentAreaFilled(false);
+        newBtn.setOpaque(true);
+        newBtn.setBorderPainted(true);
+        newBtn.setFocusPainted(false);
+        newBtn.setBorder(new LineBorder( new Color(87, 87, 87), 2, true ));
+        newBtn.setToolTipText("New project");
         newBtn.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         newBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(newBtn);
 
         loadBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gfx/ic_open.png"))); // NOI18N
-        loadBtn.setText("Load project");
+        loadBtn.setToolTipText("Load project");
+        loadBtn.setContentAreaFilled(false);
+        loadBtn.setOpaque(true);
+        loadBtn.setBorderPainted(true);
+        loadBtn.setFocusPainted(false);
+        loadBtn.setBorder(new LineBorder( new Color(87, 87, 87), 2, true ));
+        
         loadBtn.setFocusable(false);
         loadBtn.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         loadBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -162,8 +202,23 @@ public class ProjectPanel extends javax.swing.JPanel {
         jToolBar2.setRollover(true);
 
         saveBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gfx/ic_save.png"))); // NOI18N
-        saveBtn.setText("Save");
-        jToolBar2.add(saveBtn);
+        saveBtn.setContentAreaFilled(false);
+        saveBtn.setOpaque(true);
+        saveBtn.setBorderPainted(true);
+        saveBtn.setFocusPainted(false);
+        saveBtn.setToolTipText("Save project");
+        saveBtn.setBorder(new LineBorder( new Color(87, 87, 87), 2, true ));
+        jToolBar1.add(saveBtn);
+
+
+        exportDefoldBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gfx/ic_defold.png"))); // NOI18N
+        exportDefoldBtn.setContentAreaFilled(false);
+        exportDefoldBtn.setOpaque(true);
+        exportDefoldBtn.setBorderPainted(true);
+        exportDefoldBtn.setFocusPainted(false);
+        exportDefoldBtn.setToolTipText("Export for Defold");
+        exportDefoldBtn.setBorder(new LineBorder( new Color(87, 87, 87), 2, true ));
+        jToolBar2.add(exportDefoldBtn);
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
@@ -171,7 +226,7 @@ public class ProjectPanel extends javax.swing.JPanel {
                 headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(headerPanelLayout.createSequentialGroup()
                                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 333, Short.MAX_VALUE)
                                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         headerPanelLayout.setVerticalGroup(
@@ -184,13 +239,16 @@ public class ProjectPanel extends javax.swing.JPanel {
 
         jPanel1.setOpaque(false);
 
-        prjPathField.setColumns(20);
+        prjPathField.setColumns(25);
         prjPathField.setEditable(false);
         prjPathField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         prjPathField.setText("<create or load a project>");
+   
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Project file: ");
+        jLabel1.setForeground(new Color(219, 219, 219) );
+        jLabel1.setOpaque(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -228,6 +286,7 @@ public class ProjectPanel extends javax.swing.JPanel {
     private javax.swing.JButton newBtn;
     private javax.swing.JTextField prjPathField;
     private javax.swing.JButton saveBtn;
+    private javax.swing.JButton exportDefoldBtn;
     // End of variables declaration//GEN-END:variables
 
 }

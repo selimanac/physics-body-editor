@@ -46,7 +46,7 @@ public class TestInputProcessor extends InputAdapter {
         Vector2 p1 = screen.ballThrowP1;
         Vector2 p2 = screen.ballThrowP2;
         Vector2 delta = new Vector2(p2).sub(p1);
-        screen.fireBall(p1, delta.scl(3f));
+        screen.fireBall(p1, delta.scl(10f));
 
         screen.ballThrowP1 = null;
         screen.ballThrowP2 = null;

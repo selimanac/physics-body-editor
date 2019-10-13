@@ -62,7 +62,7 @@ public class Canvas extends ApplicationAdapter {
         font = new BitmapFont();
         drawer = new CanvasDrawer(batch, worldCamera);
 
-        backgroundTexture = Assets.inst().get("data/transparent-light.png", Texture.class);
+        backgroundTexture = Assets.inst().get("data/transparent-dark.png", Texture.class);
         backgroundTexture.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
         infoLabel = new Sprite(Assets.inst().get("data/white.png", Texture.class));
@@ -78,6 +78,7 @@ public class Canvas extends ApplicationAdapter {
         dynamicObjectsScreen = new DynamicObjectsScreen(this);
 
         initializeSelectionListeners();
+        
     }
 
     // -------------------------------------------------------------------------
@@ -133,6 +134,7 @@ public class Canvas extends ApplicationAdapter {
         batch.disableBlending();
         float tw = backgroundTexture.getWidth();
         float th = backgroundTexture.getHeight();
+        
         batch.draw(backgroundTexture, 0f, 0f, w, h, 0f, 0f, w / tw, h / th);
         batch.enableBlending();
         batch.end();
@@ -144,7 +146,7 @@ public class Canvas extends ApplicationAdapter {
         batch.begin();
         infoLabel.draw(batch);
         font.setColor(Color.WHITE);
-        font.draw(batch, String.format(Locale.US, "Zoom: %.0f %%", 100f / worldCamera.zoom), 10, 45);
+        font.draw(batch, String.format(Locale.US, "Zoom: %.0f %%", 10f / worldCamera.zoom), 10, 45);
         font.draw(batch, "Fps: " + Gdx.graphics.getFramesPerSecond(), 10, 25);
         batch.end();
     }
@@ -154,6 +156,7 @@ public class Canvas extends ApplicationAdapter {
        // Gdx.gl.glViewport(0, 0, width, height);
         Gdx.gl.glViewport(0, 0, width, height);
         resetCameras();
+      
     }
 
     // -------------------------------------------------------------------------
@@ -191,6 +194,7 @@ public class Canvas extends ApplicationAdapter {
     }
 
     private void fireModeChanged(Mode mode) {
+       
         for (Listener listener : listeners) listener.modeChanged(mode);
     }
 

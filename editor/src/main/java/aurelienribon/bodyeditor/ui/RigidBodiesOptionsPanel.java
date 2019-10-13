@@ -4,6 +4,9 @@ import aurelienribon.bodyeditor.Settings;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import com.badlogic.gdx.graphics.Color;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -92,35 +95,44 @@ public class RigidBodiesOptionsPanel extends javax.swing.JPanel {
 
         jPanel6.setOpaque(false);
 
+        java.awt.Color fontColor = new java.awt.Color(219, 219, 219);
+
         drawGridChk.setText("Draw grid with gap");
         drawGridChk.setFocusable(false);
-        drawGridChk.setOpaque(false);
+        drawGridChk.setOpaque(true); 
+        drawGridChk.setForeground(fontColor);
+        
 
         drawPolysChk.setSelected(true);
         drawPolysChk.setText("Draw convex polygons");
         drawPolysChk.setFocusable(false);
         drawPolysChk.setOpaque(false);
+        drawPolysChk.setForeground(fontColor);
 
         drawImageChk.setSelected(true);
         drawImageChk.setText("Draw background image");
         drawImageChk.setFocusable(false);
         drawImageChk.setOpaque(false);
+        drawImageChk.setForeground(fontColor);
 
-        gridGapSpinner.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(0.025f), Float.valueOf(0.001f), Float.valueOf(1.0f), Float.valueOf(0.005f)));
+        gridGapSpinner.setModel(new javax.swing.SpinnerNumberModel(Float.valueOf(100.0f), Float.valueOf(1.0f), Float.valueOf(1000.0f), Float.valueOf(0.1f)));
         gridGapSpinner.setFocusable(false);
 
         drawShapeChk.setSelected(true);
         drawShapeChk.setText("Draw shapes");
         drawShapeChk.setFocusable(false);
         drawShapeChk.setOpaque(false);
+        drawShapeChk.setForeground(fontColor);
 
         enableSnapToGridChk.setText("Enable snap-to-grid");
         enableSnapToGridChk.setFocusable(false);
         enableSnapToGridChk.setOpaque(false);
+        enableSnapToGridChk.setForeground(fontColor);
 
         debugPhysicsChk.setText("Debug physics");
         debugPhysicsChk.setFocusable(false);
         debugPhysicsChk.setOpaque(false);
+        debugPhysicsChk.setForeground(fontColor);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);

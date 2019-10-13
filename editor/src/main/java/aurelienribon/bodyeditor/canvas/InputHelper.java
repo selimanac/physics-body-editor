@@ -9,7 +9,7 @@ import com.badlogic.gdx.Input.Keys;
 public class InputHelper {
     public static boolean isCtrlDown() {
         return Gdx.input.isKeyPressed(Keys.CONTROL_LEFT)
-                || Gdx.input.isKeyPressed(Keys.CONTROL_RIGHT)
+                || Gdx.input.isKeyPressed(Keys.ALT_LEFT)
                 || Gdx.input.isKeyPressed(Keys.C);
     }
 }

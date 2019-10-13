@@ -36,6 +36,13 @@ public class IoManager extends ChangeableObject {
         FileUtils.writeStringToFile(projectFile, str);
     }
 
+    public void exportToDefoldFile() throws IOException, JSONException {
+        assert projectFile != null;
+
+        String str = JsonIo.serialize();
+        FileUtils.writeStringToFile(projectFile, str);
+    }
+
     public void importFromFile() throws IOException, JSONException {
         assert projectFile != null;
         assert projectFile.isFile();

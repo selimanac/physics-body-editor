@@ -149,6 +149,7 @@ public class RigidBodiesScreen {
     private final InputProcessor modeInputProcessor = new InputAdapter() {
         @Override
         public boolean keyDown(int keycode) {
+            // NOT WORKING
             if (Ctx.bodies.getSelectedModel() != null) {
                 if (keycode == Input.Keys.TAB) setNextMode();
             }
@@ -702,17 +703,21 @@ public class RigidBodiesScreen {
         bodySprite.setColor(1, 1, 1, 0.5f);
 
         float spRatio = bodySprite.getWidth() / bodySprite.getHeight();
-        bodySprite.setSize(1, 1 / spRatio);
+      //  bodySprite.setSize(1, 1 / spRatio);
+
+      System.out.println("w: " + bodySprite.getWidth() + " h: " + bodySprite.getHeight()); 
+      System.out.println("ratio: " + spRatio); 
+        bodySprite.setSize(bodySprite.getWidth(), bodySprite.getHeight());
     }
 
     private void createBall(Vector2 orig, Vector2 force) {
         Random rand = new Random();
-        float radius = rand.nextFloat() * 0.02f + 0.02f;
+        float radius = rand.nextFloat() * 5.02f + 5.02f;
 
         BodyDef bd = new BodyDef();
         bd.type = BodyType.DynamicBody;
-        bd.angularDamping = 0.5f;
-        bd.linearDamping = 0.5f;
+        bd.angularDamping = 0.3f;
+        bd.linearDamping = 0.3f;
         bd.position.set(orig);
         bd.angle = rand.nextFloat() * MathUtils.PI;
 
@@ -726,8 +731,8 @@ public class RigidBodiesScreen {
 
         FixtureDef fd = new FixtureDef();
         fd.density = 1f;
-        fd.friction = 0.5f;
-        fd.restitution = 1f;
+        fd.friction = 0.2f;
+        fd.restitution = 10f;
         fd.shape = shape;
 
         b.createFixture(fd);

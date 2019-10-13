@@ -34,6 +34,8 @@ public class CanvasDrawer {
     private static final Color MOUSESELECTION_STROKE_COLOR = new Color(0.2f, 0.2f, 0.8f, 0.6f);
     private static final Color GRID_COLOR = new Color(0.5f, 0.5f, 0.5f, 1);
     private static final Color AXIS_COLOR = new Color(0.5f, 0.5f, 0.5f, 1);
+    private static final Color AXIS_COLOR_Y = new Color(0.0f, 255.0f, 0.0f, 1);
+    private static final Color AXIS_COLOR_X = new Color(255.0f, 0.0f, 0.0f, 1);
 
     private final ShapeRenderer drawer = new ShapeRenderer();
     private final SpriteBatch batch;
@@ -151,15 +153,16 @@ public class CanvasDrawer {
         Gdx.gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         float len = 0.03f * camera.zoom;
-
+        //float len = 0.03f * camera.zoom;
         drawer.begin(ShapeRenderer.ShapeType.Line);
-        drawer.setColor(AXIS_COLOR);
-        drawer.line(0, 0, 1, 0);
-        drawer.line(1, 0, 1 - len, -len);
-        drawer.line(1, 0, 1 - len, +len);
-        drawer.line(0, 0, 0, 1);
-        drawer.line(0, 1, -len, 1 - len);
-        drawer.line(0, 1, +len, 1 - len);
+        drawer.setColor(AXIS_COLOR_X);
+        drawer.line(0, 0, 100, 0);
+        drawer.line(100, 0, 100 - len, -len);
+        drawer.line(100, 0, 100 - len, +len);
+        drawer.setColor(AXIS_COLOR_Y);
+        drawer.line(0, 0, 0, 100);
+        drawer.line(0, 100, -len, 100 - len);
+        drawer.line(0, 100, +len, 100 - len);
         drawer.end();
 
         float size = 0.1f * camera.zoom;
@@ -167,8 +170,8 @@ public class CanvasDrawer {
         v10Sprite.setSize(size, size);
         v01Sprite.setSize(size, size);
         v00Sprite.setPosition(-size, -size);
-        v10Sprite.setPosition(1, -size);
-        v01Sprite.setPosition(-size, 1 - size / 2);
+        v10Sprite.setPosition(100, -size);
+        v01Sprite.setPosition(-size, 100 - size / 2); 
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
