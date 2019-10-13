@@ -1,6 +1,8 @@
 package aurelienribon.bodyeditor;
 
 import aurelienribon.bodyeditor.io.JsonIo;
+import aurelienribon.bodyeditor.models.PolygonModel;
+import aurelienribon.bodyeditor.models.RigidBodyModel;
 import aurelienribon.utils.io.FilenameHelper;
 import aurelienribon.utils.notifications.ChangeableObject;
 import org.apache.commons.io.FileUtils;
@@ -10,6 +12,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -40,31 +44,45 @@ public class IoManager extends ChangeableObject {
 
     public void exportToDefoldFile() throws IOException, JSONException {
         assert projectFile != null;
-
+        
         //System.out.println("Projectdir: " + getProjectDir() + "file_name");
         //System.out.println("projectFile: " + projectFile);
-        Map<String, ArrayList<String[]>>  result = JsonIo.prepareForDefold();
 
-        for (Map.Entry<String, ArrayList<String[]>> entry : result.entrySet()) {
+        File path = getProjectDir();
+        String modelName = "";
 
-            System.out.println("File Name:  " + entry.getKey());
-            //System.out.println( entry.getValue());
-            ArrayList<String[]> t = entry.getValue();
-            System.out.println("ArrayList Size: " + t.size());
-            for (int i = 0; i < t.size(); i++) {
-                //System.out.println(t.get(i));
-                String[] a = t.get(i);
-                System.out.println("StringArray Size: " + a.length);
-                for (int ii = 0; ii < a.length; ii++) {
-                    System.out.println(a[ii]);
-                }
-            }
-        }
-        
-
-
+        File defoldDirectory =  new File(path + "/defold");
+        FileUtils.deleteDirectory(defoldDirectory);
        
-       // FileUtils.writeStringToFile(projectFile, str);
+        for (RigidBodyModel model : Ctx.bodies.getModels()) {
+
+            
+            System.out.println(model.getName());
+            modelName = model.getName();
+            int i = 0;
+            for (PolygonModel polygon : model.getPolygons()) {
+
+                String shapeStringContainer = "";
+                
+                shapeStringContainer += "shape_type: TYPE_HULL" + System.lineSeparator();
+
+                for (Vector2 vertex : polygon.vertices) {
+                    shapeStringContainer += "data: " + (vertex.x - model.getOrigin().x) + System.lineSeparator();
+                    shapeStringContainer += "data: " + (vertex.y - model.getOrigin().y) + System.lineSeparator();
+                    shapeStringContainer += "data: 0" + System.lineSeparator();
+                }
+
+                System.out.println(shapeStringContainer);
+                i++;
+               
+                File filePath =  new File(path + "/defold/" + modelName + "_" + i + ".convexshape");
+                System.out.println("Save File Name: " + filePath);
+                FileUtils.writeStringToFile(filePath, shapeStringContainer);
+            }
+            i = 0;
+        }
+
+
     }
 
     public void importFromFile() throws IOException, JSONException {

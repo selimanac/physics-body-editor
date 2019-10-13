@@ -1,3 +1,13 @@
+Work in progress!  
+
+Keys:  
+
+Enter -> inset point  
+Backspase ->  delete point  
+Left alt ->  Draw circle  
+escape -> cancel drawing  
+Left Control -> Change Mode  
+
 ![PBE v1.3.2](https://raw.githubusercontent.com/selimanac/Physics-Body-Editor/master/readmeImgs/pbe-v132.png)
 
 Original website: http://www.aurelienribon.com/  

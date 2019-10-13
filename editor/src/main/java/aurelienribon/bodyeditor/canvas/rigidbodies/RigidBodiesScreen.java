@@ -129,7 +129,7 @@ public class RigidBodiesScreen {
         initializeSelectedPointsEvents();
         initializeModeLabelsCallbacks();
         initializeOtherLabelsCallbacks();
-
+        
         final Tween reloadTimer = Tween.call(new TweenCallback() {
             @Override
             public void onEvent(int type, BaseTween<?> source) {
@@ -150,8 +150,10 @@ public class RigidBodiesScreen {
         @Override
         public boolean keyDown(int keycode) {
             // NOT WORKING
+            
+           
             if (Ctx.bodies.getSelectedModel() != null) {
-                if (keycode == Input.Keys.TAB) setNextMode();
+                if (keycode == Input.Keys.CONTROL_LEFT) setNextMode();
             }
 
             return false;
@@ -289,6 +291,10 @@ public class RigidBodiesScreen {
                         if (chooser.showOpenDialog(Ctx.window) == JFileChooser.APPROVE_OPTION) {
                             String path = Ctx.io.buildImagePath(chooser.getSelectedFile());
                             Ctx.bodies.getSelectedModel().setImagePath(path);
+                           // Ctx.bodies.getSelectedModel().getOrigin() = new Vector2(bodySprite.getWidth()/2, bodySprite.getWidth()/2);
+                            Ctx.bodies.getSelectedModel().getOrigin().x = bodySprite.getWidth()/2;
+                            Ctx.bodies.getSelectedModel().getOrigin().y = bodySprite.getHeight()/2;
+                            //bodySprite.getWidth();
                         }
                     }
                 });
@@ -307,6 +313,7 @@ public class RigidBodiesScreen {
             @Override
             public void touchDown(Label source) {
                 RigidBodyModel model = Ctx.bodies.getSelectedModel();
+                
                 if (model != null) {
                     model.setImagePath(null);
                     createBodySprite();
@@ -412,6 +419,8 @@ public class RigidBodiesScreen {
         }
         canvas.batch.end();
 
+       
+       // nearestPoint = new Vector2(50, 50);
         canvas.drawer.drawModel(Ctx.bodies.getSelectedModel(), selectedPoints, nextPoint, nearestPoint);
         canvas.drawer.drawGrid();
         canvas.drawer.drawMouseSelection(mouseSelectionP1, mouseSelectionP2);

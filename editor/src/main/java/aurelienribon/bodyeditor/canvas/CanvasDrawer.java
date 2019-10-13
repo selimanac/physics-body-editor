@@ -77,6 +77,7 @@ public class CanvasDrawer {
         if (Settings.isShapeDrawn) {
             drawShapes(model.getShapes(), nextPoint);
             drawPoints(model.getShapes(), selectedPoints, nearestPoint, nextPoint);
+           // System.out.println("x: " + model.getOrigin().x + "y: " + model.getOrigin().y ); 
             drawOrigin(model.getOrigin(), nearestPoint);
         }
     }
@@ -84,7 +85,7 @@ public class CanvasDrawer {
     public void drawModel(RigidBodyModel model, DynamicObjectModel.BodyAttributes attrs) {
         if (model == null)
             return;
-
+        
         Matrix4 transform = new Matrix4();
         transform.translate(attrs.x, attrs.y, 0);
         transform.scale(attrs.scale, attrs.scale, 0);

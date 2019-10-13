@@ -23,43 +23,7 @@ import org.json.JSONStringer;
  */
 public class JsonIo {
 
-    public static Map<String, ArrayList<String[]>> prepareForDefold() {
-        String result = "";
-
-        Map<String, ArrayList<String[]>> container = new HashMap<String, ArrayList<String[]>>();
-       
-
-        for (RigidBodyModel model : Ctx.bodies.getModels()) {
-            ArrayList<String[]> bodies = new ArrayList<String[]>();
-            int i = 0;
-            String[] shapeArray = new String[model.getPolygons().size()];
-
-            for (PolygonModel polygon : model.getPolygons()) {
-
-                String shapeStringContainer = "";
-
-                shapeStringContainer += "shape_type: TYPE_HULL" + System.lineSeparator();
-
-                for (Vector2 vertex : polygon.vertices) {
-                    shapeStringContainer += "data: " + vertex.x + System.lineSeparator();
-                    shapeStringContainer += "data: " + vertex.y + System.lineSeparator();
-                    shapeStringContainer += "data: 0" + System.lineSeparator();
-                }
-                shapeArray[i] = shapeStringContainer;
-                i++;
-                // Save here with file name
-                bodies.add(shapeArray);
-               
-            }
-           
-           i =0;
-     
-            container.put(model.getName(), bodies);
-           
-        }
-        // System.out.println(result);
-        return container;
-    }
+    
 
     public static String serialize() throws JSONException {
         JSONStringer json = new JSONStringer();

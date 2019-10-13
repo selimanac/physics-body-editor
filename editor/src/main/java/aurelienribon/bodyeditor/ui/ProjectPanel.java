@@ -116,7 +116,7 @@ public class ProjectPanel extends javax.swing.JPanel {
     private void exportDefoldProject(){
         try {
             Ctx.io.exportToDefoldFile();
-            JOptionPane.showMessageDialog(Ctx.window, "Save successfully done.");
+            JOptionPane.showMessageDialog(Ctx.window, "Defold export successfully done.");
 
         } catch (IOException ex) {
             String msg = "Something went wrong while saving.\n\n" + ex.getClass().getSimpleName() + " - " + ex.getMessage();
