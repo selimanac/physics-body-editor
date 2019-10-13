@@ -132,6 +132,9 @@ public class RigidBodiesCreationDialog extends javax.swing.JDialog {
             model.setImagePath(Ctx.io.buildImagePath(chooser.getSelectedFile()));
             Ctx.bodies.getModels().add(model);
             Ctx.bodies.select(model);
+
+            
+
             dispose();
         }
     }

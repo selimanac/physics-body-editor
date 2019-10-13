@@ -78,7 +78,9 @@ public class RigidBodiesScreen {
     private final Label lblInsertVertices;
     private final Label lblRemoveVertices;
 
-    private enum Mode {CREATION, EDITION, TEST}
+    private enum Mode {
+        CREATION, EDITION, TEST
+    }
 
     private Mode mode = null;
 
@@ -102,14 +104,14 @@ public class RigidBodiesScreen {
         canvas.input.addProcessor(creationInputProcessor);
 
         int lblH = 25;
-        Color lblC = new Color(0x2A / 255f, 0x6B / 255f, 0x56 / 255f, 180 / 255f);
+        Color lblC = new Color(45 / 255f, 45 / 255f, 45 / 255f, 200 / 255f);
 
-        lblModeCreation = new Label(10 + lblH, 80, lblH, "Creation", canvas.font, lblC, Anchor.TOP_LEFT);
-        lblModeEdition = new Label(10 + lblH * 2, 80, lblH, "Edition", canvas.font, lblC, Anchor.TOP_LEFT);
-        lblModeTest = new Label(10 + lblH * 3, 80, lblH, "Test", canvas.font, lblC, Anchor.TOP_LEFT);
+        lblModeCreation = new Label(10 + lblH, 80, lblH, "CREATE", canvas.font, lblC, Anchor.TOP_LEFT);
+        lblModeEdition = new Label(10 + lblH * 2, 80, lblH, "EDIT", canvas.font, lblC, Anchor.TOP_LEFT);
+        lblModeTest = new Label(10 + lblH * 3, 80, lblH, "TEST", canvas.font, lblC, Anchor.TOP_LEFT);
 
-        lblSetImage = new Label(10 + lblH, 120, lblH, "Set bg. image", canvas.font, lblC, Anchor.TOP_RIGHT);
-        lblClearImage = new Label(15 + lblH * 2, 120, lblH, "Clear bg. image", canvas.font, lblC, Anchor.TOP_RIGHT);
+        lblSetImage = new Label(10 + lblH, 120, lblH, "Load Image", canvas.font, lblC, Anchor.TOP_RIGHT);
+        lblClearImage = new Label(15 + lblH * 2, 120, lblH, "Delete Image", canvas.font, lblC, Anchor.TOP_RIGHT);
         lblAutoTrace = new Label(20 + lblH * 4, 120, lblH, "Auto-trace", canvas.font, lblC, Anchor.TOP_RIGHT);
         lblClearVertices = new Label(25 + lblH * 5, 120, lblH, "Clear all points", canvas.font, lblC, Anchor.TOP_RIGHT);
         lblInsertVertices = new Label(30 + lblH * 6, 120, lblH, "Insert points", canvas.font, lblC, Anchor.TOP_RIGHT);
@@ -129,7 +131,7 @@ public class RigidBodiesScreen {
         initializeSelectedPointsEvents();
         initializeModeLabelsCallbacks();
         initializeOtherLabelsCallbacks();
-        
+
         final Tween reloadTimer = Tween.call(new TweenCallback() {
             @Override
             public void onEvent(int type, BaseTween<?> source) {
@@ -140,8 +142,10 @@ public class RigidBodiesScreen {
         canvas.addListener(new Canvas.Listener() {
             @Override
             public void modeChanged(Canvas.Mode mode) {
-                if (mode == Canvas.Mode.BODIES) reloadTimer.resume();
-                else reloadTimer.pause();
+                if (mode == Canvas.Mode.BODIES)
+                    reloadTimer.resume();
+                else
+                    reloadTimer.pause();
             }
         });
     }
@@ -150,10 +154,10 @@ public class RigidBodiesScreen {
         @Override
         public boolean keyDown(int keycode) {
             // NOT WORKING
-            
-           
+
             if (Ctx.bodies.getSelectedModel() != null) {
-                if (keycode == Input.Keys.CONTROL_LEFT) setNextMode();
+                if (keycode == Input.Keys.CONTROL_LEFT)
+                    setNextMode();
             }
 
             return false;
@@ -164,14 +168,17 @@ public class RigidBodiesScreen {
         @Override
         public boolean touchDown(int x, int y, int pointer, int button) {
             if (button == Input.Buttons.LEFT) {
-                for (Label label : labels) if (label.touchDown(x, y)) return true;
+                for (Label label : labels)
+                    if (label.touchDown(x, y))
+                        return true;
             }
             return false;
         }
 
-        //@Override //TODO possibly mouseMoved? replace elsewhere as well
+        // @Override //TODO possibly mouseMoved? replace elsewhere as well
         public boolean touchMoved(int x, int y) {
-            for (Label label : labels) label.touchMoved(x, y);
+            for (Label label : labels)
+                label.touchMoved(x, y);
             return false;
         }
     };
@@ -206,8 +213,10 @@ public class RigidBodiesScreen {
                     updateButtons();
                     resetWorld();
 
-                    if (model != null) model.addChangeListener(selectedModelChangeListener);
-                    if (oldModel != null) oldModel.removeChangeListener(selectedModelChangeListener);
+                    if (model != null)
+                        model.addChangeListener(selectedModelChangeListener);
+                    if (oldModel != null)
+                        oldModel.removeChangeListener(selectedModelChangeListener);
                     oldModel = model;
                 }
             }
@@ -219,13 +228,15 @@ public class RigidBodiesScreen {
             @Override
             public void changed(Object source, List<Vector2> added, List<Vector2> removed) {
                 RigidBodyModel model = Ctx.bodies.getSelectedModel();
-                if (model == null) return;
+                if (model == null)
+                    return;
 
                 List<Vector2> toAdd = new ArrayList<Vector2>();
 
                 for (Vector2 v : added) {
                     ShapeModel shape = ShapeUtils.getShape(model, v);
-                    if (shape == null) continue;
+                    if (shape == null)
+                        continue;
 
                     if (shape.getType() == ShapeModel.Type.CIRCLE) {
                         List<Vector2> vs = shape.getVertices();
@@ -291,10 +302,10 @@ public class RigidBodiesScreen {
                         if (chooser.showOpenDialog(Ctx.window) == JFileChooser.APPROVE_OPTION) {
                             String path = Ctx.io.buildImagePath(chooser.getSelectedFile());
                             Ctx.bodies.getSelectedModel().setImagePath(path);
-                           // Ctx.bodies.getSelectedModel().getOrigin() = new Vector2(bodySprite.getWidth()/2, bodySprite.getWidth()/2);
-                            Ctx.bodies.getSelectedModel().getOrigin().x = bodySprite.getWidth()/2;
-                            Ctx.bodies.getSelectedModel().getOrigin().y = bodySprite.getHeight()/2;
-                            //bodySprite.getWidth();
+
+                            //Ctx.bodies.getSelectedModel().getOrigin().x = bodySprite.getWidth() / 2;
+                            //Ctx.bodies.getSelectedModel().getOrigin().y = bodySprite.getHeight() / 2;
+
                         }
                     }
                 });
@@ -313,7 +324,7 @@ public class RigidBodiesScreen {
             @Override
             public void touchDown(Label source) {
                 RigidBodyModel model = Ctx.bodies.getSelectedModel();
-                
+
                 if (model != null) {
                     model.setImagePath(null);
                     createBodySprite();
@@ -338,7 +349,8 @@ public class RigidBodiesScreen {
                     public void run() {
                         AutoTraceParamsDialog dialog = new AutoTraceParamsDialog(Ctx.window);
                         dialog.setLocationRelativeTo(Ctx.window);
-                        if (dialog.prompt()) autoTrace();
+                        if (dialog.prompt())
+                            autoTrace();
                     }
                 });
             }
@@ -408,7 +420,8 @@ public class RigidBodiesScreen {
 
         canvas.batch.setProjectionMatrix(canvas.worldCamera.combined);
         canvas.batch.begin();
-        if (bodySprite != null && Settings.isImageDrawn) bodySprite.draw(canvas.batch);
+        if (bodySprite != null && Settings.isImageDrawn)
+            bodySprite.draw(canvas.batch);
         for (int i = 0; i < ballsSprites.size(); i++) {
             Sprite sp = ballsSprites.get(i);
             Vector2 pos = ballsBodies.get(i).getPosition();
@@ -419,8 +432,7 @@ public class RigidBodiesScreen {
         }
         canvas.batch.end();
 
-       
-       // nearestPoint = new Vector2(50, 50);
+        // nearestPoint = new Vector2(50, 50);
         canvas.drawer.drawModel(Ctx.bodies.getSelectedModel(), selectedPoints, nextPoint, nearestPoint);
         canvas.drawer.drawGrid();
         canvas.drawer.drawMouseSelection(mouseSelectionP1, mouseSelectionP2);
@@ -432,7 +444,8 @@ public class RigidBodiesScreen {
 
         canvas.batch.setProjectionMatrix(canvas.screenCamera.combined);
         canvas.batch.begin();
-        for (Label lbl : labels) lbl.draw(canvas.batch);
+        for (Label lbl : labels)
+            lbl.draw(canvas.batch);
         canvas.batch.end();
     }
 
@@ -450,12 +463,14 @@ public class RigidBodiesScreen {
     }
 
     public void insertPointsBetweenSelected() {
-        if (!isInsertEnabled()) return;
+        if (!isInsertEnabled())
+            return;
 
         List<Vector2> toAdd = new ArrayList<Vector2>();
 
         for (ShapeModel shape : Ctx.bodies.getSelectedModel().getShapes()) {
-            if (shape.getType() != ShapeModel.Type.POLYGON) continue;
+            if (shape.getType() != ShapeModel.Type.POLYGON)
+                continue;
 
             List<Vector2> vs = shape.getVertices();
 
@@ -476,7 +491,8 @@ public class RigidBodiesScreen {
     }
 
     public void removeSelectedPoints() {
-        if (!isRemoveEnabled()) return;
+        if (!isRemoveEnabled())
+            return;
 
         List<ShapeModel> shapes = Ctx.bodies.getSelectedModel().getShapes();
 
@@ -484,21 +500,23 @@ public class RigidBodiesScreen {
             ShapeModel shape = Ctx.bodies.getSelectedModel().getShapes().get(i);
 
             switch (shape.getType()) {
-                case POLYGON:
-                    for (Vector2 p : selectedPoints) {
-                        if (shape.getVertices().contains(p)) shape.getVertices().remove(p);
-                    }
-                    if (shape.getVertices().isEmpty()) shapes.remove(i);
-                    break;
+            case POLYGON:
+                for (Vector2 p : selectedPoints) {
+                    if (shape.getVertices().contains(p))
+                        shape.getVertices().remove(p);
+                }
+                if (shape.getVertices().isEmpty())
+                    shapes.remove(i);
+                break;
 
-                case CIRCLE:
-                    for (Vector2 p : selectedPoints) {
-                        if (shape.getVertices().contains(p)) {
-                            shapes.remove(i);
-                            break;
-                        }
+            case CIRCLE:
+                for (Vector2 p : selectedPoints) {
+                    if (shape.getVertices().contains(p)) {
+                        shapes.remove(i);
+                        break;
                     }
-                    break;
+                }
+                break;
             }
         }
 
@@ -515,16 +533,26 @@ public class RigidBodiesScreen {
 
         if (model != null) {
             lblSetImage.show();
-            if (isImageValid()) lblClearImage.show();
-            else lblClearImage.hide();
-            if (isImageValid() && model.getShapes().isEmpty()) lblAutoTrace.show();
-            else lblAutoTrace.hide();
-            if (!model.getShapes().isEmpty()) lblClearVertices.show();
-            else lblClearVertices.hide();
-            if (isRemoveEnabled()) lblRemoveVertices.show();
-            else lblRemoveVertices.hide();
-            if (isInsertEnabled()) lblInsertVertices.show();
-            else lblInsertVertices.hide();
+            if (isImageValid())
+                lblClearImage.show();
+            else
+                lblClearImage.hide();
+            if (isImageValid() && model.getShapes().isEmpty())
+                lblAutoTrace.show();
+            else
+                lblAutoTrace.hide();
+            if (!model.getShapes().isEmpty())
+                lblClearVertices.show();
+            else
+                lblClearVertices.hide();
+            if (isRemoveEnabled())
+                lblRemoveVertices.show();
+            else
+                lblRemoveVertices.hide();
+            if (isInsertEnabled())
+                lblInsertVertices.show();
+            else
+                lblInsertVertices.hide();
 
         } else {
             lblSetImage.hide();
@@ -558,78 +586,85 @@ public class RigidBodiesScreen {
             lblModeTest.hideSemi();
 
             switch (mode) {
-                case CREATION:
-                    lblModeCreation.show();
-                    canvas.input.addProcessor(creationInputProcessor);
-                    break;
+            case CREATION:
+                lblModeCreation.show();
+                canvas.input.addProcessor(creationInputProcessor);
+                break;
 
-                case EDITION:
-                    lblModeEdition.show();
-                    canvas.input.addProcessor(editionInputProcessor);
-                    break;
+            case EDITION:
+                lblModeEdition.show();
+                canvas.input.addProcessor(editionInputProcessor);
+                break;
 
-                case TEST:
-                    lblModeTest.show();
-                    canvas.input.addProcessor(testInputProcessor);
-                    break;
+            case TEST:
+                lblModeTest.show();
+                canvas.input.addProcessor(testInputProcessor);
+                break;
             }
         }
     }
 
     private void setNextMode() {
-        Mode m = mode == Mode.CREATION
-                ? Mode.EDITION : mode == Mode.EDITION
-                ? Mode.TEST : Mode.CREATION;
+        Mode m = mode == Mode.CREATION ? Mode.EDITION : mode == Mode.EDITION ? Mode.TEST : Mode.CREATION;
         setMode(m);
     }
 
     private boolean isInsertEnabled() {
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
 
-        if (model == null) return false;
-        if (selectedPoints.size() <= 1) return false;
+        if (model == null)
+            return false;
+        if (selectedPoints.size() <= 1)
+            return false;
 
         for (ShapeModel shape : model.getShapes()) {
-            if (shape.getType() != ShapeModel.Type.POLYGON) continue;
+            if (shape.getType() != ShapeModel.Type.POLYGON)
+                continue;
 
             Vector2 v1 = null;
             for (Vector2 v2 : shape.getVertices()) {
-                if (v1 != null && selectedPoints.contains(v2)) return true;
+                if (v1 != null && selectedPoints.contains(v2))
+                    return true;
                 v1 = selectedPoints.contains(v2) ? v2 : null;
             }
-            if (v1 != null && selectedPoints.contains(shape.getVertices().get(0))) return true;
+            if (v1 != null && selectedPoints.contains(shape.getVertices().get(0)))
+                return true;
         }
 
         return false;
     }
 
     private boolean isRemoveEnabled() {
-        if (Ctx.bodies.getSelectedModel() == null) return false;
+        if (Ctx.bodies.getSelectedModel() == null)
+            return false;
         return !selectedPoints.isEmpty();
     }
 
     private boolean isImageValid() {
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
-        if (model == null) return false;
-        if (model.getImagePath() == null || !model.isImagePathValid()) return false;
+        if (model == null)
+            return false;
+        if (model.getImagePath() == null || !model.isImagePathValid())
+            return false;
         return true;
     }
 
     private void autoTrace() {
-        if (!isImageValid()) return;
+        if (!isImageValid())
+            return;
 
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
         File file = Ctx.io.getImageFile(model.getImagePath());
-        Vector2[][] polygons = Tracer.trace(file.getPath(),
-                Settings.autoTraceHullTolerance,
-                Settings.autoTraceAlphaTolerance,
-                Settings.autoTraceMultiPartDetection,
+        Vector2[][] polygons = Tracer.trace(file.getPath(), Settings.autoTraceHullTolerance,
+                Settings.autoTraceAlphaTolerance, Settings.autoTraceMultiPartDetection,
                 Settings.autoTraceHoleDetection);
 
-        if (polygons == null) return;
+        if (polygons == null)
+            return;
 
         for (Vector2[] polygon : polygons) {
-            if (polygon.length < 3) continue;
+            if (polygon.length < 3)
+                continue;
             ShapeModel shape = new ShapeModel(ShapeModel.Type.POLYGON);
             shape.getVertices().addAll(Arrays.asList(polygon));
             shape.close();
@@ -641,7 +676,8 @@ public class RigidBodiesScreen {
     }
 
     private void clearPoints() {
-        if (Ctx.bodies.getSelectedModel() == null) return;
+        if (Ctx.bodies.getSelectedModel() == null)
+            return;
         selectedPoints.clear();
         Ctx.bodies.getSelectedModel().clear();
     }
@@ -651,13 +687,16 @@ public class RigidBodiesScreen {
         ballsSprites.clear();
         Array<Body> bodies = new Array<Body>();
         world.getBodies(bodies);
-        for (Body b : bodies) world.destroyBody(b);
+        for (Body b : bodies)
+            world.destroyBody(b);
     }
 
     private void createBody() {
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
-        if (model == null) return;
-        if (model.getPolygons().isEmpty() && model.getCircles().isEmpty()) return;
+        if (model == null)
+            return;
+        if (model.getPolygons().isEmpty() && model.getCircles().isEmpty())
+            return;
 
         BodyDef bd = new BodyDef();
         bd.type = BodyType.StaticBody;
@@ -667,7 +706,8 @@ public class RigidBodiesScreen {
         for (PolygonModel polygon : model.getPolygons()) {
             Vector2[] vs = polygon.vertices.toArray(new Vector2[0]);
 
-            if (PolygonUtils.getPolygonArea(vs) < 0.00001f) continue;
+            if (PolygonUtils.getPolygonArea(vs) < 0.00001f)
+                continue;
 
             PolygonShape shape = new PolygonShape();
             shape.set(vs);
@@ -702,21 +742,28 @@ public class RigidBodiesScreen {
         bodySprite = null;
 
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
-        if (model == null) return;
+        if (model == null)
+            return;
 
         TextureRegion region = Assets.inst().getRegion(model);
-        if (region == null) return;
+        if (region == null)
+            return;
 
         bodySprite = new Sprite(region);
         bodySprite.setPosition(0, 0);
         bodySprite.setColor(1, 1, 1, 0.5f);
 
         float spRatio = bodySprite.getWidth() / bodySprite.getHeight();
-      //  bodySprite.setSize(1, 1 / spRatio);
+        // bodySprite.setSize(1, 1 / spRatio);
 
-      System.out.println("w: " + bodySprite.getWidth() + " h: " + bodySprite.getHeight()); 
-      System.out.println("ratio: " + spRatio); 
+        // System.out.println("w: " + bodySprite.getWidth() + " h: " +
+        // bodySprite.getHeight());
+        // System.out.println("ratio: " + spRatio);
         bodySprite.setSize(bodySprite.getWidth(), bodySprite.getHeight());
+
+        Ctx.bodies.getSelectedModel().getOrigin().x = bodySprite.getWidth() / 2;
+        Ctx.bodies.getSelectedModel().getOrigin().y = bodySprite.getHeight() / 2;
+
     }
 
     private void createBall(Vector2 orig, Vector2 force) {
@@ -731,7 +778,7 @@ public class RigidBodiesScreen {
         bd.angle = rand.nextFloat() * MathUtils.PI;
 
         Body b = world.createBody(bd);
-        b.applyLinearImpulse(force, orig, true);//TODO probably a bug
+        b.applyLinearImpulse(force, orig, true);// TODO probably a bug
 
         ballsBodies.add(b);
 
@@ -757,7 +804,8 @@ public class RigidBodiesScreen {
         clearWorld();
 
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
-        if (model == null) return;
+        if (model == null)
+            return;
 
         createBody();
         createBodySprite();
