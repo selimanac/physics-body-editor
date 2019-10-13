@@ -6,6 +6,11 @@ import aurelienribon.bodyeditor.models.DynamicObjectModel;
 import aurelienribon.bodyeditor.models.PolygonModel;
 import aurelienribon.bodyeditor.models.RigidBodyModel;
 import aurelienribon.bodyeditor.models.ShapeModel;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.badlogic.gdx.math.Vector2;
 import org.apache.commons.io.FilenameUtils;
 import org.json.JSONArray;
@@ -17,6 +22,45 @@ import org.json.JSONStringer;
  * @author Aurelien Ribon | http://www.aurelienribon.com
  */
 public class JsonIo {
+
+    public static Map<String, ArrayList<String[]>> prepareForDefold() {
+        String result = "";
+
+        Map<String, ArrayList<String[]>> container = new HashMap<String, ArrayList<String[]>>();
+       
+
+        for (RigidBodyModel model : Ctx.bodies.getModels()) {
+            ArrayList<String[]> bodies = new ArrayList<String[]>();
+            int i = 0;
+            String[] shapeArray = new String[model.getPolygons().size()];
+
+            for (PolygonModel polygon : model.getPolygons()) {
+
+                String shapeStringContainer = "";
+
+                shapeStringContainer += "shape_type: TYPE_HULL" + System.lineSeparator();
+
+                for (Vector2 vertex : polygon.vertices) {
+                    shapeStringContainer += "data: " + vertex.x + System.lineSeparator();
+                    shapeStringContainer += "data: " + vertex.y + System.lineSeparator();
+                    shapeStringContainer += "data: 0" + System.lineSeparator();
+                }
+                shapeArray[i] = shapeStringContainer;
+                i++;
+                // Save here with file name
+                bodies.add(shapeArray);
+               
+            }
+           
+           i =0;
+     
+            container.put(model.getName(), bodies);
+           
+        }
+        // System.out.println(result);
+        return container;
+    }
+
     public static String serialize() throws JSONException {
         JSONStringer json = new JSONStringer();
         json.object();
@@ -26,7 +70,8 @@ public class JsonIo {
             json.object();
             json.key("name").value(model.getName());
             json.key("imagePath").value(FilenameUtils.separatorsToUnix(model.getImagePath()));
-            json.key("origin").object().key("x").value(model.getOrigin().x).key("y").value(model.getOrigin().y).endObject();
+            json.key("origin").object().key("x").value(model.getOrigin().x).key("y").value(model.getOrigin().y)
+                    .endObject();
             json.key("polygons").array();
 
             for (PolygonModel polygon : model.getPolygons()) {
@@ -107,9 +152,8 @@ public class JsonIo {
                 JSONArray verticesElem = polygonsElem.getJSONArray(ii);
                 for (int iii = 0; iii < verticesElem.length(); iii++) {
                     JSONObject vertexElem = verticesElem.getJSONObject(iii);
-                    polygon.vertices.add(new Vector2(
-                            (float) vertexElem.getDouble("x"),
-                            (float) vertexElem.getDouble("y")));
+                    polygon.vertices
+                            .add(new Vector2((float) vertexElem.getDouble("x"), (float) vertexElem.getDouble("y")));
                 }
             }
 
@@ -137,9 +181,8 @@ public class JsonIo {
                 JSONArray verticesElem = shapeElem.getJSONArray("vertices");
                 for (int iii = 0; iii < verticesElem.length(); iii++) {
                     JSONObject vertexElem = verticesElem.getJSONObject(iii);
-                    shape.getVertices().add(new Vector2(
-                            (float) vertexElem.getDouble("x"),
-                            (float) vertexElem.getDouble("y")));
+                    shape.getVertices()
+                            .add(new Vector2((float) vertexElem.getDouble("x"), (float) vertexElem.getDouble("y")));
                 }
 
                 shape.close();

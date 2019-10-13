@@ -8,6 +8,8 @@ import org.json.JSONException;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -39,8 +41,30 @@ public class IoManager extends ChangeableObject {
     public void exportToDefoldFile() throws IOException, JSONException {
         assert projectFile != null;
 
-        String str = JsonIo.serialize();
-        FileUtils.writeStringToFile(projectFile, str);
+        //System.out.println("Projectdir: " + getProjectDir() + "file_name");
+        //System.out.println("projectFile: " + projectFile);
+        Map<String, ArrayList<String[]>>  result = JsonIo.prepareForDefold();
+
+        for (Map.Entry<String, ArrayList<String[]>> entry : result.entrySet()) {
+
+            System.out.println("File Name:  " + entry.getKey());
+            //System.out.println( entry.getValue());
+            ArrayList<String[]> t = entry.getValue();
+            System.out.println("ArrayList Size: " + t.size());
+            for (int i = 0; i < t.size(); i++) {
+                //System.out.println(t.get(i));
+                String[] a = t.get(i);
+                System.out.println("StringArray Size: " + a.length);
+                for (int ii = 0; ii < a.length; ii++) {
+                    System.out.println(a[ii]);
+                }
+            }
+        }
+        
+
+
+       
+       // FileUtils.writeStringToFile(projectFile, str);
     }
 
     public void importFromFile() throws IOException, JSONException {
