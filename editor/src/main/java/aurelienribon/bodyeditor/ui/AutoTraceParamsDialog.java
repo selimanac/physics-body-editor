@@ -20,9 +20,15 @@ import aurelienribon.bodyeditor.Settings;
 import aurelienribon.ui.components.PaintedPanel;
 import aurelienribon.ui.css.Style;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import  java.awt.BorderLayout;
 
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;;
 public class AutoTraceParamsDialog extends javax.swing.JDialog {
     private boolean result = false;
 
@@ -32,7 +38,7 @@ public class AutoTraceParamsDialog extends javax.swing.JDialog {
         setContentPane(new PaintedPanel());
         initComponents();
 
-        Style.registerCssClasses(getContentPane(), ".rootPanel", ".configPanel");
+        Style.registerCssClasses(getContentPane(), ".popPanel", ".configPanel");
         Style.registerCssClasses(commentLabel, ".brightcomment");
         Style.apply(getContentPane(), new Style(Res.getUrl("/css/style.css")));
 
@@ -113,9 +119,69 @@ public class AutoTraceParamsDialog extends javax.swing.JDialog {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Alpha tolerance: ");
 
-        okBtn.setText("Ok");
+        /* okBtn.setText("OK");
+        okBtn.setContentAreaFilled(false);
+        okBtn.setOpaque(true);
+        okBtn.setBorderPainted(true);
+        okBtn.setFocusPainted(false);
+        okBtn.setBorder(new LineBorder( new Color(87, 87, 87), 2, true ));
+        okBtn.setForeground(new Color(224,224,224));
+        okBtn.setBackground(new Color(65,65,65));
+        okBtn.setMargin(new Insets(100, 100, 100, 100));
+        okBtn.setVerticalAlignment(SwingConstants.CENTER);
+        okBtn.setHorizontalAlignment(SwingConstants.CENTER);
+        okBtn.setPreferredSize(new Dimension(100, 100)); */
 
-        cancelBtn.setText("Cancel");
+        okBtn.setLayout( new BorderLayout() );
+        javax.swing.JLabel oklabel = new javax.swing.JLabel( "OK" );
+        oklabel.setForeground(new Color(224,224,224));
+        oklabel.setPreferredSize(new Dimension(70, 30));
+        oklabel.setAlignmentX(javax.swing.JLabel.CENTER_ALIGNMENT);
+        oklabel.setVerticalAlignment(SwingConstants.CENTER);
+        oklabel.setHorizontalAlignment(SwingConstants.CENTER);
+       
+        okBtn.add( oklabel );
+        okBtn.setOpaque(true);
+        okBtn.setBorderPainted(true);
+        okBtn.setFocusPainted(false);
+        okBtn.setBorder(new LineBorder( new Color(87, 87, 87), 2, true ));
+        okBtn.setForeground(new Color(224,224,224));
+        okBtn.setBackground(new Color(65,65,65));
+        okBtn.setVerticalAlignment(SwingConstants.CENTER);
+        okBtn.setHorizontalAlignment(SwingConstants.CENTER);
+
+
+        cancelBtn.setLayout( new BorderLayout() );
+        javax.swing.JLabel label = new javax.swing.JLabel( "CANCEL" );
+        label.setForeground(new Color(224,224,224));
+        label.setPreferredSize(new Dimension(70, 30));
+        label.setAlignmentX(javax.swing.JLabel.CENTER_ALIGNMENT);
+        label.setVerticalAlignment(SwingConstants.CENTER);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+       
+        cancelBtn.add( label );
+        cancelBtn.setOpaque(true);
+        cancelBtn.setBorderPainted(true);
+        cancelBtn.setFocusPainted(false);
+        cancelBtn.setBorder(new LineBorder( new Color(87, 87, 87), 2, true ));
+        cancelBtn.setForeground(new Color(224,224,224));
+        cancelBtn.setBackground(new Color(65,65,65));
+        cancelBtn.setVerticalAlignment(SwingConstants.CENTER);
+        cancelBtn.setHorizontalAlignment(SwingConstants.CENTER);
+
+        /*cancelBtn.setText("CANCEL");
+        cancelBtn.setContentAreaFilled(false);
+        cancelBtn.setOpaque(true);
+        cancelBtn.setBorderPainted(true);
+        cancelBtn.setFocusPainted(false);
+        cancelBtn.setBorder(new LineBorder( new Color(87, 87, 87), 2, true ));
+        cancelBtn.setForeground(new Color(224,224,224));
+        cancelBtn.setBackground(new Color(65,65,65));
+        cancelBtn.setMargin(new Insets(100, 100, 100, 100));
+        cancelBtn.setVerticalAlignment(SwingConstants.CENTER);
+        cancelBtn.setHorizontalAlignment(SwingConstants.CENTER);
+        cancelBtn.setPreferredSize(new Dimension(60, 40));
+        cancelBtn.setBounds(0,00,60,40); //(10,10,100,25);*/
 
         javax.swing.GroupLayout paintedPanel1Layout = new javax.swing.GroupLayout(paintedPanel1);
         paintedPanel1.setLayout(paintedPanel1Layout);
@@ -140,14 +206,14 @@ public class AutoTraceParamsDialog extends javax.swing.JDialog {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(okBtn)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(cancelBtn)))
+                                                .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addContainerGap())
         );
 
-        paintedPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[]{jLabel1, jLabel2});
+        paintedPanel1Layout.linkSize(javax.swing.SwingConstants.CENTER, new java.awt.Component[]{jLabel1, jLabel2});
 
-        paintedPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[]{cancelBtn, okBtn});
-
+        paintedPanel1Layout.linkSize(javax.swing.SwingConstants.CENTER, new java.awt.Component[]{cancelBtn, okBtn});
+  
         paintedPanel1Layout.setVerticalGroup(
                 paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(paintedPanel1Layout.createSequentialGroup()
@@ -165,7 +231,7 @@ public class AutoTraceParamsDialog extends javax.swing.JDialog {
                                 .addGroup(paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(holeDetectionChk)
                                         .addComponent(okBtn)
-                                        .addComponent(cancelBtn))
+                                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap())
         );
 

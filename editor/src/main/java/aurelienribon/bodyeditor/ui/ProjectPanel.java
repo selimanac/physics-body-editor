@@ -12,7 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import javax.swing.border.LineBorder;;
+import javax.swing.border.LineBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
@@ -78,12 +79,15 @@ public class ProjectPanel extends javax.swing.JPanel {
         dir = dir != null ? dir : new File(".");
 
         JFileChooser chooser = new JFileChooser(dir);
-        chooser.setDialogTitle("Select the new project file");
+        chooser.setDialogTitle("Add new project file");
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        
         chooser.setMultiSelectionEnabled(false);
 
         if (chooser.showSaveDialog(Ctx.window) == JFileChooser.APPROVE_OPTION) {
-            Ctx.io.setProjectFile(chooser.getSelectedFile());
+            File file = chooser.getSelectedFile();
+            if(!file.getName().contains(".")) file = new File(file.toString() + ".json");
+            Ctx.io.setProjectFile(file);
         }
     }
 
@@ -95,6 +99,7 @@ public class ProjectPanel extends javax.swing.JPanel {
         JFileChooser chooser = new JFileChooser(dir);
         chooser.setDialogTitle("Select the project to load");
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.setFileFilter(new FileNameExtensionFilter("Json file", "json"));
         chooser.setMultiSelectionEnabled(false);
 
         if (chooser.showOpenDialog(Ctx.window) == JFileChooser.APPROVE_OPTION) {

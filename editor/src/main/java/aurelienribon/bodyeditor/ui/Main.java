@@ -4,6 +4,8 @@ import aurelienribon.bodyeditor.Ctx;
 import aurelienribon.bodyeditor.canvas.Canvas;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglCanvas;
+import com.badlogic.gdx.backends.lwjgl.LwjglAWTCanvas;
+
 import org.json.JSONException;
 
 import javax.swing.*;
@@ -28,23 +30,29 @@ public class Main {
                 }
 
                 LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+                System.setProperty("org.lwjgl.opengl.Display.allowSoftwareOpenGL", "true");
+
                 config.useGL30 = false;
                 LwjglCanvas glCanvas = new LwjglCanvas(new Canvas(), config);
+                // LwjglAWTCanvas glCanvas = new LwjglAWTCanvas(new Canvas(), config);
+
                 MainWindow mw = Ctx.window;
 
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                mw.setSize(
-                        Math.min(1150, screenSize.width - 100),
-                        Math.min(800, screenSize.height - 100)
-                );
-
                 mw.setCanvas(glCanvas.getCanvas());
-                mw.setLocationRelativeTo(null);
-                mw.setVisible(true);
 
+                mw.setSize(Math.min(1150, screenSize.width - 100), Math.min(800, screenSize.height - 100));
+
+                mw.setLocationRelativeTo(null);
+
+                mw.setVisible(true);
+                
                 parseArgs(args);
+
+                
             }
         });
+
     }
 
     private static void parseArgs(String[] args) {

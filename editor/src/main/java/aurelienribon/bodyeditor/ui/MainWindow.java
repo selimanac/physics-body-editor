@@ -26,13 +26,17 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
+import java.util.TimerTask;
+
 import javax.swing.border.LineBorder;;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class MainWindow extends javax.swing.JFrame {
+
     public MainWindow() {
+
         setContentPane(new PaintedPanel());
         initComponents();
 
@@ -74,11 +78,13 @@ public class MainWindow extends javax.swing.JFrame {
         });
 
         checkUpdates();
+
     }
 
     public void setCanvas(Component canvas) {
         renderPanel.add(canvas, BorderLayout.CENTER);
         canvas.requestFocusInWindow();
+
     }
 
     private void checkUpdates() {
@@ -156,7 +162,14 @@ public class MainWindow extends javax.swing.JFrame {
         } else {
             versionLabel.setText("v" + version + " (invalid update file)");
             versionLabel.setIcon(Res.getImage("/gfx/ic_error.png"));
+
         }
+
+        SwingUtilities.updateComponentTreeUI(this);
+        // SwingUtilities.updateComponentTreeUI(this);
+        // this.invalidate();
+        // this.validate();
+        // this.repaint();
     }
 
     // -------------------------------------------------------------------------
@@ -255,14 +268,13 @@ public class MainWindow extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)));
 
         renderPanel.setLayout(new java.awt.BorderLayout());
-       
 
         optionsPanel.setLayout(new java.awt.CardLayout());
         optionsPanel.add(rigidBodiesOptionsPanel1, "card2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        
+
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup().addContainerGap()
                         .addComponent(sidePanel, javax.swing.GroupLayout.PREFERRED_SIZE,

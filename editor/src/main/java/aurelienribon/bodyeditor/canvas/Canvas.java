@@ -156,7 +156,6 @@ public class Canvas extends ApplicationAdapter {
        // Gdx.gl.glViewport(0, 0, width, height);
         Gdx.gl.glViewport(0, 0, width, height);
         resetCameras();
-      
     }
 
     // -------------------------------------------------------------------------

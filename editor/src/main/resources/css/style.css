@@ -6,6 +6,10 @@
 	-ar-fill: texture(url("/gfx/bg.png"));
 }
 
+.popPanel {
+	-ar-fill: lineargradient(0, 0, 0, 1, 0, #494949, 1, #494949);
+}
+
 javax-swing-JScrollPane {
 	-swing-border: null;
 }
@@ -96,11 +100,11 @@ javax-swing-JSlider{
 
 .configPanel aurelienribon-ui-components-PaintedPanel > javax-swing-JLabel,
 .configPanel aurelienribon-ui-components-PaintedPanel > javax-swing-JCheckBox {
-	-swing-foreground: #FFF;
+	-swing-foreground: rgb(167, 167, 167);
 }
 
 .configPanel .bigLabel {
-	-swing-foreground: #FFF;
+	-swing-foreground: rgb(126, 126, 126);
 	-swing-horizontalalignment: center;
 }
 
