@@ -86,6 +86,7 @@ public class ProjectPanel extends javax.swing.JPanel {
 
         if (chooser.showSaveDialog(Ctx.window) == JFileChooser.APPROVE_OPTION) {
             File file = chooser.getSelectedFile();
+            
             if(!file.getName().contains(".")) file = new File(file.toString() + ".json");
             Ctx.io.setProjectFile(file);
         }

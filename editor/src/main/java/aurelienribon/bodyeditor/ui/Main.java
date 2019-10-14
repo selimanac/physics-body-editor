@@ -1,17 +1,21 @@
 package aurelienribon.bodyeditor.ui;
 
-import aurelienribon.bodyeditor.Ctx;
-import aurelienribon.bodyeditor.canvas.Canvas;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
+
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.backends.lwjgl.LwjglCanvas;
-import com.badlogic.gdx.backends.lwjgl.LwjglAWTCanvas;
 
 import org.json.JSONException;
 
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import aurelienribon.bodyeditor.Ctx;
+import aurelienribon.bodyeditor.canvas.Canvas;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/

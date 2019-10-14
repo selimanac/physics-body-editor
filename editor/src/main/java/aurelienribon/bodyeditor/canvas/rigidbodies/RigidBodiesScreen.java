@@ -671,8 +671,9 @@ public class RigidBodiesScreen {
             model.getShapes().add(shape);
         }
 
-        // model.computePhysics();
+       
         buildBody();
+        model.computePhysics();
     }
 
     private void clearPoints() {

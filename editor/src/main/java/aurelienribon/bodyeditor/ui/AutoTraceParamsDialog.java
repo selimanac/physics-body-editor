@@ -15,20 +15,20 @@
  */
 package aurelienribon.bodyeditor.ui;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+
 import aurelienribon.Res;
 import aurelienribon.bodyeditor.Settings;
 import aurelienribon.ui.components.PaintedPanel;
 import aurelienribon.ui.css.Style;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import  java.awt.BorderLayout;
-
-import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;;
 public class AutoTraceParamsDialog extends javax.swing.JDialog {
     private boolean result = false;
 

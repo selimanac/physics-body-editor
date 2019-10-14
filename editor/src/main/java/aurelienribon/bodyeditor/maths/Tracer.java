@@ -20,8 +20,7 @@ public class Tracer {
 
         int w = pixmap.getWidth();
         int h = pixmap.getHeight();
-        System.out.println("Tracer w: " + w); 
-        System.out.println("Tracer h: " + h); 
+        
         int size = w * h;
         int[] array = new int[size];
 

@@ -1,17 +1,8 @@
 package aurelienribon.bodyeditor.ui;
 
-import aurelienribon.Res;
-import aurelienribon.bodyeditor.Ctx;
-import aurelienribon.ui.components.ArStyle;
-import aurelienribon.ui.components.PaintedPanel;
-import aurelienribon.ui.components.TabPanel;
-import aurelienribon.ui.css.Style;
-import aurelienribon.ui.css.swing.SwingStyle;
-import aurelienribon.utils.io.HttpUtils;
-import aurelienribon.utils.ui.SwingHelper;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -26,9 +17,20 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
-import java.util.TimerTask;
 
-import javax.swing.border.LineBorder;;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
+import javax.swing.border.LineBorder;
+
+import aurelienribon.Res;
+import aurelienribon.bodyeditor.Ctx;
+import aurelienribon.ui.components.ArStyle;
+import aurelienribon.ui.components.PaintedPanel;
+import aurelienribon.ui.components.TabPanel;
+import aurelienribon.ui.css.Style;
+import aurelienribon.ui.css.swing.SwingStyle;
+import aurelienribon.utils.io.HttpUtils;
+import aurelienribon.utils.ui.SwingHelper;;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -52,7 +54,7 @@ public class MainWindow extends javax.swing.JFrame {
         Style.apply(getContentPane(), new Style(Res.getUrl("/css/style.css")));
 
         objectsPanel.getModel().add(new RigidBodiesPanel(), "Rigid bodies", null, false);
-        objectsPanel.getModel().add(new DynamicObjectsPanel(), "Dynamic objects", null, false);
+        //objectsPanel.getModel().add(new DynamicObjectsPanel(), "Dynamic objects", null, false);
         objectsPanel.setHeaderLayout(TabPanel.LAYOUT_GRID);
 
         logoWebsiteLbl.addMouseListener(new MouseAdapter() {
@@ -65,7 +67,7 @@ public class MainWindow extends javax.swing.JFrame {
         logoManualLbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                SwingHelper.browse(MainWindow.this, "http://www.aurelienribon.com/blog/projects/physics-body-editor/");
+                SwingHelper.browse(MainWindow.this, "https://selimanac.github.io/");
             }
         });
 
