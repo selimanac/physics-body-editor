@@ -92,8 +92,9 @@ public class JsonIo {
         JSONObject json = new JSONObject(str);
 
         // rigid bodies
-
         JSONArray bodiesElem = json.getJSONArray("rigidBodies");
+
+
         for (int i = 0; i < bodiesElem.length(); i++) {
             JSONObject bodyElem = bodiesElem.getJSONObject(i);
 

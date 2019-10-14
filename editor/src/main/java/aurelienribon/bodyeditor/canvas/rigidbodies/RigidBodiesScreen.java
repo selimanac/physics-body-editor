@@ -52,6 +52,7 @@ import java.util.List;
 import java.util.Random;
 
 public class RigidBodiesScreen {
+    private Vector2 v0 = new Vector2(0,0);
     private final Canvas canvas;
     private final RigidBodiesScreenDrawer drawer;
     private final Box2DDebugRenderer debugRdr = new Box2DDebugRenderer();
@@ -416,7 +417,12 @@ public class RigidBodiesScreen {
         tweenManager.update(Gdx.graphics.getDeltaTime());
 
         canvas.drawer.drawBoundingBox(bodySprite);
-        canvas.drawer.drawAxis();
+        if (Ctx.bodies.getSelectedModel() == null){
+            canvas.drawer.drawAxis(v0);
+        }else{
+            canvas.drawer.drawAxis(Ctx.bodies.getSelectedModel().getOrigin());
+        }
+        
 
         canvas.batch.setProjectionMatrix(canvas.worldCamera.combined);
         canvas.batch.begin();

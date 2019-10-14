@@ -163,7 +163,7 @@ aurelienribon-ui-components-TabPanel .-ar-tab:selected {
 }
 
 .darklink {
-	-swing-foreground: #228;
+	-swing-foreground: rgb(187, 187, 187);
 }
 
 .darklink:hover {

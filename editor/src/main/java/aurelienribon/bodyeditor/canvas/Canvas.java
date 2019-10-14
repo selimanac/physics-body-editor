@@ -207,7 +207,17 @@ public class Canvas extends ApplicationAdapter {
 
         worldCamera.viewportWidth = w / 400;
         worldCamera.viewportHeight = w / 400 * h / w;
-        worldCamera.position.set(0.5f, 0.5f, 0);
+        
+        if (Ctx.bodies.getSelectedModel() == null){
+            System.out.println("No Model resetCameras"); 
+            worldCamera.position.set(0.5f, 0.5f, 0);
+        }else{
+            System.out.println("Model resetCameras"); 
+            worldCamera.position.set(Ctx.bodies.getSelectedModel().getOrigin().x, Ctx.bodies.getSelectedModel().getOrigin().y, 0);
+        }
+
+
+        worldCamera.position.set(100.5f, 100.5f, 0);
         worldCamera.update();
 
         screenCamera.viewportWidth = w;

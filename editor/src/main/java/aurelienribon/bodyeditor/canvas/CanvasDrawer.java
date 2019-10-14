@@ -110,11 +110,11 @@ public class CanvasDrawer {
         drawBoundingBox(sp.getWidth(), sp.getHeight());
     }
 
-    public void drawAxis() {
+    public void drawAxis(Vector2 o) {
         drawer.setProjectionMatrix(camera.combined);
         drawer.setTransformMatrix(new Matrix4());
         if (Settings.isAxisShown)
-            drawAxisImpl();
+            drawAxisImpl(o);
     }
 
     public void drawGrid() {
@@ -147,7 +147,7 @@ public class CanvasDrawer {
         drawer.end();
     }
 
-    private void drawAxisImpl() {
+    private void drawAxisImpl(Vector2 o) {
         
         Gdx.gl.glLineWidth(3);
         Gdx.gl.glEnable(GL_BLEND);
@@ -157,22 +157,24 @@ public class CanvasDrawer {
         //float len = 0.03f * camera.zoom;
         drawer.begin(ShapeRenderer.ShapeType.Line);
         drawer.setColor(AXIS_COLOR_X);
-        drawer.line(0, 0, 100, 0);
-        drawer.line(100, 0, 100 - len, -len);
-        drawer.line(100, 0, 100 - len, +len);
+        drawer.line(o.x, o.y, o.x+100, o.y);
+        drawer.line(o.x+100, o.y, o.x+100 - len, o.y-len);
+        drawer.line(o.x+100, o.y, o.x+100 - len, o.y+len);
         drawer.setColor(AXIS_COLOR_Y);
-        drawer.line(0, 0, 0, 100);
-        drawer.line(0, 100, -len, 100 - len);
-        drawer.line(0, 100, +len, 100 - len);
+        drawer.line(o.x, o.y, o.x, o.y+100);
+        drawer.line(o.x, o.y+100, o.x-len, o.y+100 - len);
+        drawer.line(o.x, o.y+100, o.x+len, o.y+100 - len);
         drawer.end();
+
+        
 
         float size = 0.1f * camera.zoom;
         v00Sprite.setSize(size, size);
         v10Sprite.setSize(size, size);
         v01Sprite.setSize(size, size);
-        v00Sprite.setPosition(-size, -size);
-        v10Sprite.setPosition(100, -size);
-        v01Sprite.setPosition(-size, 100 - size / 2); 
+        v00Sprite.setPosition(o.x-size, o.y-size);
+        v10Sprite.setPosition(o.x+100, o.y-size);
+        v01Sprite.setPosition(o.x-size, o.y+100 - size / 2); 
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();

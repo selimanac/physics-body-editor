@@ -3,6 +3,7 @@ package aurelienribon.bodyeditor.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -22,6 +23,11 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+
 import aurelienribon.Res;
 import aurelienribon.bodyeditor.Ctx;
 import aurelienribon.ui.components.ArStyle;
@@ -32,10 +38,13 @@ import aurelienribon.ui.css.swing.SwingStyle;
 import aurelienribon.utils.io.HttpUtils;
 import aurelienribon.utils.ui.SwingHelper;;
 
+
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class MainWindow extends javax.swing.JFrame {
+
+    public boolean isInit = true;
 
     public MainWindow() {
 
@@ -54,7 +63,8 @@ public class MainWindow extends javax.swing.JFrame {
         Style.apply(getContentPane(), new Style(Res.getUrl("/css/style.css")));
 
         objectsPanel.getModel().add(new RigidBodiesPanel(), "Rigid bodies", null, false);
-        //objectsPanel.getModel().add(new DynamicObjectsPanel(), "Dynamic objects", null, false);
+        // objectsPanel.getModel().add(new DynamicObjectsPanel(), "Dynamic objects",
+        // null, false);
         objectsPanel.setHeaderLayout(TabPanel.LAYOUT_GRID);
 
         logoWebsiteLbl.addMouseListener(new MouseAdapter() {
@@ -70,33 +80,49 @@ public class MainWindow extends javax.swing.JFrame {
                 SwingHelper.browse(MainWindow.this, "https://selimanac.github.io/");
             }
         });
-
+        
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
                 Ctx.bodies.select(null);
                 Ctx.objects.select(null);
             }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+              
+              if (isInit){
+                pack();
+                isInit = false;
+              }
+                
+              
+            }
         });
 
-        checkUpdates();
+        //checkUpdates();
 
+      
+        
     }
 
     public void setCanvas(Component canvas) {
         renderPanel.add(canvas, BorderLayout.CENTER);
         canvas.requestFocusInWindow();
-
+       
     }
 
     private void checkUpdates() {
-        final String version = "1.3.2";
+
+        final int version = 121;
+        final String repo = "selimanac/defold-random";
+
         versionLabel.setText("v" + version + " (checking for updates)");
         versionLabel.setIcon(Res.getImage("/gfx/ic_loading.gif"));
 
         URL tmpUrl;
         try {
-            tmpUrl = new URL("http://www.aurelienribon.com/physics-body-editor/versions.txt");
+            tmpUrl = new URL("https://api.github.com/repos/" + repo + "/releases/latest");
         } catch (MalformedURLException ex) {
             throw new RuntimeException(ex);
         }
@@ -116,15 +142,15 @@ public class MainWindow extends javax.swing.JFrame {
             @Override
             public void completed() {
                 try {
-                    testUpdate(version, stream.toString("UTF-8"));
-                } catch (UnsupportedEncodingException ex) {
+                    testUpdate(version, stream.toString("UTF-8"), repo);
+                } catch (UnsupportedEncodingException | JSONException ex) {
                     throw new RuntimeException(ex);
                 }
             }
 
             @Override
             public void error(IOException ex) {
-                versionLabel.setText("v" + version + " (connection error)");
+                versionLabel.setText(" (connection error)");
                 versionLabel.setIcon(Res.getImage("/gfx/ic_error.png"));
             }
         };
@@ -140,34 +166,37 @@ public class MainWindow extends javax.swing.JFrame {
         timer.start();
     }
 
-    private void testUpdate(String version, String str) {
-        List<String> versions = Arrays.asList(str.split("\n"));
-        int versionIdx = versions.indexOf(version);
+    private void testUpdate(int version, String str, String repo) throws JSONException {
+
+        JSONObject json = new JSONObject(str);
+        String remoteVersion = json.getString("tag_name");
+        String v = remoteVersion.substring(1).replaceAll("[.]", "");
+        int vNum = Integer.parseInt(v);
+
+        System.out.println("Version " + v);
 
         MouseListener mouseListener = new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                SwingHelper.browse(MainWindow.this, "http://code.google.com/p/box2d-editor/");
+                SwingHelper.browse(MainWindow.this, "https://github.com/" + repo + "/releases");
             }
         };
 
-        if (versionIdx == 0) {
+        if (vNum == version) {
             versionLabel.setText("v" + version + " (latest version)");
             versionLabel.setIcon(Res.getImage("/gfx/ic_ok.png"));
-        } else if (versionIdx > 0) {
-            versionLabel.setText("v" + version + " (new version available: v" + versions.get(0) + ")");
-            versionLabel.setIcon(Res.getImage("/gfx/ic_warning.png"));
-            versionLabel.addMouseListener(mouseListener);
-            Style.unregisterAllCssClasses(versionLabel);
-            Style.registerCssClasses(versionLabel, ".darklink");
-            Style.apply(versionLabel, new Style(Res.getUrl("/css/style.css")));
-        } else {
-            versionLabel.setText("v" + version + " (invalid update file)");
-            versionLabel.setIcon(Res.getImage("/gfx/ic_error.png"));
+        } else if (vNum > version) {
+            versionLabel.setText("New version available: " + remoteVersion);
+            versionLabel.setIcon(Res.getImage("/gfx/ic_download.png"));
+            versionLabel.setForeground(new Color(220, 220, 220));
 
+            versionLabel.addMouseListener(mouseListener);
+
+        } else {
+            versionLabel.setText("v" + version + " (invalid version number)");
+            versionLabel.setIcon(Res.getImage("/gfx/ic_error.png"));
         }
 
-        SwingUtilities.updateComponentTreeUI(this);
         // SwingUtilities.updateComponentTreeUI(this);
         // this.invalidate();
         // this.validate();
