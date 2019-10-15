@@ -1,14 +1,12 @@
 package aurelienribon.bodyeditor.ui;
 
-import aurelienribon.bodyeditor.Settings;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import com.badlogic.gdx.graphics.Color;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import aurelienribon.bodyeditor.Settings;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/

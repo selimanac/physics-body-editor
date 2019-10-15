@@ -121,18 +121,7 @@ public class AutoTraceParamsDialog extends javax.swing.JDialog {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Alpha tolerance: ");
 
-        /* okBtn.setText("OK");
-        okBtn.setContentAreaFilled(false);
-        okBtn.setOpaque(true);
-        okBtn.setBorderPainted(true);
-        okBtn.setFocusPainted(false);
-        okBtn.setBorder(new LineBorder( new Color(87, 87, 87), 2, true ));
-        okBtn.setForeground(new Color(224,224,224));
-        okBtn.setBackground(new Color(65,65,65));
-        okBtn.setMargin(new Insets(100, 100, 100, 100));
-        okBtn.setVerticalAlignment(SwingConstants.CENTER);
-        okBtn.setHorizontalAlignment(SwingConstants.CENTER);
-        okBtn.setPreferredSize(new Dimension(100, 100)); */
+      
 
         okBtn.setLayout( new BorderLayout() );
         javax.swing.JLabel oklabel = new javax.swing.JLabel( "OK" );

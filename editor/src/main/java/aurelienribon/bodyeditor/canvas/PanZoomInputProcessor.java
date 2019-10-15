@@ -12,7 +12,10 @@ public class PanZoomInputProcessor extends InputAdapter {
     private final Canvas canvas;
     private final Vector2 lastTouch = new Vector2();
     private final int[] zoomLevels = { 1, 5, 10, 16, 25, 33, 50, 66, 100, 150, 200, 300, 400, 600, 800, 1200 };
-    private int zoomLevel = 1000;
+    private int zoomLevel =  400;
+
+    private int zoomMin = 100;
+    private int zoomMax = 1330;
 
     public PanZoomInputProcessor(Canvas canvas) {
         this.canvas = canvas;
@@ -43,28 +46,22 @@ public class PanZoomInputProcessor extends InputAdapter {
 
     @Override
     public boolean scrolled(int amount) {
-        System.out.println("amount: " + amount);
-        if (zoomLevel < 50 && amount < 0) {
-            zoomLevel = 50;
-        } else if (zoomLevel == 2000 && amount > 0) {
-            zoomLevel = 2000;
+       // System.out.println("amount: " + amount);
+        if (zoomLevel <= zoomMin && amount < 0) {
+            zoomLevel = zoomMin;
+        } else if (zoomLevel == zoomMax && amount > 0) {
+            zoomLevel = zoomMax;
         } else {
             zoomLevel = zoomLevel + (amount*10);
-            if (zoomLevel < 50 ){
-                zoomLevel = 50;
+            if (zoomLevel < zoomMin ){
+                zoomLevel = zoomMin;
+            }else if(zoomLevel > zoomMax){
+                zoomLevel = zoomMax;
             }
-            /*
-            for (int i = 1; i < zoomLevels.length - 1; i++) {
-                if (zoomLevels[i] == zoomLevel) {
-                    zoomLevel = amount > 0 ? zoomLevels[i - 1] : zoomLevels[i + 1];
-                    break;
-                }
-            }
-            */
+            
         }
-        System.out.println("zoomLevel: " + zoomLevel);
-        System.out.println("zoom: " + zoomLevel / 1f);
-        canvas.worldCamera.zoom = zoomLevel / 1f;
+       
+        canvas.worldCamera.zoom = zoomLevel;
         canvas.worldCamera.update();
         return false;
     }

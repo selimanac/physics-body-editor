@@ -55,6 +55,7 @@ public class Canvas extends ApplicationAdapter {
         Tween.registerAccessor(Sprite.class, new SpriteAccessor());
 
         worldCamera = new OrthographicCamera();
+        worldCamera.zoom = 400.0f;
         screenCamera = new OrthographicCamera();
         resetCameras();
 
@@ -90,11 +91,16 @@ public class Canvas extends ApplicationAdapter {
             @Override
             public void propertyChanged(Object source, String propertyName) {
                 if (propertyName.equals(RigidBodiesManager.PROP_SELECTION)) {
+                    resetCameras(); 
                     if (Ctx.bodies.getSelectedModel() != null) {
                         Mode oldMode = mode;
                         mode = Mode.BODIES;
-                        if (mode != oldMode)
+                        if (mode != oldMode){
+                            
                             fireModeChanged(mode);
+                           
+                        }
+                            
                     }
                 }
             }
@@ -104,11 +110,14 @@ public class Canvas extends ApplicationAdapter {
             @Override
             public void propertyChanged(Object source, String propertyName) {
                 if (propertyName.equals(RigidBodiesManager.PROP_SELECTION)) {
+                    resetCameras(); 
                     if (Ctx.objects.getSelectedModel() != null) {
                         Mode oldMode = mode;
                         mode = Mode.OBJECTS;
-                        if (mode != oldMode)
+                        if (mode != oldMode){
                             fireModeChanged(mode);
+                        }
+                            
                     }
                 }
             }
@@ -146,11 +155,11 @@ public class Canvas extends ApplicationAdapter {
         batch.begin();
         infoLabel.draw(batch);
         font.setColor(Color.WHITE);
-        font.draw(batch, String.format(Locale.US, "Zoom: %.0f %%", 10f / worldCamera.zoom), 10, 45);
+        font.draw(batch, String.format(Locale.US, "Zoom: %.0f %%",  (400f/ worldCamera.zoom )*100   ), 10, 45);
         font.draw(batch, "Fps: " + Gdx.graphics.getFramesPerSecond(), 10, 25);
         batch.end();
     }
-
+   
     @Override
     public void resize(int width, int height) {
        // Gdx.gl.glViewport(0, 0, width, height);
@@ -209,15 +218,14 @@ public class Canvas extends ApplicationAdapter {
         worldCamera.viewportHeight = w / 400 * h / w;
         
         if (Ctx.bodies.getSelectedModel() == null){
-            System.out.println("No Model resetCameras"); 
             worldCamera.position.set(0.5f, 0.5f, 0);
         }else{
-            System.out.println("Model resetCameras"); 
+
             worldCamera.position.set(Ctx.bodies.getSelectedModel().getOrigin().x, Ctx.bodies.getSelectedModel().getOrigin().y, 0);
         }
 
-
-        worldCamera.position.set(100.5f, 100.5f, 0);
+        //worldCamera.position.set(0.5f, 0.5f, 0);
+       // worldCamera.position.set(100.5f, 100.5f, 0);
         worldCamera.update();
 
         screenCamera.viewportWidth = w;

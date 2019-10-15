@@ -7,9 +7,15 @@ import aurelienribon.ui.components.PaintedPanel;
 import aurelienribon.ui.css.Style;
 import org.apache.commons.io.FilenameUtils;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
+import java.awt.BorderLayout;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -23,8 +29,8 @@ public class RepairImagePathsDialog extends javax.swing.JDialog {
         setContentPane(new PaintedPanel());
         initComponents();
 
-        Style.registerCssClasses(getContentPane(), ".rootPanel", ".configPanel");
-        Style.apply(getContentPane(), new Style(Res.getUrl("css/style.css")));
+        Style.registerCssClasses(getContentPane(), ".popPanel", ".configPanel");
+        Style.apply(getContentPane(), new Style(Res.getUrl("/css/style.css")));
 
         okBtn.addActionListener(new ActionListener() {
             @Override
@@ -87,7 +93,8 @@ public class RepairImagePathsDialog extends javax.swing.JDialog {
     // -------------------------------------------------------------------------
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         paintedPanel1 = new aurelienribon.ui.components.PaintedPanel();
@@ -104,9 +111,44 @@ public class RepairImagePathsDialog extends javax.swing.JDialog {
 
         commonPathField.setText("...");
 
-        okBtn.setText("Ok");
+        
+        okBtn.setLayout(new BorderLayout());
+        javax.swing.JLabel oklabel = new javax.swing.JLabel("OK");
+        oklabel.setForeground(new Color(224, 224, 224));
+        oklabel.setPreferredSize(new Dimension(70, 30));
+        oklabel.setAlignmentX(javax.swing.JLabel.CENTER_ALIGNMENT);
+        oklabel.setVerticalAlignment(SwingConstants.CENTER);
+        oklabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        cancelBtn.setText("Cancel");
+        okBtn.add(oklabel);
+        okBtn.setOpaque(true);
+        okBtn.setBorderPainted(true);
+        okBtn.setFocusPainted(false);
+        okBtn.setBorder(new LineBorder(new Color(87, 87, 87), 2, true));
+        okBtn.setForeground(new Color(224,224,224));
+        okBtn.setBackground(new Color(65,65,65));
+        okBtn.setVerticalAlignment(SwingConstants.CENTER);
+        okBtn.setHorizontalAlignment(SwingConstants.CENTER);
+        
+
+     
+        cancelBtn.setLayout(new BorderLayout());
+        javax.swing.JLabel clabel = new javax.swing.JLabel("CANCEL");
+        clabel.setForeground(new Color(224, 224, 224));
+        clabel.setPreferredSize(new Dimension(70, 30));
+        clabel.setAlignmentX(javax.swing.JLabel.CENTER_ALIGNMENT);
+        clabel.setVerticalAlignment(SwingConstants.CENTER);
+        clabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        cancelBtn.add(clabel);
+        cancelBtn.setOpaque(true);
+        cancelBtn.setBorderPainted(true);
+        cancelBtn.setFocusPainted(false);
+        cancelBtn.setBorder(new LineBorder(new Color(87, 87, 87), 2, true));
+        cancelBtn.setForeground(new Color(224,224,224));
+        cancelBtn.setBackground(new Color(65,65,65));
+        cancelBtn.setVerticalAlignment(SwingConstants.CENTER);
+        cancelBtn.setHorizontalAlignment(SwingConstants.CENTER);
 
         javax.swing.GroupLayout paintedPanel1Layout = new javax.swing.GroupLayout(paintedPanel1);
         paintedPanel1.setLayout(paintedPanel1Layout);

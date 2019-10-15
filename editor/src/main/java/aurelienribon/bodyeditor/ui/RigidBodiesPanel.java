@@ -27,7 +27,6 @@ import java.util.Map;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
-
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
@@ -260,10 +259,13 @@ public class RigidBodiesPanel extends javax.swing.JPanel {
             downBtn.setEnabled(model != null);
 
             list.removeListSelectionListener(listSelectionListener);
-            if (model != null)
+            if (model != null) {
+               // System.out.println("Selected");
                 list.setSelectedValue(model, true);
-            else
+            } else {
                 list.clearSelection();
+            }
+
             list.addListSelectionListener(listSelectionListener);
         }
     };
@@ -309,7 +311,7 @@ public class RigidBodiesPanel extends javax.swing.JPanel {
             infoLabel.setFont(new Font(font.getName(), font.getStyle(), 10));
 
             imgPanel.setPreferredSize(new Dimension(30, 20));
-            //imgPanel.setFill(new Color(255, 255, 255));
+            // imgPanel.setFill(new Color(255, 255, 255));
             imgPanel.setBorder(BorderFactory.createLineBorder(new Color(56, 56, 56)));
         }
 
@@ -333,7 +335,7 @@ public class RigidBodiesPanel extends javax.swing.JPanel {
                 } else {
                     infoLabel.setText("[not found] " + imgPath);
                     try {
-                        imgPanel.setImage(Res.getUrl("gfx/unknown.png"));
+                        imgPanel.setImage(Res.getUrl("/gfx/unknown.png"));
                     } catch (IOException ex) {
                     }
                 }
@@ -345,7 +347,7 @@ public class RigidBodiesPanel extends javax.swing.JPanel {
             }
 
             panel.setOpaque(isSelected);
-         
+
             return panel;
         }
     };
@@ -378,7 +380,7 @@ public class RigidBodiesPanel extends javax.swing.JPanel {
         jToolBar1.setRollover(true);
 
         createBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gfx/ic_add.png"))); // NOI18N
-        
+
         createBtn.setToolTipText("Create a new model");
         createBtn.setFocusable(false);
         createBtn.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -393,7 +395,7 @@ public class RigidBodiesPanel extends javax.swing.JPanel {
         jToolBar1.add(createBtn);
 
         renameBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gfx/ic_edit.png"))); // NOI18N
-      
+
         renameBtn.setToolTipText("Change the name of the selected model");
         renameBtn.setFocusable(false);
         renameBtn.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -501,20 +503,18 @@ public class RigidBodiesPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(list);
 
-     
-        jScrollPane1.getViewport().getView().setBackground(new Color(77,77,77));
+        jScrollPane1.getViewport().getView().setBackground(new Color(77, 77, 77));
 
-       
         jScrollPane1.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-            @Override 
-            protected void configureScrollBarColors(){
-                this.trackColor = new Color(70,70,70);
-                this.thumbColor = new Color(105,105,105);
-               // this.thumbLightShadowColor = new Color(105,105,105);
-                //this.trackColor
+            @Override
+            protected void configureScrollBarColors() {
+                this.trackColor = new Color(70, 70, 70);
+                this.thumbColor = new Color(105, 105, 105);
+                // this.thumbLightShadowColor = new Color(105,105,105);
+                // this.trackColor
             }
         });
-   
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

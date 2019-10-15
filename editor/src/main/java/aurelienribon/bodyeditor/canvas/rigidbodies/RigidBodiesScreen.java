@@ -52,7 +52,7 @@ import java.util.List;
 import java.util.Random;
 
 public class RigidBodiesScreen {
-    private Vector2 v0 = new Vector2(0,0);
+    private Vector2 v0 = new Vector2(0, 0);
     private final Canvas canvas;
     private final RigidBodiesScreenDrawer drawer;
     private final Box2DDebugRenderer debugRdr = new Box2DDebugRenderer();
@@ -304,8 +304,8 @@ public class RigidBodiesScreen {
                             String path = Ctx.io.buildImagePath(chooser.getSelectedFile());
                             Ctx.bodies.getSelectedModel().setImagePath(path);
 
-                            //Ctx.bodies.getSelectedModel().getOrigin().x = bodySprite.getWidth() / 2;
-                            //Ctx.bodies.getSelectedModel().getOrigin().y = bodySprite.getHeight() / 2;
+                            Ctx.bodies.getSelectedModel().getOrigin().x = bodySprite.getWidth() / 2;
+                            Ctx.bodies.getSelectedModel().getOrigin().y = bodySprite.getHeight() / 2;
 
                         }
                     }
@@ -417,12 +417,11 @@ public class RigidBodiesScreen {
         tweenManager.update(Gdx.graphics.getDeltaTime());
 
         canvas.drawer.drawBoundingBox(bodySprite);
-        if (Ctx.bodies.getSelectedModel() == null){
+        if (Ctx.bodies.getSelectedModel() == null) {
             canvas.drawer.drawAxis(v0);
-        }else{
+        } else {
             canvas.drawer.drawAxis(Ctx.bodies.getSelectedModel().getOrigin());
         }
-        
 
         canvas.batch.setProjectionMatrix(canvas.worldCamera.combined);
         canvas.batch.begin();
@@ -677,7 +676,6 @@ public class RigidBodiesScreen {
             model.getShapes().add(shape);
         }
 
-       
         buildBody();
         model.computePhysics();
     }
@@ -767,9 +765,6 @@ public class RigidBodiesScreen {
         // bodySprite.getHeight());
         // System.out.println("ratio: " + spRatio);
         bodySprite.setSize(bodySprite.getWidth(), bodySprite.getHeight());
-
-        Ctx.bodies.getSelectedModel().getOrigin().x = bodySprite.getWidth() / 2;
-        Ctx.bodies.getSelectedModel().getOrigin().y = bodySprite.getHeight() / 2;
 
     }
 
