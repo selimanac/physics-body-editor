@@ -42,7 +42,7 @@ public class Tracer {
         }
 
         TextureRegion region = TextureUtils.getPOTTexture(path);
-        float tw = region.getRegionWidth();
+        //float tw = region.getRegionWidth();
         float th = region.getRegionHeight();
 
         Vector2[][] polygons = new Vector2[outlines.size][];

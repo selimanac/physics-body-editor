@@ -1,19 +1,18 @@
 package aurelienribon.bodyeditor;
 
+import java.io.File;
+import java.io.IOException;
+
+import com.badlogic.gdx.math.Vector2;
+
+import org.apache.commons.io.FileUtils;
+import org.json.JSONException;
+
 import aurelienribon.bodyeditor.io.JsonIo;
 import aurelienribon.bodyeditor.models.PolygonModel;
 import aurelienribon.bodyeditor.models.RigidBodyModel;
 import aurelienribon.utils.io.FilenameHelper;
 import aurelienribon.utils.notifications.ChangeableObject;
-import org.apache.commons.io.FileUtils;
-import org.json.JSONException;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Map;
-
-import com.badlogic.gdx.math.Vector2;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/

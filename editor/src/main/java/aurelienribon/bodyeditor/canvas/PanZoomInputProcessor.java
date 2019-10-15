@@ -11,8 +11,8 @@ import com.badlogic.gdx.math.Vector2;
 public class PanZoomInputProcessor extends InputAdapter {
     private final Canvas canvas;
     private final Vector2 lastTouch = new Vector2();
-    private final int[] zoomLevels = {1,5, 10, 16, 25, 33, 50, 66, 100, 150, 200, 300, 400, 600, 800, 1000};
-    private int zoomLevel = 100;
+    private final int[] zoomLevels = { 1, 5, 10, 16, 25, 33, 50, 66, 100, 150, 200, 300, 400, 600, 800, 1200 };
+    private int zoomLevel = 1000;
 
     public PanZoomInputProcessor(Canvas canvas) {
         this.canvas = canvas;
@@ -20,7 +20,8 @@ public class PanZoomInputProcessor extends InputAdapter {
 
     @Override
     public boolean touchDown(int x, int y, int pointer, int button) {
-        if (button != Buttons.RIGHT) return false;
+        if (button != Buttons.RIGHT)
+            return false;
 
         Vector2 p = canvas.screenToWorld(x, y);
         lastTouch.set(p);
@@ -29,7 +30,8 @@ public class PanZoomInputProcessor extends InputAdapter {
 
     @Override
     public boolean touchDragged(int x, int y, int pointer) {
-        if (!Gdx.input.isButtonPressed(Buttons.RIGHT)) return false;
+        if (!Gdx.input.isButtonPressed(Buttons.RIGHT))
+            return false;
 
         Vector2 p = canvas.screenToWorld(x, y);
         Vector2 delta = new Vector2(p).sub(lastTouch);
@@ -41,21 +43,28 @@ public class PanZoomInputProcessor extends InputAdapter {
 
     @Override
     public boolean scrolled(int amount) {
-        if (zoomLevel == zoomLevels[0] && amount < 0) {
-            zoomLevel = zoomLevels[1];
-        } else if (zoomLevel == zoomLevels[zoomLevels.length - 1] && amount > 0) {
-            zoomLevel = zoomLevels[zoomLevels.length - 2];
+        System.out.println("amount: " + amount);
+        if (zoomLevel < 50 && amount < 0) {
+            zoomLevel = 50;
+        } else if (zoomLevel == 2000 && amount > 0) {
+            zoomLevel = 2000;
         } else {
+            zoomLevel = zoomLevel + (amount*10);
+            if (zoomLevel < 50 ){
+                zoomLevel = 50;
+            }
+            /*
             for (int i = 1; i < zoomLevels.length - 1; i++) {
                 if (zoomLevels[i] == zoomLevel) {
                     zoomLevel = amount > 0 ? zoomLevels[i - 1] : zoomLevels[i + 1];
                     break;
                 }
             }
+            */
         }
-        //System.out.println("zoomLevel: " + zoomLevel); 
-        //System.out.println("zoom: " + 10f * zoomLevel); 
-        canvas.worldCamera.zoom = 10f * zoomLevel;
+        System.out.println("zoomLevel: " + zoomLevel);
+        System.out.println("zoom: " + zoomLevel / 1f);
+        canvas.worldCamera.zoom = zoomLevel / 1f;
         canvas.worldCamera.update();
         return false;
     }

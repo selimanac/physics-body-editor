@@ -1,22 +1,19 @@
 package aurelienribon.bodyeditor.io;
 
+import com.badlogic.gdx.math.Vector2;
+
+import org.apache.commons.io.FilenameUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONStringer;
+
 import aurelienribon.bodyeditor.Ctx;
 import aurelienribon.bodyeditor.models.CircleModel;
 import aurelienribon.bodyeditor.models.DynamicObjectModel;
 import aurelienribon.bodyeditor.models.PolygonModel;
 import aurelienribon.bodyeditor.models.RigidBodyModel;
 import aurelienribon.bodyeditor.models.ShapeModel;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.badlogic.gdx.math.Vector2;
-import org.apache.commons.io.FilenameUtils;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONStringer;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com
