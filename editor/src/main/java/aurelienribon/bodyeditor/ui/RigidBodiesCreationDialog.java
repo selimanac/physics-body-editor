@@ -142,7 +142,7 @@ public class RigidBodiesCreationDialog extends javax.swing.JDialog {
         chooser.setFileFilter(new FileNameExtensionFilter("Image files", "png", "jpg", "jpeg"));
         chooser.setMultiSelectionEnabled(false);
 
-        if (chooser.showSaveDialog(Ctx.window) == JFileChooser.APPROVE_OPTION) {
+        if (chooser.showOpenDialog(Ctx.window) == JFileChooser.APPROVE_OPTION) {
             RigidBodyModel model = new RigidBodyModel();
             model.setName(b2NameField.getText());
             model.setImagePath(Ctx.io.buildImagePath(chooser.getSelectedFile()));
@@ -155,12 +155,15 @@ public class RigidBodiesCreationDialog extends javax.swing.JDialog {
 
     private void createFromImages() {
         JFileChooser chooser = new JFileChooser(Ctx.io.getProjectDir());
+        
         chooser.setDialogTitle("Select the images for the new models");
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        
         chooser.setFileFilter(new FileNameExtensionFilter("Image files", "png", "jpg", "jpeg"));
         chooser.setMultiSelectionEnabled(true);
+     
 
-        if (chooser.showSaveDialog(Ctx.window) == JFileChooser.APPROVE_OPTION) {
+        if (chooser.showOpenDialog(Ctx.window) == JFileChooser.APPROVE_OPTION) {
             for (File file : chooser.getSelectedFiles()) {
                 String name = file.getName();
                 String origName = name;

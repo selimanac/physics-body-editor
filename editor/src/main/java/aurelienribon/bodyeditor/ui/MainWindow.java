@@ -27,7 +27,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import aurelienribon.Res;
 import aurelienribon.bodyeditor.Ctx;
 import aurelienribon.ui.components.ArStyle;
@@ -37,7 +36,6 @@ import aurelienribon.ui.css.Style;
 import aurelienribon.ui.css.swing.SwingStyle;
 import aurelienribon.utils.io.HttpUtils;
 import aurelienribon.utils.ui.SwingHelper;;
-
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -80,7 +78,7 @@ public class MainWindow extends javax.swing.JFrame {
                 SwingHelper.browse(MainWindow.this, "https://selimanac.github.io/");
             }
         });
-        
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowOpened(WindowEvent e) {
@@ -90,26 +88,23 @@ public class MainWindow extends javax.swing.JFrame {
 
             @Override
             public void windowActivated(WindowEvent e) {
-              
-              if (isInit){
-                pack();
-                isInit = false;
-              }
-                
-              
+
+                if (isInit) {
+                    pack();
+                    isInit = false;
+                }
+
             }
         });
 
-        //checkUpdates();
+        // checkUpdates();
 
-      
-        
     }
 
     public void setCanvas(Component canvas) {
         renderPanel.add(canvas, BorderLayout.CENTER);
         canvas.requestFocusInWindow();
-       
+
     }
 
     private void checkUpdates() {

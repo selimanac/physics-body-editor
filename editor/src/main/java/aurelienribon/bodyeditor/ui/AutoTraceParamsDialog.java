@@ -110,8 +110,10 @@ public class AutoTraceParamsDialog extends javax.swing.JDialog {
         alphaToleranceSlider.setValue(128);
 
         multiPartDetectionChk.setText("Multi-part detection");
+        multiPartDetectionChk.setEnabled(false);
 
         holeDetectionChk.setText("Hole detection");
+        holeDetectionChk.setEnabled(false);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Hull tolerance: ");
@@ -237,8 +239,8 @@ public class AutoTraceParamsDialog extends javax.swing.JDialog {
 
         paintedPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[]{alphaToleranceSlider, hullToleranceSlider, jLabel1, jLabel2});
 
-        commentLabel.setText("Only check multi-part detection or hole detection if your image needs it.");
-        commentLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        //commentLabel.setText("Only check multi-part detection or hole detection if your image needs it.");
+        //commentLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gfx/autoTrace.png"))); // NOI18N
 

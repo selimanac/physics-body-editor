@@ -42,7 +42,7 @@ public class Main {
 
                 MainWindow mw = Ctx.window;
 
-                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 mw.setCanvas(glCanvas.getCanvas());
 
                 mw.setSize(1155, 805);
