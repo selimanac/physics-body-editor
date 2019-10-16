@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
+
+ 
 public class PanZoomInputProcessor extends InputAdapter {
     private final Canvas canvas;
     private final Vector2 lastTouch = new Vector2();
@@ -47,6 +49,7 @@ public class PanZoomInputProcessor extends InputAdapter {
     @Override
     public boolean scrolled(int amount) {
        // System.out.println("amount: " + amount);
+       zoomLevel = (int) canvas.worldCamera.zoom;
         if (zoomLevel <= zoomMin && amount < 0) {
             zoomLevel = zoomMin;
         } else if (zoomLevel == zoomMax && amount > 0) {

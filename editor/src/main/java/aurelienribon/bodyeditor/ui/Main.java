@@ -44,8 +44,8 @@ public class Main {
                 //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 mw.setCanvas(glCanvas.getCanvas());
 
-                mw.setSize(1155, 800);
-                mw.setMinimumSize(new Dimension(1150, 800));
+                mw.setSize(1175, 800);
+                mw.setMinimumSize(new Dimension(1170, 800));
                 mw.setLocationRelativeTo(null);
 
                 mw.setVisible(true);

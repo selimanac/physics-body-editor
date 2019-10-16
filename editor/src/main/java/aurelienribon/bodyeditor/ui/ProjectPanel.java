@@ -189,6 +189,7 @@ public class ProjectPanel extends javax.swing.JPanel {
         newBtn.setToolTipText("New project");
         newBtn.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         newBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        
         jToolBar1.add(newBtn);
 
         loadBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gfx/ic_open.png"))); // NOI18N

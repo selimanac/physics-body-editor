@@ -30,7 +30,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class Canvas extends ApplicationAdapter {
-    public OrthographicCamera worldCamera;
+    public static OrthographicCamera worldCamera;
     public OrthographicCamera screenCamera;
     public SpriteBatch batch;
     public BitmapFont font;
@@ -79,28 +79,37 @@ public class Canvas extends ApplicationAdapter {
         dynamicObjectsScreen = new DynamicObjectsScreen(this);
 
         initializeSelectionListeners();
-        
+
     }
 
     // -------------------------------------------------------------------------
     // Init
     // -------------------------------------------------------------------------
+    public static void resetZoom() {
+        worldCamera.zoom = 400f;
+        if(Ctx.bodies.getSelectedModel() !=null){
+            worldCamera.position.set(Ctx.bodies.getSelectedModel().getOrigin().x,
+            Ctx.bodies.getSelectedModel().getOrigin().y, 0);
+        }
+        
+        worldCamera.update();
+    }
 
     private void initializeSelectionListeners() {
         Ctx.bodies.addChangeListener(new ChangeListener() {
             @Override
             public void propertyChanged(Object source, String propertyName) {
                 if (propertyName.equals(RigidBodiesManager.PROP_SELECTION)) {
-                    resetCameras(); 
+                    resetCameras();
                     if (Ctx.bodies.getSelectedModel() != null) {
                         Mode oldMode = mode;
                         mode = Mode.BODIES;
-                        if (mode != oldMode){
-                            
+                        if (mode != oldMode) {
+
                             fireModeChanged(mode);
-                           
+
                         }
-                            
+
                     }
                 }
             }
@@ -110,14 +119,14 @@ public class Canvas extends ApplicationAdapter {
             @Override
             public void propertyChanged(Object source, String propertyName) {
                 if (propertyName.equals(RigidBodiesManager.PROP_SELECTION)) {
-                    resetCameras(); 
+                    resetCameras();
                     if (Ctx.objects.getSelectedModel() != null) {
                         Mode oldMode = mode;
                         mode = Mode.OBJECTS;
-                        if (mode != oldMode){
+                        if (mode != oldMode) {
                             fireModeChanged(mode);
                         }
-                            
+
                     }
                 }
             }
@@ -133,9 +142,9 @@ public class Canvas extends ApplicationAdapter {
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
 
-       // Gdx.gl.glClearColor(1, 1, 1, 1);
+        // Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClearColor(1, 1, 1, 1);
-      //  Gdx.gl.glClear(GL_COLOR_BUFFER_BIT);
+        // Gdx.gl.glClear(GL_COLOR_BUFFER_BIT);
         Gdx.gl.glClear(GL_COLOR_BUFFER_BIT);
 
         batch.setProjectionMatrix(screenCamera.combined);
@@ -143,7 +152,7 @@ public class Canvas extends ApplicationAdapter {
         batch.disableBlending();
         float tw = backgroundTexture.getWidth();
         float th = backgroundTexture.getHeight();
-        
+
         batch.draw(backgroundTexture, 0f, 0f, w, h, 0f, 0f, w / tw, h / th);
         batch.enableBlending();
         batch.end();
@@ -155,14 +164,14 @@ public class Canvas extends ApplicationAdapter {
         batch.begin();
         infoLabel.draw(batch);
         font.setColor(Color.WHITE);
-        font.draw(batch, String.format(Locale.US, "Zoom: %.0f %%",  (400f/ worldCamera.zoom )*100   ), 10, 45);
+        font.draw(batch, String.format(Locale.US, "Zoom: %.0f %%", (400f / worldCamera.zoom) * 100), 10, 45);
         font.draw(batch, "Fps: " + Gdx.graphics.getFramesPerSecond(), 10, 25);
         batch.end();
     }
-   
+
     @Override
     public void resize(int width, int height) {
-       // Gdx.gl.glViewport(0, 0, width, height);
+        // Gdx.gl.glViewport(0, 0, width, height);
         Gdx.gl.glViewport(0, 0, width, height);
         resetCameras();
     }
@@ -202,8 +211,9 @@ public class Canvas extends ApplicationAdapter {
     }
 
     private void fireModeChanged(Mode mode) {
-       
-        for (Listener listener : listeners) listener.modeChanged(mode);
+
+        for (Listener listener : listeners)
+            listener.modeChanged(mode);
     }
 
     // -------------------------------------------------------------------------
@@ -216,16 +226,17 @@ public class Canvas extends ApplicationAdapter {
 
         worldCamera.viewportWidth = w / 400;
         worldCamera.viewportHeight = w / 400 * h / w;
-        
-        if (Ctx.bodies.getSelectedModel() == null){
-            worldCamera.position.set(0.5f, 0.5f, 0);
-        }else{
 
-            worldCamera.position.set(Ctx.bodies.getSelectedModel().getOrigin().x, Ctx.bodies.getSelectedModel().getOrigin().y, 0);
+        if (Ctx.bodies.getSelectedModel() == null) {
+            worldCamera.position.set(0.5f, 0.5f, 0);
+        } else {
+
+            worldCamera.position.set(Ctx.bodies.getSelectedModel().getOrigin().x,
+                    Ctx.bodies.getSelectedModel().getOrigin().y, 0);
         }
 
-        //worldCamera.position.set(0.5f, 0.5f, 0);
-       // worldCamera.position.set(100.5f, 100.5f, 0);
+        // worldCamera.position.set(0.5f, 0.5f, 0);
+        // worldCamera.position.set(100.5f, 100.5f, 0);
         worldCamera.update();
 
         screenCamera.viewportWidth = w;

@@ -3,6 +3,7 @@ package aurelienribon.bodyeditor.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -268,6 +269,8 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel1.add(versionPanel, java.awt.BorderLayout.SOUTH);
 
+   
+        sidePanel.setPreferredSize(new Dimension(350,600));
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(sidePanelLayout

@@ -62,7 +62,7 @@ public class RigidBodiesScreen {
     private final List<Sprite> ballsSprites = new ArrayList<Sprite>();
     private final List<Body> ballsBodies = new ArrayList<Body>();
     private final World world = new World(new Vector2(0, 0), true);
-    private Sprite bodySprite;
+    public static Sprite bodySprite;
 
     private final InputProcessor creationInputProcessor;
     private final InputProcessor editionInputProcessor;
@@ -151,6 +151,14 @@ public class RigidBodiesScreen {
         });
     }
 
+    public static void setPivot() {
+
+        if (bodySprite != null) {
+            Ctx.bodies.getSelectedModel().getOrigin().x = bodySprite.getWidth() / 2;
+            Ctx.bodies.getSelectedModel().getOrigin().y = bodySprite.getHeight() / 2;
+        }
+    }
+
     private final InputProcessor modeInputProcessor = new InputAdapter() {
         @Override
         public boolean keyDown(int keycode) {
@@ -193,7 +201,9 @@ public class RigidBodiesScreen {
             @Override
             public void propertyChanged(Object source, String propertyName) {
                 if (propertyName.equals(RigidBodyModel.PROP_IMAGEPATH)) {
-                    createBodySprite();
+
+                    System.out.println("Callback: selectedModelChangeListener");
+                    createBodySprite(false);
                     lblClearImage.show();
                 } else if (propertyName.equals(RigidBodyModel.PROP_PHYSICS)) {
                     clearWorld();
@@ -328,7 +338,8 @@ public class RigidBodiesScreen {
 
                 if (model != null) {
                     model.setImagePath(null);
-                    createBodySprite();
+                    System.out.println("Callback: touchDown");
+                    createBodySprite(false);
                     lblClearImage.hide();
                 }
             }
@@ -743,9 +754,12 @@ public class RigidBodiesScreen {
         }
     }
 
-    private void createBodySprite() {
+    private void createBodySprite(boolean isLoad) {
         bodySprite = null;
-
+        if (bodySprite !=null){
+            bodySprite.getTexture().dispose();
+        }
+       
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
         if (model == null)
             return;
@@ -758,13 +772,19 @@ public class RigidBodiesScreen {
         bodySprite.setPosition(0, 0);
         bodySprite.setColor(1, 1, 1, 0.5f);
 
-        float spRatio = bodySprite.getWidth() / bodySprite.getHeight();
+        //float spRatio = bodySprite.getWidth() / bodySprite.getHeight();
         // bodySprite.setSize(1, 1 / spRatio);
 
         // System.out.println("w: " + bodySprite.getWidth() + " h: " +
         // bodySprite.getHeight());
         // System.out.println("ratio: " + spRatio);
         bodySprite.setSize(bodySprite.getWidth(), bodySprite.getHeight());
+        System.out.println("isLoad: " + isLoad);
+
+        if (isLoad) {
+            Ctx.bodies.getSelectedModel().getOrigin().x = bodySprite.getWidth() / 2;
+            Ctx.bodies.getSelectedModel().getOrigin().y = bodySprite.getHeight() / 2;
+        }
 
     }
 
@@ -810,6 +830,7 @@ public class RigidBodiesScreen {
             return;
 
         createBody();
-        createBodySprite();
+        System.out.println("Callback: resetWorld");
+        createBodySprite(false);
     }
 }

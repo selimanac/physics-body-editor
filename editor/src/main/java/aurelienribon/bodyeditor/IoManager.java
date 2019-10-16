@@ -42,40 +42,27 @@ public class IoManager extends ChangeableObject {
     }
 
     public String toDefoldComponentString(String path, int id) {
-        return String.format("embedded_components {" + System.lineSeparator()
-                + " id: \"collisionobject"+id+"\" " + System.lineSeparator()
-                + " type: \"collisionobject\" " + System.lineSeparator()
-                + " data: \"collision_shape: \\\"/"+path+"\\\"\\n\" " + System.lineSeparator()
-                + " \"type: COLLISION_OBJECT_TYPE_STATIC\\n\" " + System.lineSeparator()
-                + " \"mass: 0.0\\n\" " + System.lineSeparator()
-                + " \"friction: 0.1\\n\" " + System.lineSeparator()
-                + " \"restitution: 0.5\\n\" " + System.lineSeparator()
-                + " \"group: \\\"default\\\"\\n\" " + System.lineSeparator()
-                + " \"mask: \\\"default\\\"\\n\" " + System.lineSeparator()
-                + " \"linear_damping: 0.0\\n\" " + System.lineSeparator()
-                + " \"angular_damping: 0.0\\n\" " + System.lineSeparator()
-                + " \"locked_rotation: false\\n\" " + System.lineSeparator()
-                + " \"\" " + System.lineSeparator()
-                + " position { " + System.lineSeparator()
-                + "     x: 0.0 " + System.lineSeparator()
-                + "     y: 0.0 " + System.lineSeparator()
-                + "     z: 0.0 " + System.lineSeparator()
-                + " } " + System.lineSeparator()
-                + " rotation { " + System.lineSeparator()
-                + "     x: 0.0 " + System.lineSeparator()
-                + "     y: 0.0 " + System.lineSeparator()
-                + "     z: 0.0 " + System.lineSeparator()
-                + "     w: 1.0 " + System.lineSeparator()
-                + " } " + System.lineSeparator()
-                + "} " + System.lineSeparator()
-               );
+        return String.format("embedded_components {" + System.lineSeparator() + " id: \"collisionobject" + id + "\" "
+                + System.lineSeparator() + " type: \"collisionobject\" " + System.lineSeparator()
+                + " data: \"collision_shape: \\\"/" + path + "\\\"\\n\" " + System.lineSeparator()
+                + " \"type: COLLISION_OBJECT_TYPE_STATIC\\n\" " + System.lineSeparator() + " \"mass: 0.0\\n\" "
+                + System.lineSeparator() + " \"friction: 0.1\\n\" " + System.lineSeparator()
+                + " \"restitution: 0.5\\n\" " + System.lineSeparator() + " \"group: \\\"default\\\"\\n\" "
+                + System.lineSeparator() + " \"mask: \\\"default\\\"\\n\" " + System.lineSeparator()
+                + " \"linear_damping: 0.0\\n\" " + System.lineSeparator() + " \"angular_damping: 0.0\\n\" "
+                + System.lineSeparator() + " \"locked_rotation: false\\n\" " + System.lineSeparator() + " \"\" "
+                + System.lineSeparator() + " position { " + System.lineSeparator() + "     x: 0.0 "
+                + System.lineSeparator() + "     y: 0.0 " + System.lineSeparator() + "     z: 0.0 "
+                + System.lineSeparator() + " } " + System.lineSeparator() + " rotation { " + System.lineSeparator()
+                + "     x: 0.0 " + System.lineSeparator() + "     y: 0.0 " + System.lineSeparator() + "     z: 0.0 "
+                + System.lineSeparator() + "     w: 1.0 " + System.lineSeparator() + " } " + System.lineSeparator()
+                + "} " + System.lineSeparator());
     }
 
     public void exportToDefoldFile() throws IOException, JSONException {
 
-        
         assert projectFile != null;
-        
+
         File path = getProjectDir();
         String modelName = "";
 
@@ -102,10 +89,8 @@ public class IoManager extends ChangeableObject {
                     shapeStringContainer += "data: 0" + System.lineSeparator();
                 }
 
-                
-
                 i++;
-                
+
                 File filePath = new File(path + "/defold/" + modelName + "/" + modelName + "_" + i + ".convexshape");
                 FileUtils.writeStringToFile(filePath, shapeStringContainer);
 
