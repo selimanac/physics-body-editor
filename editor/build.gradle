@@ -11,9 +11,9 @@ dependencies {
     compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion"
     compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
 
-    compile "net.java.balloontip:balloontip:1.2.1"
-    compile "commons-io:commons-io:2.1"
-    compile "org.json:json:20090211"
+    compile "net.java.balloontip:balloontip:1.2.4.1"
+    compile "commons-io:commons-io:2.6"
+    compile "org.json:json:20190722"
 
     compile files('./libs/css-engine-swing-api.jar')
     compile files('./libs/tween-engine-api.jar')
