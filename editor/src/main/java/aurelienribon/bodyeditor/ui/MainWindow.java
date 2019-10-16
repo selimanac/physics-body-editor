@@ -105,9 +105,10 @@ public class MainWindow extends javax.swing.JFrame {
     private void checkUpdates() {
 
         final int version = 150;
+        final String v_txt = "1.5.0";
         final String repo = "selimanac/physics-body-editor";
 
-        versionLabel.setText("v" + version + " (checking for updates)");
+        versionLabel.setText("v" + v_txt + " (checking for updates)");
         versionLabel.setIcon(Res.getImage("/gfx/ic_loading.gif"));
 
         URL tmpUrl;
@@ -132,7 +133,7 @@ public class MainWindow extends javax.swing.JFrame {
             @Override
             public void completed() {
                 try {
-                    testUpdate(version, stream.toString("UTF-8"), repo);
+                    testUpdate(version, stream.toString("UTF-8"), repo, v_txt);
                 } catch (UnsupportedEncodingException | JSONException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -156,7 +157,7 @@ public class MainWindow extends javax.swing.JFrame {
         timer.start();
     }
 
-    private void testUpdate(int version, String str, String repo) throws JSONException {
+    private void testUpdate(int version, String str, String repo, String v_txt) throws JSONException {
 
         JSONObject json = new JSONObject(str);
         String remoteVersion = json.getString("tag_name");
@@ -171,7 +172,7 @@ public class MainWindow extends javax.swing.JFrame {
         };
 
         if (vNum == version) {
-            versionLabel.setText("v" + version + " (latest version)");
+            versionLabel.setText("v" + v_txt + " (latest version)");
             versionLabel.setIcon(Res.getImage("/gfx/ic_ok.png"));
         } else if (vNum > version) {
             versionLabel.setText("New version available: " + remoteVersion);
@@ -181,14 +182,10 @@ public class MainWindow extends javax.swing.JFrame {
             versionLabel.addMouseListener(mouseListener);
 
         } else {
-            versionLabel.setText("v" + version + " (invalid version number)");
+            versionLabel.setText("v" + v_txt + " (invalid version number)");
             versionLabel.setIcon(Res.getImage("/gfx/ic_error.png"));
         }
 
-        // SwingUtilities.updateComponentTreeUI(this);
-        // this.invalidate();
-        // this.validate();
-        // this.repaint();
     }
 
     // -------------------------------------------------------------------------
