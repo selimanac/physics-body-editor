@@ -148,21 +148,19 @@ public class RigidBodiesCreationDialog extends javax.swing.JDialog {
             model.setImagePath(Ctx.io.buildImagePath(chooser.getSelectedFile()));
             Ctx.bodies.getModels().add(model);
             Ctx.bodies.select(model);
-            
-    
+
             dispose();
         }
     }
 
     private void createFromImages() {
         JFileChooser chooser = new JFileChooser(Ctx.io.getProjectDir());
-        
+
         chooser.setDialogTitle("Select the images for the new models");
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-        
+
         chooser.setFileFilter(new FileNameExtensionFilter("Image files", "png", "jpg", "jpeg"));
         chooser.setMultiSelectionEnabled(true);
-     
 
         if (chooser.showOpenDialog(Ctx.window) == JFileChooser.APPROVE_OPTION) {
             for (File file : chooser.getSelectedFiles()) {

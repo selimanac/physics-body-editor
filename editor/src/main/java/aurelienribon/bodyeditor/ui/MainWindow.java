@@ -57,8 +57,7 @@ public class MainWindow extends javax.swing.JFrame {
         Style.apply(getContentPane(), new Style(Res.getUrl("/css/style.css")));
 
         objectsPanel.getModel().add(new RigidBodiesPanel(), "Rigid bodies", null, false);
-        // objectsPanel.getModel().add(new DynamicObjectsPanel(), "Dynamic objects",
-        // null, false);
+
         objectsPanel.setHeaderLayout(TabPanel.LAYOUT_GRID);
 
         logoWebsiteLbl.addMouseListener(new MouseAdapter() {
@@ -93,7 +92,7 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
 
-        // checkUpdates();
+        checkUpdates();
 
     }
 
@@ -105,8 +104,8 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void checkUpdates() {
 
-        final int version = 121;
-        final String repo = "selimanac/defold-random";
+        final int version = 150;
+        final String repo = "selimanac/physics-body-editor";
 
         versionLabel.setText("v" + version + " (checking for updates)");
         versionLabel.setIcon(Res.getImage("/gfx/ic_loading.gif"));
@@ -163,8 +162,6 @@ public class MainWindow extends javax.swing.JFrame {
         String remoteVersion = json.getString("tag_name");
         String v = remoteVersion.substring(1).replaceAll("[.]", "");
         int vNum = Integer.parseInt(v);
-
-        System.out.println("Version " + v);
 
         MouseListener mouseListener = new MouseAdapter() {
             @Override
@@ -269,8 +266,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jPanel1.add(versionPanel, java.awt.BorderLayout.SOUTH);
 
-   
-        sidePanel.setPreferredSize(new Dimension(350,600));
+        sidePanel.setPreferredSize(new Dimension(350, 600));
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(sidePanelLayout

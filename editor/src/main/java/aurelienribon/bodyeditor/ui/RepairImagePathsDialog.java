@@ -111,7 +111,6 @@ public class RepairImagePathsDialog extends javax.swing.JDialog {
 
         commonPathField.setText("...");
 
-        
         okBtn.setLayout(new BorderLayout());
         javax.swing.JLabel oklabel = new javax.swing.JLabel("OK");
         oklabel.setForeground(new Color(224, 224, 224));
@@ -125,13 +124,11 @@ public class RepairImagePathsDialog extends javax.swing.JDialog {
         okBtn.setBorderPainted(true);
         okBtn.setFocusPainted(false);
         okBtn.setBorder(new LineBorder(new Color(87, 87, 87), 2, true));
-        okBtn.setForeground(new Color(224,224,224));
-        okBtn.setBackground(new Color(65,65,65));
+        okBtn.setForeground(new Color(224, 224, 224));
+        okBtn.setBackground(new Color(65, 65, 65));
         okBtn.setVerticalAlignment(SwingConstants.CENTER);
         okBtn.setHorizontalAlignment(SwingConstants.CENTER);
-        
 
-     
         cancelBtn.setLayout(new BorderLayout());
         javax.swing.JLabel clabel = new javax.swing.JLabel("CANCEL");
         clabel.setForeground(new Color(224, 224, 224));
@@ -145,62 +142,54 @@ public class RepairImagePathsDialog extends javax.swing.JDialog {
         cancelBtn.setBorderPainted(true);
         cancelBtn.setFocusPainted(false);
         cancelBtn.setBorder(new LineBorder(new Color(87, 87, 87), 2, true));
-        cancelBtn.setForeground(new Color(224,224,224));
-        cancelBtn.setBackground(new Color(65,65,65));
+        cancelBtn.setForeground(new Color(224, 224, 224));
+        cancelBtn.setBackground(new Color(65, 65, 65));
         cancelBtn.setVerticalAlignment(SwingConstants.CENTER);
         cancelBtn.setHorizontalAlignment(SwingConstants.CENTER);
 
         javax.swing.GroupLayout paintedPanel1Layout = new javax.swing.GroupLayout(paintedPanel1);
         paintedPanel1.setLayout(paintedPanel1Layout);
-        paintedPanel1Layout.setHorizontalGroup(
-                paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(paintedPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(paintedPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel1)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(commonPathField))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paintedPanel1Layout.createSequentialGroup()
-                                                .addGap(0, 178, Short.MAX_VALUE)
+        paintedPanel1Layout.setHorizontalGroup(paintedPanel1Layout
+                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paintedPanel1Layout.createSequentialGroup().addContainerGap()
+                        .addGroup(paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(paintedPanel1Layout.createSequentialGroup().addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(commonPathField))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                        paintedPanel1Layout.createSequentialGroup().addGap(0, 178, Short.MAX_VALUE)
                                                 .addComponent(okBtn)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(cancelBtn)))
-                                .addContainerGap())
-        );
+                        .addContainerGap()));
 
-        paintedPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[]{cancelBtn, okBtn});
+        paintedPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
+                new java.awt.Component[] { cancelBtn, okBtn });
 
-        paintedPanel1Layout.setVerticalGroup(
-                paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(paintedPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel1)
-                                        .addComponent(commonPathField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(okBtn)
-                                        .addComponent(cancelBtn))
-                                .addContainerGap())
-        );
+        paintedPanel1Layout.setVerticalGroup(paintedPanel1Layout
+                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(paintedPanel1Layout.createSequentialGroup().addContainerGap()
+                        .addGroup(paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1).addComponent(commonPathField,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(okBtn).addComponent(cancelBtn))
+                        .addContainerGap()));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(paintedPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(paintedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup().addContainerGap().addComponent(paintedPanel1,
+                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()));
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup().addContainerGap()
+                        .addComponent(paintedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

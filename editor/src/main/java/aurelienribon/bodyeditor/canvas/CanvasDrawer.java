@@ -77,7 +77,7 @@ public class CanvasDrawer {
         if (Settings.isShapeDrawn) {
             drawShapes(model.getShapes(), nextPoint);
             drawPoints(model.getShapes(), selectedPoints, nearestPoint, nextPoint);
-           // System.out.println("x: " + model.getOrigin().x + "y: " + model.getOrigin().y ); 
+           
             drawOrigin(model.getOrigin(), nearestPoint);
         }
     }

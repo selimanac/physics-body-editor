@@ -30,252 +30,266 @@ import aurelienribon.ui.components.PaintedPanel;
 import aurelienribon.ui.css.Style;
 
 public class AutoTraceParamsDialog extends javax.swing.JDialog {
-    private boolean result = false;
+        private boolean result = false;
 
-    public AutoTraceParamsDialog(javax.swing.JFrame parent) {
-        super(parent, true);
+        public AutoTraceParamsDialog(javax.swing.JFrame parent) {
+                super(parent, true);
 
-        setContentPane(new PaintedPanel());
-        initComponents();
+                setContentPane(new PaintedPanel());
+                initComponents();
 
-        Style.registerCssClasses(getContentPane(), ".popPanel", ".configPanel");
-        Style.registerCssClasses(commentLabel, ".brightcomment");
-        Style.apply(getContentPane(), new Style(Res.getUrl("/css/style.css")));
+                Style.registerCssClasses(getContentPane(), ".popPanel", ".configPanel");
+                Style.registerCssClasses(commentLabel, ".brightcomment");
+                Style.apply(getContentPane(), new Style(Res.getUrl("/css/style.css")));
 
-        hullToleranceSlider.setValue((int) (Settings.autoTraceHullTolerance * 100));
-        alphaToleranceSlider.setValue(Settings.autoTraceAlphaTolerance);
-        multiPartDetectionChk.setSelected(Settings.autoTraceMultiPartDetection);
-        holeDetectionChk.setSelected(Settings.autoTraceHoleDetection);
+                hullToleranceSlider.setValue((int) (Settings.autoTraceHullTolerance * 100));
+                alphaToleranceSlider.setValue(Settings.autoTraceAlphaTolerance);
+                multiPartDetectionChk.setSelected(Settings.autoTraceMultiPartDetection);
+                holeDetectionChk.setSelected(Settings.autoTraceHoleDetection);
 
-        okBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Settings.autoTraceHullTolerance = hullToleranceSlider.getValue() / 100f;
-                Settings.autoTraceAlphaTolerance = alphaToleranceSlider.getValue();
-                Settings.autoTraceMultiPartDetection = multiPartDetectionChk.isSelected();
-                Settings.autoTraceHoleDetection = holeDetectionChk.isSelected();
+                okBtn.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                                Settings.autoTraceHullTolerance = hullToleranceSlider.getValue() / 100f;
+                                Settings.autoTraceAlphaTolerance = alphaToleranceSlider.getValue();
+                                Settings.autoTraceMultiPartDetection = multiPartDetectionChk.isSelected();
+                                Settings.autoTraceHoleDetection = holeDetectionChk.isSelected();
+                                dispose();
+                                result = true;
+                        }
+                });
+
+                cancelBtn.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                                dispose();
+                        }
+                });
+        }
+
+        public boolean prompt() {
+                setVisible(true);
                 dispose();
-                result = true;
-            }
-        });
+                return result;
+        }
 
-        cancelBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-    }
+        // -------------------------------------------------------------------------
+        // Generated stuff
+        // -------------------------------------------------------------------------
 
-    public boolean prompt() {
-        setVisible(true);
-        dispose();
-        return result;
-    }
+        @SuppressWarnings("unchecked")
+        // <editor-fold defaultstate="collapsed" desc="Generated
+        // Code">//GEN-BEGIN:initComponents
+        private void initComponents() {
 
-    // -------------------------------------------------------------------------
-    // Generated stuff
-    // -------------------------------------------------------------------------
+                paintedPanel1 = new aurelienribon.ui.components.PaintedPanel();
+                hullToleranceSlider = new javax.swing.JSlider();
+                alphaToleranceSlider = new javax.swing.JSlider();
+                multiPartDetectionChk = new javax.swing.JCheckBox();
+                holeDetectionChk = new javax.swing.JCheckBox();
+                jLabel1 = new javax.swing.JLabel();
+                jLabel2 = new javax.swing.JLabel();
+                okBtn = new javax.swing.JButton();
+                cancelBtn = new javax.swing.JButton();
+                commentLabel = new javax.swing.JLabel();
+                jLabel3 = new javax.swing.JLabel();
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+                setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+                setTitle("Auto-trace parameters");
+                setResizable(false);
 
-        paintedPanel1 = new aurelienribon.ui.components.PaintedPanel();
-        hullToleranceSlider = new javax.swing.JSlider();
-        alphaToleranceSlider = new javax.swing.JSlider();
-        multiPartDetectionChk = new javax.swing.JCheckBox();
-        holeDetectionChk = new javax.swing.JCheckBox();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        okBtn = new javax.swing.JButton();
-        cancelBtn = new javax.swing.JButton();
-        commentLabel = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+                hullToleranceSlider.setMajorTickSpacing(100);
+                hullToleranceSlider.setMaximum(400);
+                hullToleranceSlider.setMinimum(100);
+                hullToleranceSlider.setMinorTickSpacing(10);
+                hullToleranceSlider.setPaintTicks(true);
+                hullToleranceSlider.setValue(400);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Auto-trace parameters");
-        setResizable(false);
+                alphaToleranceSlider.setMaximum(255);
+                alphaToleranceSlider.setMinorTickSpacing(5);
+                alphaToleranceSlider.setPaintTicks(true);
+                alphaToleranceSlider.setValue(128);
 
-        hullToleranceSlider.setMajorTickSpacing(100);
-        hullToleranceSlider.setMaximum(400);
-        hullToleranceSlider.setMinimum(100);
-        hullToleranceSlider.setMinorTickSpacing(10);
-        hullToleranceSlider.setPaintTicks(true);
-        hullToleranceSlider.setValue(400);
+                multiPartDetectionChk.setText("Multi-part detection");
+                multiPartDetectionChk.setEnabled(false);
 
-        alphaToleranceSlider.setMaximum(255);
-        alphaToleranceSlider.setMinorTickSpacing(5);
-        alphaToleranceSlider.setPaintTicks(true);
-        alphaToleranceSlider.setValue(128);
+                holeDetectionChk.setText("Hole detection");
+                holeDetectionChk.setEnabled(false);
 
-        multiPartDetectionChk.setText("Multi-part detection");
-        multiPartDetectionChk.setEnabled(false);
+                jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+                jLabel1.setText("Hull tolerance: ");
 
-        holeDetectionChk.setText("Hole detection");
-        holeDetectionChk.setEnabled(false);
+                jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+                jLabel2.setText("Alpha tolerance: ");
 
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel1.setText("Hull tolerance: ");
+                okBtn.setLayout(new BorderLayout());
+                javax.swing.JLabel oklabel = new javax.swing.JLabel("OK");
+                oklabel.setForeground(new Color(224, 224, 224));
+                oklabel.setPreferredSize(new Dimension(70, 30));
+                oklabel.setAlignmentX(javax.swing.JLabel.CENTER_ALIGNMENT);
+                oklabel.setVerticalAlignment(SwingConstants.CENTER);
+                oklabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel2.setText("Alpha tolerance: ");
+                oklabel.setBackground(new Color(65, 65, 65));
+                oklabel.setOpaque(true);
 
-      
+                okBtn.add(oklabel);
+                okBtn.setOpaque(true);
+                okBtn.setBorderPainted(true);
+                okBtn.setFocusPainted(false);
+                okBtn.setBorder(new LineBorder(new Color(87, 87, 87), 2, true));
+                okBtn.setForeground(new Color(224, 224, 224));
+                okBtn.setBackground(new Color(65, 65, 65));
+                okBtn.setVerticalAlignment(SwingConstants.CENTER);
+                okBtn.setHorizontalAlignment(SwingConstants.CENTER);
 
-        okBtn.setLayout( new BorderLayout() );
-        javax.swing.JLabel oklabel = new javax.swing.JLabel( "OK" );
-        oklabel.setForeground(new Color(224,224,224));
-        oklabel.setPreferredSize(new Dimension(70, 30));
-        oklabel.setAlignmentX(javax.swing.JLabel.CENTER_ALIGNMENT);
-        oklabel.setVerticalAlignment(SwingConstants.CENTER);
-        oklabel.setHorizontalAlignment(SwingConstants.CENTER);
+                cancelBtn.setLayout(new BorderLayout());
+                javax.swing.JLabel label = new javax.swing.JLabel("CANCEL");
+                label.setForeground(new Color(224, 224, 224));
+                label.setPreferredSize(new Dimension(70, 30));
+                label.setAlignmentX(javax.swing.JLabel.CENTER_ALIGNMENT);
+                label.setVerticalAlignment(SwingConstants.CENTER);
+                label.setHorizontalAlignment(SwingConstants.CENTER);
 
-        oklabel.setBackground(new Color(65, 65, 65));
-        oklabel.setOpaque(true);
-       
-        okBtn.add( oklabel );
-        okBtn.setOpaque(true);
-        okBtn.setBorderPainted(true);
-        okBtn.setFocusPainted(false);
-        okBtn.setBorder(new LineBorder( new Color(87, 87, 87), 2, true ));
-        okBtn.setForeground(new Color(224,224,224));
-        okBtn.setBackground(new Color(65,65,65));
-        okBtn.setVerticalAlignment(SwingConstants.CENTER);
-        okBtn.setHorizontalAlignment(SwingConstants.CENTER);
+                label.setBackground(new Color(65, 65, 65));
+                label.setOpaque(true);
 
+                cancelBtn.add(label);
+                cancelBtn.setOpaque(true);
+                cancelBtn.setBorderPainted(true);
+                cancelBtn.setFocusPainted(false);
+                cancelBtn.setBorder(new LineBorder(new Color(87, 87, 87), 2, true));
+                cancelBtn.setForeground(new Color(224, 224, 224));
+                cancelBtn.setBackground(new Color(65, 65, 65));
+                cancelBtn.setVerticalAlignment(SwingConstants.CENTER);
+                cancelBtn.setHorizontalAlignment(SwingConstants.CENTER);
 
-        cancelBtn.setLayout( new BorderLayout() );
-        javax.swing.JLabel label = new javax.swing.JLabel( "CANCEL" );
-        label.setForeground(new Color(224,224,224));
-        label.setPreferredSize(new Dimension(70, 30));
-        label.setAlignmentX(javax.swing.JLabel.CENTER_ALIGNMENT);
-        label.setVerticalAlignment(SwingConstants.CENTER);
-        label.setHorizontalAlignment(SwingConstants.CENTER);
+                javax.swing.GroupLayout paintedPanel1Layout = new javax.swing.GroupLayout(paintedPanel1);
+                paintedPanel1.setLayout(paintedPanel1Layout);
+                paintedPanel1Layout.setHorizontalGroup(paintedPanel1Layout
+                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(paintedPanel1Layout.createSequentialGroup().addContainerGap()
+                                                .addGroup(paintedPanel1Layout.createParallelGroup(
+                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addGroup(paintedPanel1Layout.createSequentialGroup()
+                                                                                .addComponent(jLabel1)
+                                                                                .addPreferredGap(
+                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                .addComponent(hullToleranceSlider,
+                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                Short.MAX_VALUE))
+                                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                paintedPanel1Layout
+                                                                                                .createSequentialGroup()
+                                                                                                .addComponent(jLabel2)
+                                                                                                .addPreferredGap(
+                                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                                .addComponent(alphaToleranceSlider,
+                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                                Short.MAX_VALUE))
+                                                                .addGroup(paintedPanel1Layout.createSequentialGroup()
+                                                                                .addComponent(multiPartDetectionChk)
+                                                                                .addGap(0, 0, Short.MAX_VALUE))
+                                                                .addGroup(paintedPanel1Layout.createSequentialGroup()
+                                                                                .addComponent(holeDetectionChk)
+                                                                                .addPreferredGap(
+                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                Short.MAX_VALUE)
+                                                                                .addComponent(okBtn)
+                                                                                .addPreferredGap(
+                                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                .addComponent(cancelBtn,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addContainerGap()));
 
-        label.setBackground(new Color(65, 65, 65));
-        label.setOpaque(true);
-       
-        cancelBtn.add( label );
-        cancelBtn.setOpaque(true);
-        cancelBtn.setBorderPainted(true);
-        cancelBtn.setFocusPainted(false);
-        cancelBtn.setBorder(new LineBorder( new Color(87, 87, 87), 2, true ));
-        cancelBtn.setForeground(new Color(224,224,224));
-        cancelBtn.setBackground(new Color(65,65,65));
-        cancelBtn.setVerticalAlignment(SwingConstants.CENTER);
-        cancelBtn.setHorizontalAlignment(SwingConstants.CENTER);
+                paintedPanel1Layout.linkSize(javax.swing.SwingConstants.CENTER,
+                                new java.awt.Component[] { jLabel1, jLabel2 });
 
-        /*cancelBtn.setText("CANCEL");
-        cancelBtn.setContentAreaFilled(false);
-        cancelBtn.setOpaque(true);
-        cancelBtn.setBorderPainted(true);
-        cancelBtn.setFocusPainted(false);
-        cancelBtn.setBorder(new LineBorder( new Color(87, 87, 87), 2, true ));
-        cancelBtn.setForeground(new Color(224,224,224));
-        cancelBtn.setBackground(new Color(65,65,65));
-        cancelBtn.setMargin(new Insets(100, 100, 100, 100));
-        cancelBtn.setVerticalAlignment(SwingConstants.CENTER);
-        cancelBtn.setHorizontalAlignment(SwingConstants.CENTER);
-        cancelBtn.setPreferredSize(new Dimension(60, 40));
-        cancelBtn.setBounds(0,00,60,40); //(10,10,100,25);*/
+                paintedPanel1Layout.linkSize(javax.swing.SwingConstants.CENTER,
+                                new java.awt.Component[] { cancelBtn, okBtn });
 
-        javax.swing.GroupLayout paintedPanel1Layout = new javax.swing.GroupLayout(paintedPanel1);
-        paintedPanel1.setLayout(paintedPanel1Layout);
-        paintedPanel1Layout.setHorizontalGroup(
-                paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(paintedPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(paintedPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel1)
+                paintedPanel1Layout.setVerticalGroup(paintedPanel1Layout
+                                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(paintedPanel1Layout.createSequentialGroup().addContainerGap()
+                                                .addGroup(paintedPanel1Layout.createParallelGroup(
+                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(hullToleranceSlider,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(jLabel1))
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(hullToleranceSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, paintedPanel1Layout.createSequentialGroup()
-                                                .addComponent(jLabel2)
+                                                .addGroup(paintedPanel1Layout.createParallelGroup(
+                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(alphaToleranceSlider,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(jLabel2))
+                                                .addGap(18, 18, 18).addComponent(multiPartDetectionChk)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(alphaToleranceSlider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(paintedPanel1Layout.createSequentialGroup()
-                                                .addComponent(multiPartDetectionChk)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                        .addGroup(paintedPanel1Layout.createSequentialGroup()
-                                                .addComponent(holeDetectionChk)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(okBtn)
+                                                .addGroup(paintedPanel1Layout.createParallelGroup(
+                                                                javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addComponent(holeDetectionChk).addComponent(okBtn)
+                                                                .addComponent(cancelBtn,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addContainerGap()));
+
+                paintedPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {
+                                alphaToleranceSlider, hullToleranceSlider, jLabel1, jLabel2 });
+
+                // commentLabel.setText("Only check multi-part detection or hole detection if
+                // your image needs it.");
+                // commentLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+                jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gfx/autoTrace.png"))); // NOI18N
+
+                javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+                getContentPane().setLayout(layout);
+                layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup().addComponent(jLabel3)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap())
-        );
+                                                .addGroup(layout.createParallelGroup(
+                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(paintedPanel1,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)
+                                                                .addComponent(commentLabel,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                388, Short.MAX_VALUE))
+                                                .addContainerGap()));
+                layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup().addContainerGap()
+                                                .addComponent(paintedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(commentLabel).addContainerGap())
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
-        paintedPanel1Layout.linkSize(javax.swing.SwingConstants.CENTER, new java.awt.Component[]{jLabel1, jLabel2});
+                pack();
+        }// </editor-fold>//GEN-END:initComponents
 
-        paintedPanel1Layout.linkSize(javax.swing.SwingConstants.CENTER, new java.awt.Component[]{cancelBtn, okBtn});
-  
-        paintedPanel1Layout.setVerticalGroup(
-                paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(paintedPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(hullToleranceSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(alphaToleranceSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
-                                .addComponent(multiPartDetectionChk)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(paintedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(holeDetectionChk)
-                                        .addComponent(okBtn)
-                                        .addComponent(cancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())
-        );
-
-        paintedPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[]{alphaToleranceSlider, hullToleranceSlider, jLabel1, jLabel2});
-
-        //commentLabel.setText("Only check multi-part detection or hole detection if your image needs it.");
-        //commentLabel.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gfx/autoTrace.png"))); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(paintedPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(commentLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE))
-                                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(paintedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(commentLabel)
-                                .addContainerGap())
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSlider alphaToleranceSlider;
-    private javax.swing.JButton cancelBtn;
-    private javax.swing.JLabel commentLabel;
-    private javax.swing.JCheckBox holeDetectionChk;
-    private javax.swing.JSlider hullToleranceSlider;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JCheckBox multiPartDetectionChk;
-    private javax.swing.JButton okBtn;
-    private aurelienribon.ui.components.PaintedPanel paintedPanel1;
-    // End of variables declaration//GEN-END:variables
+        // Variables declaration - do not modify//GEN-BEGIN:variables
+        private javax.swing.JSlider alphaToleranceSlider;
+        private javax.swing.JButton cancelBtn;
+        private javax.swing.JLabel commentLabel;
+        private javax.swing.JCheckBox holeDetectionChk;
+        private javax.swing.JSlider hullToleranceSlider;
+        private javax.swing.JLabel jLabel1;
+        private javax.swing.JLabel jLabel2;
+        private javax.swing.JLabel jLabel3;
+        private javax.swing.JCheckBox multiPartDetectionChk;
+        private javax.swing.JButton okBtn;
+        private aurelienribon.ui.components.PaintedPanel paintedPanel1;
+        // End of variables declaration//GEN-END:variables
 }

@@ -48,7 +48,7 @@ public class PanZoomInputProcessor extends InputAdapter {
 
     @Override
     public boolean scrolled(int amount) {
-       // System.out.println("amount: " + amount);
+      
        zoomLevel = (int) canvas.worldCamera.zoom;
         if (zoomLevel <= zoomMin && amount < 0) {
             zoomLevel = zoomMin;

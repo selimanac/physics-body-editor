@@ -253,6 +253,7 @@ public class RigidBodiesPanel extends javax.swing.JPanel {
         @Override
         public void propertyChanged(Object source, String propertyName) {
             RigidBodyModel model = Ctx.bodies.getSelectedModel();
+
             renameBtn.setEnabled(model != null);
             deleteBtn.setEnabled(model != null);
             upBtn.setEnabled(model != null);
@@ -260,8 +261,16 @@ public class RigidBodiesPanel extends javax.swing.JPanel {
 
             list.removeListSelectionListener(listSelectionListener);
             if (model != null) {
-               // System.out.println("Selected");
+
                 list.setSelectedValue(model, true);
+
+                if (!model.getShapes().isEmpty()) {
+                    if (!model.getShapes().get(model.getShapes().size() - 1).isClosed()) {
+                        model.getShapes().remove(model.getShapes().size() - 1);
+                    }
+
+                }
+
             } else {
                 list.clearSelection();
             }

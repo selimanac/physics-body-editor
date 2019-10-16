@@ -56,11 +56,11 @@ public class Assets extends AssetManager {
         Ctx.bodies.getModels().addListChangedListener(new ObservableList.ListChangeListener<RigidBodyModel>() {
             @Override
             public void changed(Object source, List<RigidBodyModel> added, List<RigidBodyModel> removed) {
-                System.out.println("changed");
+              
                 for (RigidBodyModel body : removed) {
                     TextureRegion region = rigidBodiesRegions.remove(body);
                     if (region != null){
-                        System.out.println("dispose");
+                      
                         region.getTexture().dispose();
                     }
                 }
@@ -80,7 +80,7 @@ public class Assets extends AssetManager {
     }
 
     public TextureRegion getRegion(RigidBodyModel body) {
-        System.out.println("getRegion");
+       
         if (!body.isImagePathValid()) return unknownRegion;
         if (body.getImagePath() == null) return null;
         //load(body);
@@ -89,10 +89,10 @@ public class Assets extends AssetManager {
     }
 
     private void load(RigidBodyModel body) {
-        System.out.println("1load");
+      
         if (!body.isImagePathValid()) return;
         if (body.getImagePath() == null) return;
-        System.out.println("2load");
+      
         File file = Ctx.io.getImageFile(body.getImagePath());
         TextureRegion region = TextureUtils.getPOTTexture(file.getPath());
         rigidBodiesRegions.put(body, region);

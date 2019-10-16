@@ -68,12 +68,12 @@ public class TextureConverter {
                 }
                 searchOn = false;
                 if (polygon != null && polygon.size > 2) {
-                    System.out.println("Hole: " + pca.HoleDetection);
+                   
                     if (pca.HoleDetection) {
                         do {
-                            System.out.println("DOME: ");
+                           
                             holeEntrance = GetHoleHullEntrance(pca, polygon, holeEntrance);
-                            System.out.println("holeEntrance: " + holeEntrance.x + holeEntrance.y);
+                        
                             if (holeEntrance != null) {
                                 if (!vectorListContains(blackList, holeEntrance)) {
                                     blackList.add(holeEntrance);

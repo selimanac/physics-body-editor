@@ -205,7 +205,7 @@ public class RigidBodiesScreen {
             public void propertyChanged(Object source, String propertyName) {
                 if (propertyName.equals(RigidBodyModel.PROP_IMAGEPATH)) {
 
-                    System.out.println("Callback: selectedModelChangeListener");
+                   
                     createBodySprite(false);
                     lblClearImage.show();
                 } else if (propertyName.equals(RigidBodyModel.PROP_PHYSICS)) {
@@ -776,7 +776,7 @@ public class RigidBodiesScreen {
 
         if (region == null)
             return;
-        System.out.println("New Sprite");
+       
         bodySprite = new Sprite(region);
         bodySprite.setPosition(0, 0);
         bodySprite.setColor(1, 1, 1, 0.5f);

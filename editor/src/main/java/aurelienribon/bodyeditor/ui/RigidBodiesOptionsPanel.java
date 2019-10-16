@@ -22,7 +22,7 @@ import aurelienribon.bodyeditor.canvas.rigidbodies.RigidBodiesScreen;
  * @author Aurelien Ribon | http://www.aurelienribon.com/
  */
 public class RigidBodiesOptionsPanel extends javax.swing.JPanel {
-    
+
     public static final String PROP_SELECTION = "selection";
 
     public RigidBodiesOptionsPanel() {
@@ -88,13 +88,14 @@ public class RigidBodiesOptionsPanel extends javax.swing.JPanel {
         });
     }
 
-    private void setPivot(){
+    private void setPivot() {
         RigidBodiesScreen.setPivot();
         Canvas.resetZoom();
-      //  Ctx.bodies.getSelectedModel().;
+        // Ctx.bodies.getSelectedModel().;
     }
+
     private void resetZoom() {
-       Canvas.resetZoom();
+        Canvas.resetZoom();
     }
 
     private void updateOptions() {
@@ -184,7 +185,7 @@ public class RigidBodiesOptionsPanel extends javax.swing.JPanel {
         resetZoomBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gfx/ic_zoom.png"))); // NOI18N
 
         resetZoomBtn.setToolTipText("Reset zoom");
-        resetZoomBtn.setMargin(new Insets(10,100,10,10));
+        resetZoomBtn.setMargin(new Insets(10, 100, 10, 10));
         resetZoomBtn.setFocusable(false);
         resetZoomBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         resetZoomBtn.setVerticalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -194,9 +195,8 @@ public class RigidBodiesOptionsPanel extends javax.swing.JPanel {
         resetZoomBtn.setBackground(new Color(87, 87, 87));
         resetZoomBtn.setBorderPainted(true);
         resetZoomBtn.setFocusPainted(false);
-        
+
         resetZoomBtn.setBorder(new LineBorder(new Color(87, 87, 87), 2, true));
-        
 
         setPivotBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gfx/ic_axis.png"))); // NOI18N
         setPivotBtn.setToolTipText("Set pivot center");
@@ -212,31 +212,28 @@ public class RigidBodiesOptionsPanel extends javax.swing.JPanel {
 
         jToolBar1.add(resetZoomBtn);
         jToolBar1.add(setPivotBtn);
-        
 
         javax.swing.GroupLayout headerPanelLayout = new javax.swing.GroupLayout(headerPanel);
         headerPanel.setLayout(headerPanelLayout);
-        headerPanelLayout.setHorizontalGroup(
-                headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(headerPanelLayout.createSequentialGroup()
-                                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 333, Short.MAX_VALUE)
-                                )
-        );
+        headerPanelLayout.setHorizontalGroup(headerPanelLayout
+                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(headerPanelLayout.createSequentialGroup()
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 333, Short.MAX_VALUE)));
         headerPanelLayout.setVerticalGroup(
-                headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        
+                headerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jToolBar1,
+                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+
         );
 
         add(headerPanel, java.awt.BorderLayout.NORTH);
-        
-        
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel6Layout.createSequentialGroup().addContainerGap()
-                
+
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(drawImageChk).addComponent(drawShapeChk))
                         .addGap(18, 18, 18)
@@ -268,12 +265,11 @@ public class RigidBodiesOptionsPanel extends javax.swing.JPanel {
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(drawShapeChk).addComponent(debugPhysicsChk))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-      //  add(resetZoomBtn);
-       // add(setPivotBtn);
+        // add(resetZoomBtn);
+        // add(setPivotBtn);
 
         add(jPanel6);
         add(filler1);
-    
 
     }// </editor-fold>//GEN-END:initComponents
 

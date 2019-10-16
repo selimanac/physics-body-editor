@@ -37,11 +37,9 @@ public class Main {
 
                 config.useGL30 = false;
                 LwjglCanvas glCanvas = new LwjglCanvas(new Canvas(), config);
-                // LwjglAWTCanvas glCanvas = new LwjglAWTCanvas(new Canvas(), config);
 
                 MainWindow mw = Ctx.window;
 
-                //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 mw.setCanvas(glCanvas.getCanvas());
 
                 mw.setSize(1175, 800);
@@ -49,13 +47,12 @@ public class Main {
                 mw.setLocationRelativeTo(null);
 
                 mw.setVisible(true);
-                
+
                 parseArgs(args);
 
-                
             }
         });
-        
+
     }
 
     private static void parseArgs(String[] args) {
