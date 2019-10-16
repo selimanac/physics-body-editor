@@ -130,6 +130,9 @@ public class AutoTraceParamsDialog extends javax.swing.JDialog {
         oklabel.setAlignmentX(javax.swing.JLabel.CENTER_ALIGNMENT);
         oklabel.setVerticalAlignment(SwingConstants.CENTER);
         oklabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        oklabel.setBackground(new Color(65, 65, 65));
+        oklabel.setOpaque(true);
        
         okBtn.add( oklabel );
         okBtn.setOpaque(true);
@@ -149,6 +152,9 @@ public class AutoTraceParamsDialog extends javax.swing.JDialog {
         label.setAlignmentX(javax.swing.JLabel.CENTER_ALIGNMENT);
         label.setVerticalAlignment(SwingConstants.CENTER);
         label.setHorizontalAlignment(SwingConstants.CENTER);
+
+        label.setBackground(new Color(65, 65, 65));
+        label.setOpaque(true);
        
         cancelBtn.add( label );
         cancelBtn.setOpaque(true);

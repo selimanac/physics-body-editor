@@ -45,6 +45,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 
 import javax.swing.*;
+
+import static aurelienribon.bodyeditor.canvas.Canvas.worldCamera;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,7 +98,7 @@ public class RigidBodiesScreen {
 
     public RigidBodiesScreen(Canvas canvas) {
         this.canvas = canvas;
-        this.drawer = new RigidBodiesScreenDrawer(canvas.worldCamera);
+        this.drawer = new RigidBodiesScreenDrawer(worldCamera);
 
         creationInputProcessor = new CreationInputProcessor(canvas, this);
         editionInputProcessor = new EditionInputProcessor(canvas, this);
@@ -335,10 +338,8 @@ public class RigidBodiesScreen {
             @Override
             public void touchDown(Label source) {
                 RigidBodyModel model = Ctx.bodies.getSelectedModel();
-
                 if (model != null) {
                     model.setImagePath(null);
-                    System.out.println("Callback: touchDown");
                     createBodySprite(false);
                     lblClearImage.hide();
                 }
@@ -428,6 +429,7 @@ public class RigidBodiesScreen {
         tweenManager.update(Gdx.graphics.getDeltaTime());
 
         canvas.drawer.drawBoundingBox(bodySprite);
+
         if (Ctx.bodies.getSelectedModel() == null) {
             canvas.drawer.drawAxis(v0);
         } else {
@@ -755,31 +757,33 @@ public class RigidBodiesScreen {
     }
 
     private void createBodySprite(boolean isLoad) {
-        bodySprite = null;
-        if (bodySprite !=null){
-            bodySprite.getTexture().dispose();
-        }
-       
+
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
+        if (bodySprite !=null){
+           // bodySprite.getTexture().dispose();
+          
+           Assets.inst().removeRegion(model);
+        }
+
+
+        bodySprite = null;
+
+        
         if (model == null)
             return;
 
         TextureRegion region = Assets.inst().getRegion(model);
+
         if (region == null)
             return;
-
+        System.out.println("New Sprite");
         bodySprite = new Sprite(region);
         bodySprite.setPosition(0, 0);
         bodySprite.setColor(1, 1, 1, 0.5f);
 
-        //float spRatio = bodySprite.getWidth() / bodySprite.getHeight();
-        // bodySprite.setSize(1, 1 / spRatio);
 
-        // System.out.println("w: " + bodySprite.getWidth() + " h: " +
-        // bodySprite.getHeight());
-        // System.out.println("ratio: " + spRatio);
         bodySprite.setSize(bodySprite.getWidth(), bodySprite.getHeight());
-        System.out.println("isLoad: " + isLoad);
+
 
         if (isLoad) {
             Ctx.bodies.getSelectedModel().getOrigin().x = bodySprite.getWidth() / 2;
@@ -830,7 +834,7 @@ public class RigidBodiesScreen {
             return;
 
         createBody();
-        System.out.println("Callback: resetWorld");
+        
         createBodySprite(false);
     }
 }

@@ -254,6 +254,9 @@ public class RigidBodiesCreationDialog extends javax.swing.JDialog {
         b2label.setVerticalAlignment(SwingConstants.CENTER);
         b2label.setHorizontalAlignment(SwingConstants.CENTER);
 
+        b2label.setBackground(new Color(65, 65, 65));
+        b2label.setOpaque(true);
+
         b2CreateBtn.add(b2label);
         b2CreateBtn.setOpaque(true);
         b2CreateBtn.setBorderPainted(true);
@@ -302,6 +305,8 @@ public class RigidBodiesCreationDialog extends javax.swing.JDialog {
         oklabel.setAlignmentX(javax.swing.JLabel.CENTER_ALIGNMENT);
         oklabel.setVerticalAlignment(SwingConstants.CENTER);
         oklabel.setHorizontalAlignment(SwingConstants.CENTER);
+        oklabel.setBackground(new Color(65, 65, 65));
+        oklabel.setOpaque(true);
 
         b1CreateBtn.add(oklabel);
         b1CreateBtn.setOpaque(true);
@@ -353,6 +358,9 @@ public class RigidBodiesCreationDialog extends javax.swing.JDialog {
         b3label.setAlignmentX(javax.swing.JLabel.CENTER_ALIGNMENT);
         b3label.setVerticalAlignment(SwingConstants.CENTER);
         b3label.setHorizontalAlignment(SwingConstants.CENTER);
+        b3label.setOpaque(true);
+        b3label.setBackground(new Color(65, 65, 65));
+        b3label.setOpaque(true);
 
         b3CreateBtn.add(b3label);
         b3CreateBtn.setOpaque(true);
