@@ -70,7 +70,7 @@ public class MainWindow extends javax.swing.JFrame {
         logoManualLbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                SwingHelper.browse(MainWindow.this, "https://selimanac.github.io/");
+                SwingHelper.browse(MainWindow.this, "https://selimanac.github.io/physics-body-editor/");
             }
         });
 
