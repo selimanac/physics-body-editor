@@ -5,6 +5,8 @@ Physics Body Editor is originally developed by [Aurelien Ribon](http://www.aurel
 
 This is the modified version for Defold Game Engine compatibility. I made a lots of breaking changes, improvements, added new functionalities and bug fixes.
 
+Generic file format is json. It is simple to read and can be implemented in any game engine.
+
 More info and manual is available here: https://selimanac.github.io/physics-body-editor/
 
 ### Release Notes
@@ -24,13 +26,7 @@ More info and manual is available here: https://selimanac.github.io/physics-body
 - Multi-part Detection and Hole Detection are not working as aspected. They are disabled. Need more investigation.
 - Swing widget toolkit is ancient and it is not supporting anymore. So it may contain bugs.  
 
-### Keys  
 
-Enter -> inset point  
-Backspase ->  delete point  
-Left alt ->  Draw circle  
-escape -> cancel drawing  
-Left Control -> Change Mode  
 
 
 
