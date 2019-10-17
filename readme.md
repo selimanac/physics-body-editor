@@ -13,18 +13,18 @@ More info and manual is available here: https://selimanac.github.io/physics-body
 
 #### 1.5.0
 
-- New GUI color schema
-- New coordinate system
-- New zoom level and pivot(origin) functionallties
-- Defold Exporter with .convexshapes and .go files
-- Lots of small bug fixed
+- New GUI color schema.
+- New coordinate system.
+- New zoom level and pivot(origin) functionallties.
+- Defold Exporter with .convexshapes and .go files.
+- Lots of minor and major bug fixed.
 
 
 ### Known issues
 
-- Incorrect Layout Rendering of LwjglCanvas on MacOS [#5004](https://github.com/libgdx/libgdx/issues/5004)
+- Incorrect Layout Rendering of LwjglCanvas on MacOS. [#5004](https://github.com/libgdx/libgdx/issues/5004) Temporarily fixed with glue.
 - Multi-part Detection and Hole Detection are not working as aspected. They are disabled. Need more investigation.
-- Swing widget toolkit is ancient and it is not supporting anymore. So it may contain bugs.  
+- Swing widget toolkit is ancient and it is not supported anymore. So it may contain non fixed bugs.
 
 
 
