@@ -1,5 +1,5 @@
 
-#Physics Body Editor
+# Physics Body Editor
 
 Physics Body Editor is orginally developed by [Aurelien Ribon](http://www.aurelienribon.com/) and maintained by [MovingBlocks](http://terasology.org) for libGDX loader.
 
