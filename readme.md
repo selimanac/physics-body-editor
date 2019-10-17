@@ -1,11 +1,11 @@
 
 # Physics Body Editor
 
-Physics Body Editor is orginally developed by [Aurelien Ribon](http://www.aurelienribon.com/) and maintained by [MovingBlocks](http://terasology.org) for libGDX loader.
+Physics Body Editor is originally developed by [Aurelien Ribon](http://www.aurelienribon.com/) and maintained by [MovingBlocks](http://terasology.org) for libGDX loader.
 
-This is the modified version for Defold Game Engine compabilty. I made a lots of breaking changes, improvements, added new functionallties and bug fixes. 
+This is the modified version for Defold Game Engine compatibility. I made a lots of breaking changes, improvements, added new functionalities and bug fixes.
 
-More info and manual is avalible here: https://selimanac.github.io/physics-body-editor/
+More info and manual is available here: https://selimanac.github.io/physics-body-editor/
 
 ### Release Notes
 
@@ -14,17 +14,17 @@ More info and manual is avalible here: https://selimanac.github.io/physics-body-
 - New GUI color schema
 - New coordinate system
 - New zoom level and pivot(origin) functionallties
-- Defold exporter
+- Defold Exporter with .convexshapes and .go files
 - Lots of small bug fixed
 
 
 ### Known issues
 
 - Incorrect Layout Rendering of LwjglCanvas on MacOS [#5004](https://github.com/libgdx/libgdx/issues/5004)
-- Multi-part Detection and Hole Detection are not working as aspected. They are disabled. Need more invastigation.
-- Swing widget toolkit is ancient and it is not supporting anymore.  
+- Multi-part Detection and Hole Detection are not working as aspected. They are disabled. Need more investigation.
+- Swing widget toolkit is ancient and it is not supporting anymore. So it may contain bugs.  
 
-Keys:  
+### Keys  
 
 Enter -> inset point  
 Backspase ->  delete point  
