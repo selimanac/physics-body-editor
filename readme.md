@@ -1,21 +1,30 @@
 
 # Physics Body Editor
 
-Physics Body Editor is originally developed by [Aurelien Ribon](http://www.aurelienribon.com/) and maintained by [MovingBlocks](http://terasology.org) for libGDX loader also they add the Gradle build support.
+Physics Body Editor is originally developed by [Aurelien Ribon](http://www.aurelienribon.com/) and maintained by [MovingBlocks](http://terasology.org) for libGDX loader, also they added the Gradle build support.
 
 This is the modified version for Defold Game Engine compatibility. I made a lots of breaking changes, improvements, added new functionalities and bug fixes.
 
 More info and manual is available here: https://selimanac.github.io/physics-body-editor/
 
+
+
+
+
 ### Release Notes
 
 #### 1.5.0
 
-- New GUI color schema.
+- New dark theme GUI color schema.
 - New coordinate system.
 - New zoom level and pivot(origin) functionallties.
 - Defold Exporter with .convexshapes and .go files.
-- Lots of minor and major bug fixed.
+- Lots of minor and major bugs fixed.
+
+### Build
+
+> $ gradle init  
+> $ gradle jar
 
 
 ### Known issues
