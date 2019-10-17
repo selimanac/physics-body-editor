@@ -2,6 +2,7 @@ package aurelienribon.bodyeditor;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -38,7 +39,8 @@ public class IoManager extends ChangeableObject {
         assert projectFile != null;
 
         String str = JsonIo.serialize();
-        FileUtils.writeStringToFile(projectFile, str);
+        FileUtils.writeStringToFile(projectFile, str, StandardCharsets.UTF_8);
+
     }
 
     public String toDefoldComponentString(String path, int id) {
@@ -90,15 +92,15 @@ public class IoManager extends ChangeableObject {
                 }
 
                 i++;
-
+                
                 File filePath = new File(path + "/defold/" + modelName + "/" + modelName + "_" + i + ".convexshape");
-                FileUtils.writeStringToFile(filePath, shapeStringContainer);
+                FileUtils.writeStringToFile(filePath, shapeStringContainer, StandardCharsets.UTF_8);
 
                 componentString += toDefoldComponentString(modelName + "/" + modelName + "_" + i + ".convexshape", i);
             }
 
             File filePath = new File(path + "/defold/" + modelName + "/" + modelName + ".go");
-            FileUtils.writeStringToFile(filePath, componentString);
+            FileUtils.writeStringToFile(filePath, componentString, StandardCharsets.UTF_8);
             i = 0;
         }
 
@@ -109,7 +111,7 @@ public class IoManager extends ChangeableObject {
         assert projectFile.isFile();
 
         Ctx.bodies.getModels().clear();
-        String str = FileUtils.readFileToString(projectFile);
+        String str = FileUtils.readFileToString(projectFile, StandardCharsets.UTF_8);
 
         JsonIo.deserialize(str);
     }

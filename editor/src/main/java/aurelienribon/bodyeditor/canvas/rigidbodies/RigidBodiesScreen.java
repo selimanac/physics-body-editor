@@ -205,7 +205,6 @@ public class RigidBodiesScreen {
             public void propertyChanged(Object source, String propertyName) {
                 if (propertyName.equals(RigidBodyModel.PROP_IMAGEPATH)) {
 
-                   
                     createBodySprite(false);
                     lblClearImage.show();
                 } else if (propertyName.equals(RigidBodyModel.PROP_PHYSICS)) {
@@ -593,6 +592,19 @@ public class RigidBodiesScreen {
         nextPoint = null;
         nearestPoint = null;
 
+        RigidBodyModel model = Ctx.bodies.getSelectedModel();
+
+        if (model != null) {
+
+            if (!model.getShapes().isEmpty()) {
+                if (!model.getShapes().get(model.getShapes().size() - 1).isClosed()) {
+                    model.getShapes().remove(model.getShapes().size() - 1);
+                }
+
+            }
+
+        }
+
         if (mode == null) {
             lblModeCreation.hide();
             lblModeEdition.hide();
@@ -759,16 +771,14 @@ public class RigidBodiesScreen {
     private void createBodySprite(boolean isLoad) {
 
         RigidBodyModel model = Ctx.bodies.getSelectedModel();
-        if (bodySprite !=null){
-           // bodySprite.getTexture().dispose();
-          
-           Assets.inst().removeRegion(model);
-        }
+        if (bodySprite != null) {
+            // bodySprite.getTexture().dispose();
 
+            Assets.inst().removeRegion(model);
+        }
 
         bodySprite = null;
 
-        
         if (model == null)
             return;
 
@@ -776,14 +786,12 @@ public class RigidBodiesScreen {
 
         if (region == null)
             return;
-       
+
         bodySprite = new Sprite(region);
         bodySprite.setPosition(0, 0);
         bodySprite.setColor(1, 1, 1, 0.5f);
 
-
         bodySprite.setSize(bodySprite.getWidth(), bodySprite.getHeight());
-
 
         if (isLoad) {
             Ctx.bodies.getSelectedModel().getOrigin().x = bodySprite.getWidth() / 2;
@@ -794,7 +802,7 @@ public class RigidBodiesScreen {
 
     private void createBall(Vector2 orig, Vector2 force) {
         Random rand = new Random();
-        float radius = rand.nextFloat() * 5.02f + 5.02f;
+        float radius = rand.nextFloat() * 5.0f + 10.0f;
 
         BodyDef bd = new BodyDef();
         bd.type = BodyType.DynamicBody;
@@ -834,7 +842,7 @@ public class RigidBodiesScreen {
             return;
 
         createBody();
-        
+
         createBodySprite(false);
     }
 }

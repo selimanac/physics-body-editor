@@ -261,9 +261,7 @@ public class RigidBodiesPanel extends javax.swing.JPanel {
 
             list.removeListSelectionListener(listSelectionListener);
             if (model != null) {
-
                 list.setSelectedValue(model, true);
-
                 if (!model.getShapes().isEmpty()) {
                     if (!model.getShapes().get(model.getShapes().size() - 1).isClosed()) {
                         model.getShapes().remove(model.getShapes().size() - 1);

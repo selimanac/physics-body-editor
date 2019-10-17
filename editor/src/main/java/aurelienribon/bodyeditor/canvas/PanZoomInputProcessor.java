@@ -16,7 +16,7 @@ public class PanZoomInputProcessor extends InputAdapter {
     private final int[] zoomLevels = { 1, 5, 10, 16, 25, 33, 50, 66, 100, 150, 200, 300, 400, 600, 800, 1200 };
     private int zoomLevel =  400;
 
-    private int zoomMin = 100;
+    private int zoomMin = 20;
     private int zoomMax = 1330;
 
     public PanZoomInputProcessor(Canvas canvas) {
