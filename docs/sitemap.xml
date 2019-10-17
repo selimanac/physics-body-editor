@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+     <loc>https://selimanac.github.io/physics-body-editor/</loc>
+     <lastmod>2019-10-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://selimanac.github.io/physics-body-editor/tutorial/</loc>
+     <lastmod>2019-10-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://selimanac.github.io/physics-body-editor/editor/</loc>
+     <lastmod>2019-10-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+</urlset>
