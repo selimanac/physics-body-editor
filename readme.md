@@ -1,4 +1,4 @@
-![Physics Body Editor](https://selimanac.github.io/physics-body-editor/img/header.png)
+![Physics Body Editor](https://selimanac.github.io/physics-body-editor/img/git_header.png)
 
 Physics Body Editor is originally developed by [Aurelien Ribon](http://www.aurelienribon.com/) and maintained by [MovingBlocks](http://terasology.org) for libGDX loader, also they added the Gradle build support.
 
