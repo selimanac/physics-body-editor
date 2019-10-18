@@ -1,10 +1,11 @@
 package aurelienribon.bodyeditor.canvas;
 
-import aurelienribon.bodyeditor.Settings;
-import aurelienribon.bodyeditor.models.DynamicObjectModel;
-import aurelienribon.bodyeditor.models.PolygonModel;
-import aurelienribon.bodyeditor.models.RigidBodyModel;
-import aurelienribon.bodyeditor.models.ShapeModel;
+import static com.badlogic.gdx.graphics.GL20.GL_BLEND;
+import static com.badlogic.gdx.graphics.GL20.GL_ONE_MINUS_SRC_ALPHA;
+import static com.badlogic.gdx.graphics.GL20.GL_SRC_ALPHA;
+
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -16,11 +17,11 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import static com.badlogic.gdx.graphics.GL20.GL_BLEND;
-import static com.badlogic.gdx.graphics.GL20.GL_ONE_MINUS_SRC_ALPHA;
-import static com.badlogic.gdx.graphics.GL20.GL_SRC_ALPHA;
-
-import java.util.List;
+import aurelienribon.bodyeditor.Settings;
+import aurelienribon.bodyeditor.models.DynamicObjectModel;
+import aurelienribon.bodyeditor.models.PolygonModel;
+import aurelienribon.bodyeditor.models.RigidBodyModel;
+import aurelienribon.bodyeditor.models.ShapeModel;
 
 /**
  * @author Aurelien Ribon | http://www.aurelienribon.com/
@@ -77,7 +78,7 @@ public class CanvasDrawer {
         if (Settings.isShapeDrawn) {
             drawShapes(model.getShapes(), nextPoint);
             drawPoints(model.getShapes(), selectedPoints, nearestPoint, nextPoint);
-           
+
             drawOrigin(model.getOrigin(), nearestPoint);
         }
     }
@@ -85,7 +86,7 @@ public class CanvasDrawer {
     public void drawModel(RigidBodyModel model, DynamicObjectModel.BodyAttributes attrs) {
         if (model == null)
             return;
-        
+
         Matrix4 transform = new Matrix4();
         transform.translate(attrs.x, attrs.y, 0);
         transform.scale(attrs.scale, attrs.scale, 0);
@@ -148,33 +149,31 @@ public class CanvasDrawer {
     }
 
     private void drawAxisImpl(Vector2 o) {
-        
+
         Gdx.gl.glLineWidth(3);
         Gdx.gl.glEnable(GL_BLEND);
         Gdx.gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         float len = 0.03f * camera.zoom;
-        //float len = 0.03f * camera.zoom;
+        // float len = 0.03f * camera.zoom;
         drawer.begin(ShapeRenderer.ShapeType.Line);
         drawer.setColor(AXIS_COLOR_X);
-        drawer.line(o.x, o.y, o.x+100, o.y);
-        drawer.line(o.x+100, o.y, o.x+100 - len, o.y-len);
-        drawer.line(o.x+100, o.y, o.x+100 - len, o.y+len);
+        drawer.line(o.x, o.y, o.x + 100, o.y);
+        drawer.line(o.x + 100, o.y, o.x + 100 - len, o.y - len);
+        drawer.line(o.x + 100, o.y, o.x + 100 - len, o.y + len);
         drawer.setColor(AXIS_COLOR_Y);
-        drawer.line(o.x, o.y, o.x, o.y+100);
-        drawer.line(o.x, o.y+100, o.x-len, o.y+100 - len);
-        drawer.line(o.x, o.y+100, o.x+len, o.y+100 - len);
+        drawer.line(o.x, o.y, o.x, o.y + 100);
+        drawer.line(o.x, o.y + 100, o.x - len, o.y + 100 - len);
+        drawer.line(o.x, o.y + 100, o.x + len, o.y + 100 - len);
         drawer.end();
-
-        
 
         float size = 0.1f * camera.zoom;
         v00Sprite.setSize(size, size);
         v10Sprite.setSize(size, size);
         v01Sprite.setSize(size, size);
-        v00Sprite.setPosition(o.x-size, o.y-size);
-        v10Sprite.setPosition(o.x+100, o.y-size);
-        v01Sprite.setPosition(o.x-size, o.y+100 - size / 2); 
+        v00Sprite.setPosition(o.x - size, o.y - size);
+        v10Sprite.setPosition(o.x + 100, o.y - size);
+        v01Sprite.setPosition(o.x - size, o.y + 100 - size / 2);
 
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
@@ -232,8 +231,12 @@ public class CanvasDrawer {
                     drawer.setColor(SHAPE_COLOR);
                     drawer.line(vs.get(0).x, vs.get(0).y, vs.get(vs.size() - 1).x, vs.get(vs.size() - 1).y);
                 } else {
-                    drawer.setColor(SHAPE_LASTLINE_COLOR);
-                    drawer.line(vs.get(vs.size() - 1).x, vs.get(vs.size() - 1).y, nextPoint.x, nextPoint.y);
+
+                    if (nextPoint != null) {
+                        drawer.setColor(SHAPE_LASTLINE_COLOR);
+                        drawer.line(vs.get(vs.size() - 1).x, vs.get(vs.size() - 1).y, nextPoint.x, nextPoint.y);
+                    }
+
                 }
 
                 drawer.end();
@@ -348,10 +351,7 @@ public class CanvasDrawer {
         Gdx.gl.glEnable(GL_BLEND);
         Gdx.gl.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        Rectangle rect = new Rectangle(
-                Math.min(x1, x2), Math.min(y1, y2),
-                Math.abs(x2 - x1), Math.abs(y2 - y1)
-        );
+        Rectangle rect = new Rectangle(Math.min(x1, x2), Math.min(y1, y2), Math.abs(x2 - x1), Math.abs(y2 - y1));
 
         drawer.begin(ShapeRenderer.ShapeType.Filled);
         drawer.setColor(MOUSESELECTION_FILL_COLOR);

@@ -1,5 +1,37 @@
 package aurelienribon.bodyeditor.canvas.rigidbodies;
 
+import static aurelienribon.bodyeditor.canvas.Canvas.worldCamera;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+import javax.swing.JFileChooser;
+import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
+import com.badlogic.gdx.physics.box2d.CircleShape;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
+
 import aurelienribon.bodyeditor.Ctx;
 import aurelienribon.bodyeditor.RigidBodiesManager;
 import aurelienribon.bodyeditor.Settings;
@@ -24,35 +56,6 @@ import aurelienribon.tweenengine.TweenManager;
 import aurelienribon.utils.gdx.PolygonUtils;
 import aurelienribon.utils.notifications.ChangeListener;
 import aurelienribon.utils.notifications.ObservableList;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
-import com.badlogic.gdx.physics.box2d.CircleShape;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.Array;
-
-import javax.swing.*;
-
-import static aurelienribon.bodyeditor.canvas.Canvas.worldCamera;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
 
 public class RigidBodiesScreen {
     private Vector2 v0 = new Vector2(0, 0);
@@ -310,7 +313,10 @@ public class RigidBodiesScreen {
                     @Override
                     public void run() {
                         JFileChooser chooser = new JFileChooser(Ctx.io.getProjectDir());
+                        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
                         chooser.setDialogTitle("Select the background image for the selected model");
+                        chooser.setFileFilter(new FileNameExtensionFilter("Image files", "png", "jpg", "jpeg"));
+                        chooser.setMultiSelectionEnabled(false);
 
                         if (chooser.showOpenDialog(Ctx.window) == JFileChooser.APPROVE_OPTION) {
                             String path = Ctx.io.buildImagePath(chooser.getSelectedFile());
